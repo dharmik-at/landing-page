@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Globe, Video, FileText, HardDrive, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
 const features = [
     {
@@ -39,7 +40,7 @@ export function FeaturesGrid() {
     return (
         <section id="features" className="py-24 px-4 md:px-6">
             <div className="container mx-auto max-w-6xl">
-                <div className="mb-16">
+                <ScrollReveal className="mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6">
                         Universal <span className="text-brand-orange">Ingestion</span>
                     </h2>
@@ -47,16 +48,12 @@ export function FeaturesGrid() {
                         One API to handle every data type. We take care of the parsing, chunking,
                         and embedding so you don't have to.
                     </p>
-                </div>
+                </ScrollReveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {features.map((feature, index) => (
-                        <motion.div
+                        <StaggerItem
                             key={feature.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            viewport={{ once: true }}
                             className={cn(
                                 "group relative overflow-hidden rounded-3xl border border-glass-border bg-obsidian p-8 hover:border-brand-orange/30 transition-colors",
                                 feature.className
@@ -77,9 +74,9 @@ export function FeaturesGrid() {
                                     {feature.description}
                                 </p>
                             </div>
-                        </motion.div>
+                        </StaggerItem>
                     ))}
-                </div>
+                </StaggerContainer>
             </div>
         </section>
     );

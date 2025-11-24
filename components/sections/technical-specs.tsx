@@ -80,6 +80,8 @@ const BorderBeam = () => (
     </div>
 );
 
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
+
 export function TechnicalSpecs() {
     return (
         <section className="py-32 px-4 md:px-6 bg-black relative overflow-hidden">
@@ -96,23 +98,19 @@ export function TechnicalSpecs() {
             </div>
 
             <div className="container mx-auto max-w-7xl relative z-10">
-                <div className="text-center mb-20">
+                <ScrollReveal className="text-center mb-20">
                     <h2 className="text-4xl md:text-5xl font-bold mb-6">
                         Technical <span className="text-brand-orange">Specifications</span>
                     </h2>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto">
                         Built for developers who need granular control. Full support for the modern AI stack.
                     </p>
-                </div>
+                </ScrollReveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {specs.map((category, catIndex) => (
-                        <motion.div
+                        <StaggerItem
                             key={category.category}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: catIndex * 0.1 }}
-                            viewport={{ once: true }}
                             className="space-y-6"
                         >
                             <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
@@ -142,15 +140,12 @@ export function TechnicalSpecs() {
                                     </motion.div>
                                 ))}
                             </div>
-                        </motion.div>
+                        </StaggerItem>
                     ))}
-                </div>
+                </StaggerContainer>
 
                 {/* Security Badge */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                <ScrollReveal
                     className="mt-20 p-8 rounded-2xl bg-gradient-to-r from-white/5 to-transparent border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8"
                 >
                     <div className="flex items-center gap-6">
@@ -171,7 +166,7 @@ export function TechnicalSpecs() {
                             </div>
                         ))}
                     </div>
-                </motion.div>
+                </ScrollReveal>
             </div>
         </section>
     );

@@ -10,21 +10,23 @@ const destinations = [
     { name: "S3 Vector Storage", icon: S3Icon, color: "text-orange-500" },
 ];
 
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+
 export function DestinationConnectors() {
     return (
         <section className="py-24 bg-[#0F0F0F] overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 mb-12">
-                <div className="text-center">
+                <ScrollReveal className="text-center" width="100%">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
                         <span className="text-brand-orange">Destination</span> Connectors
                     </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Sync your vectors where you need them. Support for leading vector databases and storage solutions.
                     </p>
-                </div>
+                </ScrollReveal>
             </div>
 
-            <div className="relative flex w-full overflow-hidden mask-gradient">
+            <ScrollReveal className="relative flex w-full overflow-hidden mask-gradient" width="100%" delay={0.2}>
                 <div className="flex animate-marquee-reverse whitespace-nowrap hover:pause gap-8 min-w-full">
                     {destinations.map((dest, i) => (
                         <MarqueeCard key={`1-${i}`} dest={dest} />
@@ -43,7 +45,7 @@ export function DestinationConnectors() {
                 {/* Gradient Masks */}
                 <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0F0F0F] to-transparent z-10"></div>
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0F0F0F] to-transparent z-10"></div>
-            </div>
+            </ScrollReveal>
         </section>
     );
 }

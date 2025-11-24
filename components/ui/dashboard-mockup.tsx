@@ -105,6 +105,8 @@ const knowledgeBases = [
 
 type ViewState = 'source' | 'destination' | 'parser' | 'embedding' | 'kb';
 
+import { BorderBeam } from "./border-beam";
+
 export function DashboardMockup() {
     const [activeView, setActiveView] = useState<ViewState>('source');
     const [selectedKBId, setSelectedKBId] = useState<string | null>(null);
@@ -118,12 +120,27 @@ export function DashboardMockup() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full h-full bg-[#0A0A0A] rounded-xl border border-white/10 overflow-hidden shadow-2xl flex font-sans"
+            className="w-full h-full bg-[#0A0A0A] rounded-xl border border-white/10 shadow-2xl flex font-sans relative"
+            style={{ transformStyle: "preserve-3d" }}
         >
-            {/* Sidebar */}
-            <div className="w-64 border-r border-white/5 bg-[#0A0A0A] flex flex-col">
+            {/* Glossy Reflection Overlay */}
+            <div
+                className="absolute inset-0 rounded-xl bg-gradient-to-tr from-white/5 to-transparent pointer-events-none z-50"
+                style={{ transform: "translateZ(50px)" }}
+            />
+
+            {/* Futuristic Border Beam */}
+            <div style={{ transform: "translateZ(60px)" }} className="absolute inset-0 pointer-events-none z-50">
+                <BorderBeam duration={8} borderWidth={2} colorFrom="#FF4F00" colorTo="#FF8F00" />
+            </div>
+
+            {/* Sidebar Layer */}
+            <motion.div
+                className="w-64 border-r border-white/5 bg-[#0A0A0A] flex flex-col rounded-l-xl"
+                style={{ transform: "translateZ(20px)" }}
+            >
                 <div className="p-6 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-brand-orange rounded-lg flex items-center justify-center text-white">
+                    <div className="w-8 h-8 bg-brand-orange rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand-orange/20">
                         <Zap className="w-5 h-5 fill-current" />
                     </div>
                     <span className="font-bold text-lg text-white tracking-tight">IngestIQ</span>
@@ -183,12 +200,18 @@ export function DashboardMockup() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
 
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col bg-[#0F0F0F] min-w-0">
-                {/* Header */}
-                <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-[#0F0F0F]">
+            {/* Main Content Layer */}
+            <motion.div
+                className="flex-1 flex flex-col bg-[#0F0F0F] min-w-0 rounded-r-xl"
+                style={{ transform: "translateZ(30px)" }}
+            >
+                {/* Header Layer */}
+                <motion.header
+                    className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-[#0F0F0F] rounded-tr-xl"
+                    style={{ transform: "translateZ(40px)" }}
+                >
                     <div className="flex items-center gap-4">
                         <span className="text-sm text-gray-400">Pipeline Status</span>
                         <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
@@ -199,7 +222,7 @@ export function DashboardMockup() {
                     <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
                         <Search className="w-4 h-4" />
                     </div>
-                </header>
+                </motion.header>
 
                 {/* Dynamic Content Area */}
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-8">
@@ -488,7 +511,7 @@ export function DashboardMockup() {
                         )}
                     </AnimatePresence>
                 </div>
-            </div>
+            </motion.div>
         </motion.div>
     );
 }

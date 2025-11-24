@@ -47,6 +47,8 @@ const pipelines = [
     }
 ];
 
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
+
 export function PipelineVisualizer() {
     const [activePipeline, setActivePipeline] = useState<string | null>(null);
 
@@ -56,7 +58,7 @@ export function PipelineVisualizer() {
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20 pointer-events-none" />
 
             <div className="container mx-auto max-w-7xl relative z-10">
-                <div className="text-center mb-20">
+                <ScrollReveal className="text-center mb-20">
                     <h2 className="text-4xl md:text-5xl font-bold mb-6">
                         The <span className="text-brand-orange">Infrastructure</span> Matrix
                     </h2>
@@ -64,11 +66,11 @@ export function PipelineVisualizer() {
                         One platform, infinite possibilities. Orchestrate complex multi-modal pipelines
                         with a drag-and-drop interface.
                     </p>
-                </div>
+                </ScrollReveal>
 
-                <div className="flex flex-col gap-12">
+                <StaggerContainer className="flex flex-col gap-12">
                     {pipelines.map((pipeline, pIndex) => (
-                        <div
+                        <StaggerItem
                             key={pipeline.id}
                             className={cn(
                                 "relative transition-opacity duration-500",
@@ -131,9 +133,9 @@ export function PipelineVisualizer() {
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </StaggerItem>
                     ))}
-                </div>
+                </StaggerContainer>
             </div>
         </section>
     );

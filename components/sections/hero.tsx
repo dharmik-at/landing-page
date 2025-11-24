@@ -51,7 +51,7 @@ export function Hero() {
                 <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
             </div>
 
-            <div className="container relative z-10 px-4 md:px-6">
+            <div className="container relative z-10 px-4 md:px-6 mx-auto">
                 <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
                     {/* Left: Content */}
@@ -75,9 +75,9 @@ export function Hero() {
                             transition={{ duration: 0.5, delay: 0.1 }}
                             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9]"
                         >
-                            The Stripe for <br />
+                            Your Data, <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-400">
-                                RAG
+                                Your Intelligence
                             </span>
                         </motion.h1>
 
@@ -85,9 +85,9 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="text-2xl md:text-3xl font-medium text-white mb-6"
+                            className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-wide"
                         >
-                            Your Data, Your Intelligence.
+                            INGESTIQ
                         </motion.p>
 
                         <motion.p
@@ -131,14 +131,20 @@ export function Hero() {
 
                     {/* Right: Dashboard Mockup (3D Tilt) */}
                     <motion.div
-                        className="flex-1 w-full max-w-[800px] lg:max-w-none"
-                        style={{
-                            rotateX,
-                            rotateY,
-                            transformStyle: "preserve-3d",
-                        }}
+                        initial={{ opacity: 0, rotateX: 20, y: 50, scale: 0.9 }}
+                        animate={{ opacity: 1, rotateX: 0, y: 0, scale: 1 }}
+                        transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 50 }}
+                        className="flex-1 w-full max-w-[800px] lg:max-w-none perspective-1000"
                     >
-                        <DashboardMockup />
+                        <motion.div
+                            style={{
+                                rotateX,
+                                rotateY,
+                                transformStyle: "preserve-3d",
+                            }}
+                        >
+                            <DashboardMockup />
+                        </motion.div>
                     </motion.div>
 
                 </div>

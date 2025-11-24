@@ -66,6 +66,8 @@ const knowledgeBases = [
     }
 ];
 
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
+
 export function KnowledgeBases() {
     const [selectedKBId, setSelectedKBId] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState("pipelines");
@@ -75,26 +77,25 @@ export function KnowledgeBases() {
     return (
         <section className="py-24 bg-[#0A0A0A] border-t border-white/5 min-h-[800px]">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="text-center mb-16">
+                <ScrollReveal className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
                         <span className="text-brand-orange">Knowledge</span> Bases
                     </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Manage your RAG corpus with granular control. Specialized knowledge bases for every department.
                     </p>
-                </div>
+                </ScrollReveal>
 
                 <div className="max-w-6xl mx-auto">
                     <AnimatePresence mode="wait">
                         {!selectedKB ? (
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
+                            <StaggerContainer
+                                key="grid"
                                 exit={{ opacity: 0, y: -20 }}
                                 className="grid grid-cols-1 md:grid-cols-3 gap-6"
                             >
                                 {knowledgeBases.map((kb) => (
-                                    <div
+                                    <StaggerItem
                                         key={kb.id}
                                         onClick={() => setSelectedKBId(kb.id)}
                                         className="group cursor-pointer p-6 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex flex-col"
@@ -116,9 +117,9 @@ export function KnowledgeBases() {
                                         <div className="flex items-center text-sm text-gray-400 group-hover:text-white transition-colors mt-auto">
                                             View Details <ChevronRight className="w-4 h-4 ml-1" />
                                         </div>
-                                    </div>
+                                    </StaggerItem>
                                 ))}
-                            </motion.div>
+                            </StaggerContainer>
                         ) : (
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
