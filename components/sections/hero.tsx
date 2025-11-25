@@ -66,7 +66,7 @@ export function Hero() {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
                             </span>
-                            <span className="text-xs font-medium text-gray-300 tracking-wide uppercase">Enterprise RAG Platform 2.0</span>
+                            <span className="text-xs font-medium text-gray-300 tracking-wide uppercase">Enterprise RAG Platform</span>
                         </motion.div>
 
                         <motion.h1

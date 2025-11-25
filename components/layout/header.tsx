@@ -7,9 +7,11 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
+import { SolutionsDropdown } from "@/components/layout/solutions-dropdown";
+
 const navItems = [
     { name: "Product", href: "#features" },
-    { name: "Solutions", href: "#solutions" },
+    // Solutions is handled separately
     { name: "Developers", href: "#docs" },
     { name: "Pricing", href: "#pricing" },
 ];
@@ -49,7 +51,20 @@ export function Header() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-8">
-                    {navItems.map((item) => (
+                    {navItems.slice(0, 1).map((item) => (
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            className="text-sm font-medium text-gray-400 hover:text-white transition-colors relative group"
+                        >
+                            {item.name}
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all group-hover:w-full" />
+                        </Link>
+                    ))}
+
+                    <SolutionsDropdown />
+
+                    {navItems.slice(1).map((item) => (
                         <Link
                             key={item.name}
                             href={item.href}
