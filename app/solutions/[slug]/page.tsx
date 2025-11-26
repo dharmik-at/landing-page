@@ -1,16 +1,20 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
 import {
     Video, Mic, Globe, Image as ImageIcon, FileText,
     Database, HardDrive, Search, ArrowRight, CheckCircle2,
     Zap, Shield, Clock, XCircle, TrendingUp, BarChart3,
-    MessageSquare, Layers, Lock
+    MessageSquare, Layers, Lock, Cpu, Activity, Scan
 } from "lucide-react";
-import { useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const solutionsData: Record<string, any> = {
     "meeting-intelligence": {
@@ -19,6 +23,8 @@ const solutionsData: Record<string, any> = {
         description: "Stop taking notes. IngestIQ automatically records, transcribes, and extracts key decisions from your Zoom, Google Meet, and Teams calls.",
         icon: Video,
         color: "text-blue-400",
+        borderColor: "border-blue-500/50",
+        shadowColor: "shadow-blue-500/20",
         gradient: "from-blue-500 to-purple-500",
         stats: [
             { label: "Time Saved / Week", value: "12 hrs" },
@@ -79,6 +85,8 @@ const solutionsData: Record<string, any> = {
         description: "Don't let the market surprise you. Monitor competitor pricing, news releases, and social sentiment 24/7 with our advanced web scraping engine.",
         icon: Globe,
         color: "text-orange-400",
+        borderColor: "border-orange-500/50",
+        shadowColor: "shadow-orange-500/20",
         gradient: "from-orange-500 to-red-500",
         stats: [
             { label: "Data Sources", value: "10k+" },
@@ -139,6 +147,8 @@ const solutionsData: Record<string, any> = {
         description: "Unlock the 80% of data trapped in visual formats. Our multimodal AI parses complex PDFs, engineering blueprints, and financial charts with pixel-perfect accuracy.",
         icon: ImageIcon,
         color: "text-emerald-400",
+        borderColor: "border-emerald-500/50",
+        shadowColor: "shadow-emerald-500/20",
         gradient: "from-emerald-500 to-cyan-500",
         stats: [
             { label: "Formats", value: "PDF, PNG, CAD" },
@@ -199,6 +209,8 @@ const solutionsData: Record<string, any> = {
         description: "Break down information silos. Connect Google Drive, Slack, Notion, and S3 into a single, secure knowledge graph that answers questions instantly.",
         icon: Database,
         color: "text-pink-400",
+        borderColor: "border-pink-500/50",
+        shadowColor: "shadow-pink-500/20",
         gradient: "from-pink-500 to-rose-500",
         stats: [
             { label: "Connectors", value: "100+" },
@@ -259,11 +271,138 @@ export default function SolutionPage() {
     const params = useParams();
     const slug = params.slug as string;
     const data = solutionsData[slug];
+
+    // Refs for GSAP
     const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
+    const heroRef = useRef<HTMLDivElement>(null);
+    const stepsRef = useRef<HTMLDivElement>(null);
+    const progressLineRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        if (!data) return;
+
+        // 1. Snappier Hero Animation Timeline
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+        tl.from(".hero-badge", { y: -20, opacity: 0, duration: 0.6 })
+            .from(".hero-title", { y: 50, opacity: 0, duration: 1, ease: "back.out(1.2)" }, "-=0.4")
+            .from(".hero-desc", { y: 20, opacity: 0, duration: 0.8 }, "-=0.8")
+            .from(".hero-stats", { scale: 0.9, opacity: 0, duration: 0.6 }, "-=0.6")
+            .from(".hero-buttons", { y: 20, opacity: 0, duration: 0.6 }, "-=0.5")
+            .from(".hero-visual", { scale: 0.5, opacity: 0, rotationY: 45, duration: 1.2, ease: "elastic.out(1, 0.75)" }, "-=1");
+
+        // 2. Hero Visual Parallax
+        const heroSection = heroRef.current;
+        if (heroSection) {
+            heroSection.addEventListener("mousemove", (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 30;
+                const y = (e.clientY / window.innerHeight - 0.5) * 30;
+                gsap.to(".hero-visual", {
+                    rotationY: x,
+                    rotationX: -y,
+                    duration: 1.5,
+                    ease: "power2.out"
+                });
+            });
+        }
+
+        // 3. Abstract Visual Animations (Continuous & Dynamic)
+        if (data.visual === "waveform") {
+            gsap.to(".visual-bar", {
+                height: "random(10, 100)",
+                duration: 0.4,
+                repeat: -1,
+                yoyo: true,
+                stagger: {
+                    each: 0.05,
+                    from: "center",
+                    grid: "auto"
+                },
+                ease: "power1.inOut"
+            });
+        }
+
+        // 4. ScrollTrigger for "How it Works" Progress Line
+        if (stepsRef.current && progressLineRef.current) {
+            gsap.fromTo(progressLineRef.current,
+                { scaleY: 0 },
+                {
+                    scaleY: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: stepsRef.current,
+                        start: "top center",
+                        end: "bottom center",
+                        scrub: true
+                    }
+                }
+            );
+        }
+
+        // 5. Reveal Steps on Scroll with 3D Flip
+        const steps = gsap.utils.toArray(".step-card");
+        steps.forEach((step: any, i) => {
+            gsap.from(step, {
+                opacity: 0,
+                y: 50,
+                rotationX: -15,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: step,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // 6. 3D Tilt Effect for Cards
+        const tiltCards = document.querySelectorAll(".tilt-card");
+        tiltCards.forEach((card: any) => {
+            card.addEventListener("mousemove", (e: any) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                gsap.to(card, {
+                    perspective: 1000,
+                    rotateX: rotateX,
+                    rotateY: rotateY,
+                    scale: 1.02,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            });
+            card.addEventListener("mouseleave", () => {
+                gsap.to(card, {
+                    rotateX: 0,
+                    rotateY: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: "elastic.out(1, 0.5)"
+                });
+            });
+        });
+
+        // 7. Magnetic Hover Effect for Buttons
+        const buttons = document.querySelectorAll(".magnetic-btn");
+        buttons.forEach((btn) => {
+            btn.addEventListener("mousemove", (e: any) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: "power2.out" });
+            });
+            btn.addEventListener("mouseleave", () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+
+    }, { scope: containerRef, dependencies: [slug] });
 
     if (!data) {
         return (
@@ -276,256 +415,237 @@ export default function SolutionPage() {
     const Icon = data.icon;
 
     return (
-        <main className="min-h-screen bg-black text-white pt-24 pb-20 overflow-hidden">
-            {/* Hero Section */}
-            <section className="relative px-4 md:px-8 py-20">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-brand-orange/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
+        <main ref={containerRef} className="min-h-screen bg-[#050505] text-white pt-24 pb-20 overflow-hidden font-sans selection:bg-brand-orange/30">
+            {/* Grid Background */}
+            <div className="fixed inset-0 z-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+            </div>
 
-                <div className="max-w-6xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 ${data.color} mb-6`}>
+            {/* Hero Section */}
+            <section ref={heroRef} className="relative px-4 md:px-8 py-20 z-10 [perspective:1000px]">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-orange/20 rounded-full blur-[120px] pointer-events-none opacity-50" />
+
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <div className={`hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 ${data.color} mb-8 backdrop-blur-md`}>
                             <Icon className="w-4 h-4" />
-                            <span className="text-sm font-medium">{data.title}</span>
+                            <span className="text-sm font-mono tracking-wide uppercase">{data.title}</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                        <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
                             {data.subtitle}
                         </h1>
-                        <p className="text-xl text-gray-400 mb-8 leading-relaxed">
+                        <p className="hero-desc text-xl text-gray-400 mb-10 leading-relaxed max-w-xl">
                             {data.description}
                         </p>
 
-                        {/* Stats Banner */}
-                        <div className="grid grid-cols-3 gap-4 mb-8 border-t border-white/10 pt-8">
+                        {/* HUD Stats */}
+                        <div className="hero-stats grid grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden mb-10 backdrop-blur-sm">
                             {data.stats.map((stat: any, i: number) => (
-                                <div key={i}>
-                                    <div className="text-2xl font-bold text-white">{stat.value}</div>
-                                    <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
+                                <div key={i} className="bg-black/40 p-6 flex flex-col items-center justify-center text-center group hover:bg-white/5 transition-colors">
+                                    <div className={`text-2xl font-bold text-white mb-1 ${data.color}`}>{stat.value}</div>
+                                    <div className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="flex flex-wrap gap-4">
-                            <Button size="lg" className="rounded-full bg-brand-orange hover:bg-brand-orange/90 text-white px-8">
+                        <div className="hero-buttons flex flex-wrap gap-4">
+                            <Button size="lg" className="magnetic-btn h-12 rounded-full bg-white text-black hover:bg-gray-200 px-8 font-semibold text-base">
                                 Start Free Trial
                             </Button>
-                            <Button size="lg" variant="outline" className="rounded-full border-white/10 hover:bg-white/5 text-white px-8">
+                            <Button size="lg" variant="outline" className="magnetic-btn h-12 rounded-full border-white/20 hover:bg-white/10 text-white px-8 text-base">
                                 Schedule Demo
                             </Button>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Visual Placeholder */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative aspect-square rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden"
-                    >
-                        <div className={`absolute inset-0 bg-gradient-to-br ${data.gradient} opacity-10`} />
-                        <BorderBeam duration={15} colorFrom="#FF4F00" colorTo="#FF8F00" />
+                    <div className="hero-visual relative aspect-square [perspective:1000px]">
+                        <div className={`absolute inset-0 bg-gradient-to-br ${data.gradient} opacity-20 blur-3xl`} />
+                        <div className="relative h-full w-full rounded-3xl border border-white/10 bg-black/40 backdrop-blur-xl overflow-hidden shadow-2xl [transform-style:preserve-3d]">
+                            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+                            <BorderBeam duration={8} colorFrom="#ffffff" colorTo={data.color.split('-')[1]} />
 
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            {/* Abstract Visual Representation based on type */}
-                            {data.visual === "waveform" && (
-                                <div className="flex items-center gap-1">
-                                    {[...Array(20)].map((_, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="w-2 bg-blue-500 rounded-full"
-                                            animate={{ height: [20, 60, 30, 80, 40, 20] }}
-                                            transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.05, ease: "easeInOut" }}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                            {data.visual === "chart" && (
-                                <div className="relative w-64 h-64">
-                                    <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20" />
-                                    <div className="absolute bottom-0 left-0 w-1 h-full bg-white/20" />
-                                    <motion.path
-                                        d="M0 200 Q 50 100 100 150 T 200 50"
-                                        fill="none"
-                                        stroke="#f97316"
-                                        strokeWidth="4"
-                                        initial={{ pathLength: 0 }}
-                                        animate={{ pathLength: 1 }}
-                                        transition={{ duration: 2, ease: "easeInOut" }}
-                                    />
-                                    <motion.path
-                                        d="M0 150 Q 50 200 100 100 T 200 180"
-                                        fill="none"
-                                        stroke="#fbbf24"
-                                        strokeWidth="4"
-                                        initial={{ pathLength: 0 }}
-                                        animate={{ pathLength: 1 }}
-                                        transition={{ duration: 2.5, ease: "easeInOut", delay: 0.5 }}
-                                    />
-                                </div>
-                            )}
-                            {data.visual === "scan" && (
-                                <div className="relative w-64 h-64 bg-gray-800 rounded-lg flex items-center justify-center p-4">
-                                    <FileText className="w-24 h-24 text-emerald-500 opacity-20 absolute" />
-                                    <motion.div
-                                        className="absolute top-0 left-0 w-full h-1 bg-emerald-400"
-                                        initial={{ y: 0 }}
-                                        animate={{ y: "100%" }}
-                                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                    />
-                                    <div className="text-sm text-gray-300 text-center">
-                                        <p>Document Scan in Progress...</p>
-                                        <p className="text-xs text-gray-500 mt-1">Extracting text & visuals</p>
+                            <div className="absolute inset-0 flex items-center justify-center [transform-style:preserve-3d] [transform:translateZ(20px)]">
+                                {/* Abstract Visual Representation based on type */}
+                                {data.visual === "waveform" && (
+                                    <div className="flex items-center gap-1.5">
+                                        {[...Array(12)].map((_, i) => (
+                                            <div
+                                                key={i}
+                                                className={`visual-bar w-3 h-10 rounded-full ${data.color.replace('text-', 'bg-')} opacity-80`}
+                                            />
+                                        ))}
                                     </div>
-                                </div>
-                            )}
-                            {data.visual === "graph" && (
-                                <div className="relative w-64 h-64 flex items-center justify-center">
-                                    <motion.div
-                                        className="absolute w-24 h-24 rounded-full bg-pink-500/20"
-                                        initial={{ scale: 0 }}
-                                        animate={{ scale: [0, 1, 0.8, 1.2, 1] }}
-                                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                    />
-                                    <motion.div
-                                        className="absolute w-16 h-16 rounded-full bg-rose-500/20"
-                                        initial={{ scale: 0 }}
-                                        animate={{ scale: [0, 1.2, 0.9, 1.1, 1] }}
-                                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                                    />
-                                    <Database className="w-20 h-20 text-pink-400 opacity-70" />
-                                    <motion.div
-                                        className="absolute w-2 h-2 rounded-full bg-white"
-                                        initial={{ x: 0, y: 0 }}
-                                        animate={{
-                                            x: [0, 50, -50, 0, 70, -70, 0],
-                                            y: [0, -30, 40, -20, 60, -10, 0]
-                                        }}
-                                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                                    />
-                                </div>
-                            )}
-                            {/* Fallback for others */}
-                            {(data.visual !== "waveform" && data.visual !== "chart" && data.visual !== "scan" && data.visual !== "graph") && (
-                                <Icon className={`w-32 h-32 ${data.color} opacity-50`} />
-                            )}
+                                )}
+                                {data.visual === "chart" && (
+                                    <div className="relative w-80 h-64">
+                                        <div className="absolute bottom-0 left-0 w-full h-px bg-white/20" />
+                                        <div className="absolute bottom-0 left-0 w-px h-full bg-white/20" />
+                                        <div className="absolute bottom-0 left-0 right-0 top-0 overflow-hidden">
+                                            <svg className="w-full h-full" viewBox="0 0 320 256">
+                                                <path
+                                                    d="M0 200 Q 80 100 160 150 T 320 50"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="3"
+                                                    className={data.color}
+                                                />
+                                                <path
+                                                    d="M0 200 Q 80 100 160 150 T 320 50 V 256 H 0 Z"
+                                                    fill={`url(#gradient-${slug})`}
+                                                    opacity="0.2"
+                                                />
+                                                <defs>
+                                                    <linearGradient id={`gradient-${slug}`} x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="0%" stopColor="currentColor" className={data.color} />
+                                                        <stop offset="100%" stopColor="transparent" />
+                                                    </linearGradient>
+                                                </defs>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                )}
+                                {data.visual === "scan" && (
+                                    <div className="relative w-72 h-96 bg-white/5 rounded-xl border border-white/10 p-6 flex flex-col gap-4">
+                                        <div className="h-4 w-3/4 bg-white/10 rounded" />
+                                        <div className="h-4 w-1/2 bg-white/10 rounded" />
+                                        <div className="flex-1 bg-white/5 rounded border border-white/5" />
+                                        <div className={`absolute top-0 left-0 w-full h-1 ${data.color.replace('text-', 'bg-')} shadow-[0_0_20px_currentColor] animate-scan`} />
+                                    </div>
+                                )}
+                                {data.visual === "graph" && (
+                                    <div className="relative w-full h-full">
+                                        {[...Array(8)].map((_, i) => (
+                                            <div
+                                                key={i}
+                                                className={`absolute w-3 h-3 rounded-full ${data.color.replace('text-', 'bg-')}`}
+                                                style={{
+                                                    left: `${Math.random() * 80 + 10}%`,
+                                                    top: `${Math.random() * 80 + 10}%`,
+                                                }}
+                                            />
+                                        ))}
+                                        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                                            <path
+                                                d="M100 100 L 200 200 M 100 200 L 200 100"
+                                                stroke="currentColor"
+                                                strokeWidth="1"
+                                                className={`${data.color} opacity-20`}
+                                            />
+                                        </svg>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
-            {/* Problem vs Solution Section */}
-            <section className="px-4 md:px-8 py-24 bg-white/5">
+            {/* Problem vs Solution Section - Holographic Cards */}
+            <section className="px-4 md:px-8 py-32 z-10 relative">
                 <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Why the old way is broken</h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">
-                            Manual processes are slow, error-prone, and unscalable. See the difference IngestIQ makes.
+                    <div className="text-center mb-20">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Evolution of Intelligence</h2>
+                        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                            Upgrade from manual workflows to autonomous AI agents.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 [perspective:1000px]">
                         {/* The Old Way */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="p-8 rounded-3xl bg-red-500/5 border border-red-500/10 relative overflow-hidden"
-                        >
-                            <div className="absolute top-0 right-0 p-4 opacity-20">
-                                <XCircle className="w-24 h-24 text-red-500" />
+                        <div className="tilt-card step-card group relative p-8 rounded-3xl bg-[#0A0A0A] border border-white/5 overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent opacity-50" />
+                            <div className="relative z-10">
+                                <div className="flex items-center justify-between mb-8">
+                                    <h3 className="text-2xl font-bold text-gray-300">Legacy Process</h3>
+                                    <XCircle className="w-8 h-8 text-red-500/50" />
+                                </div>
+                                <ul className="space-y-6">
+                                    {data.problem.points.map((point: string, i: number) => (
+                                        <li key={i} className="flex items-start gap-4 text-gray-500 group-hover:text-gray-400 transition-colors">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-red-900/50 mt-2.5" />
+                                            <span className="text-lg">{point}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                            <h3 className="text-xl font-bold text-red-400 mb-6 flex items-center gap-2">
-                                <XCircle className="w-5 h-5" /> The Old Way
-                            </h3>
-                            <ul className="space-y-4">
-                                {data.problem.points.map((point: string, i: number) => (
-                                    <li key={i} className="flex items-start gap-3 text-gray-400">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-red-500/50 mt-2" />
-                                        {point}
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
+                        </div>
 
                         {/* The IngestIQ Way */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="p-8 rounded-3xl bg-emerald-500/5 border border-emerald-500/10 relative overflow-hidden"
-                        >
-                            <div className="absolute top-0 right-0 p-4 opacity-20">
-                                <CheckCircle2 className="w-24 h-24 text-emerald-500" />
+                        <div className={`tilt-card step-card group relative p-8 rounded-3xl bg-[#0A0A0A] border ${data.borderColor} overflow-hidden shadow-2xl ${data.shadowColor}`}>
+                            <div className={`absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] ${data.gradient.replace('from-', 'from-').replace('to-', 'via-transparent to-transparent')} opacity-10`} />
+                            <BorderBeam duration={10} size={300} colorFrom="transparent" colorTo="white" />
+
+                            <div className="relative z-10">
+                                <div className="flex items-center justify-between mb-8">
+                                    <h3 className="text-2xl font-bold text-white">IngestIQ AI</h3>
+                                    <div className={`p-2 rounded-lg bg-white/5 ${data.color}`}>
+                                        <Zap className="w-6 h-6" />
+                                    </div>
+                                </div>
+                                <ul className="space-y-6">
+                                    {data.solution.points.map((point: string, i: number) => (
+                                        <li key={i} className="flex items-start gap-4 text-gray-200">
+                                            <div className={`w-1.5 h-1.5 rounded-full ${data.color.replace('text-', 'bg-')} mt-2.5 shadow-[0_0_10px_currentColor]`} />
+                                            <span className="text-lg">{point}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                            <h3 className="text-xl font-bold text-emerald-400 mb-6 flex items-center gap-2">
-                                <CheckCircle2 className="w-5 h-5" /> The IngestIQ Way
-                            </h3>
-                            <ul className="space-y-4">
-                                {data.solution.points.map((point: string, i: number) => (
-                                    <li key={i} className="flex items-start gap-3 text-white">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2" />
-                                        {point}
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* How It Works Section */}
-            <section className="px-4 md:px-8 py-24 relative" ref={containerRef}>
-                <div className="max-w-4xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">How it works</h2>
-                        <p className="text-gray-400">From raw data to actionable intelligence in four simple steps.</p>
+            {/* How It Works Section - Fixed Alignment */}
+            <section className="px-4 md:px-8 py-32 relative z-10" ref={stepsRef}>
+                <div className="max-w-5xl mx-auto">
+                    <div className="text-center mb-24">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">System Architecture</h2>
+                        <p className="text-gray-400">Autonomous processing pipeline.</p>
                     </div>
 
                     <div className="relative">
-                        {/* Connecting Line */}
-                        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block" />
+                        {/* Central Progress Line */}
+                        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block">
+                            <div
+                                ref={progressLineRef}
+                                className={`w-full h-full bg-gradient-to-b ${data.gradient} origin-top`}
+                            />
+                        </div>
 
-                        <div className="space-y-12 md:space-y-24">
+                        <div className="space-y-24 [perspective:1000px]">
                             {data.steps.map((step: any, i: number) => {
                                 const StepIcon = step.icon;
+                                const isEven = i % 2 === 0;
                                 return (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true, margin: "-100px" }}
-                                        transition={{ duration: 0.5, delay: i * 0.1 }}
-                                        className={`flex flex-col md:flex-row gap-8 items-center ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-                                    >
-                                        <div className="flex-1 text-left md:text-right">
-                                            {i % 2 === 0 && (
-                                                <>
-                                                    <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
-                                                    <p className="text-gray-400">{step.description}</p>
-                                                </>
-                                            )}
-                                        </div>
-
-                                        <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-2xl bg-[#111] border border-white/10 flex items-center justify-center shadow-xl">
-                                            <div className={`absolute inset-0 bg-gradient-to-br ${data.gradient} opacity-20 blur-lg`} />
-                                            <StepIcon className={`w-6 h-6 ${data.color}`} />
-                                            <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold border border-black">
-                                                {i + 1}
+                                    <div key={i} className="relative flex items-center justify-between md:justify-center">
+                                        {/* Left Content (Text for Even, Empty for Odd) */}
+                                        <div className={`tilt-card step-card hidden md:block w-1/2 pr-12 text-right ${!isEven ? 'invisible' : ''}`}>
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
+                                                <p className="text-gray-400">{step.description}</p>
                                             </div>
                                         </div>
 
-                                        <div className="flex-1 text-left">
-                                            {i % 2 !== 0 && (
-                                                <>
-                                                    <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
-                                                    <p className="text-gray-400">{step.description}</p>
-                                                </>
-                                            )}
+                                        {/* Center Icon */}
+                                        <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-2xl bg-[#0A0A0A] border border-white/10 flex items-center justify-center shadow-2xl group hover:scale-110 transition-transform duration-300 cursor-default">
+                                            <div className={`absolute inset-0 bg-gradient-to-br ${data.gradient} opacity-0 group-hover:opacity-20 transition-opacity rounded-2xl blur-md`} />
+                                            <StepIcon className={`w-6 h-6 ${data.color}`} />
+                                            <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-[#0A0A0A] border border-white/10 flex items-center justify-center text-[10px] font-mono font-bold text-gray-500">
+                                                0{i + 1}
+                                            </div>
                                         </div>
-                                    </motion.div>
+
+                                        {/* Right Content (Text for Odd, Empty for Even) */}
+                                        <div className={`tilt-card step-card flex-1 md:w-1/2 pl-8 md:pl-12 text-left ${isEven ? 'hidden md:invisible md:block' : ''}`}>
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
+                                                <p className="text-gray-400">{step.description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 );
                             })}
                         </div>
@@ -533,26 +653,25 @@ export default function SolutionPage() {
                 </div>
             </section>
 
-            {/* Features Grid */}
-            <section className="px-4 md:px-8 py-20 bg-white/5 border-t border-white/5">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-12">
-                        <h2 className="text-2xl font-bold mb-4">Technical Capabilities</h2>
+            {/* Technical Capabilities Grid */}
+            <section className="px-4 md:px-8 py-24 bg-white/[0.02] border-t border-white/5">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex items-center justify-between mb-12">
+                        <h2 className="text-2xl font-bold">Core Capabilities</h2>
+                        <div className="h-px flex-1 bg-white/10 ml-8" />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 [perspective:1000px]">
                         {data.features.map((feature: string, i: number) => (
-                            <motion.div
+                            <div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                className="p-6 rounded-2xl bg-black border border-white/10 hover:border-brand-orange/50 transition-colors group"
+                                className="tilt-card step-card group p-6 rounded-xl bg-black border border-white/10 hover:border-white/20 transition-all hover:bg-white/[0.02]"
                             >
-                                <div className={`w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-4 ${data.color} group-hover:scale-110 transition-transform`}>
-                                    <CheckCircle2 className="w-5 h-5" />
+                                <div className={`w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-4 ${data.color} group-hover:scale-110 transition-transform duration-500`}>
+                                    <Cpu className="w-5 h-5" />
                                 </div>
-                                <h3 className="text-lg font-bold text-white">{feature}</h3>
-                            </motion.div>
+                                <h3 className="text-sm font-bold text-white uppercase tracking-wide mb-2">{feature}</h3>
+                                <div className={`h-0.5 w-8 ${data.color.replace('text-', 'bg-')} opacity-50`} />
+                            </div>
                         ))}
                     </div>
                 </div>

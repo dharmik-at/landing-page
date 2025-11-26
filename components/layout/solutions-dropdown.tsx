@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
     Video, Globe, Image as ImageIcon, Database,
-    ChevronRight, Sparkles
+    ChevronRight
 } from "lucide-react";
 import { useState } from "react";
 
@@ -15,8 +15,8 @@ const solutions = [
         icon: Video,
         href: "/solutions/meeting-intelligence",
         color: "text-blue-400",
-        bg: "bg-blue-500/10",
-        border: "border-blue-500/20"
+        gradient: "from-blue-500/20 to-purple-500/20",
+        border: "group-hover:border-blue-500/50"
     },
     {
         title: "Market Pulse",
@@ -24,8 +24,8 @@ const solutions = [
         icon: Globe,
         href: "/solutions/market-pulse",
         color: "text-orange-400",
-        bg: "bg-orange-500/10",
-        border: "border-orange-500/20"
+        gradient: "from-orange-500/20 to-red-500/20",
+        border: "group-hover:border-orange-500/50"
     },
     {
         title: "Visual Knowledge",
@@ -33,8 +33,8 @@ const solutions = [
         icon: ImageIcon,
         href: "/solutions/visual-knowledge",
         color: "text-emerald-400",
-        bg: "bg-emerald-500/10",
-        border: "border-emerald-500/20"
+        gradient: "from-emerald-500/20 to-cyan-500/20",
+        border: "group-hover:border-emerald-500/50"
     },
     {
         title: "Unified Knowledge",
@@ -42,8 +42,8 @@ const solutions = [
         icon: Database,
         href: "/solutions/unified-knowledge",
         color: "text-pink-400",
-        bg: "bg-pink-500/10",
-        border: "border-pink-500/20"
+        gradient: "from-pink-500/20 to-rose-500/20",
+        border: "group-hover:border-pink-500/50"
     }
 ];
 
@@ -57,11 +57,11 @@ export function SolutionsDropdown() {
             onMouseLeave={() => setIsOpen(false)}
         >
             <button
-                className="text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center gap-1 py-2"
+                className={`text-sm font-medium transition-colors flex items-center gap-1 py-2 ${isOpen ? 'text-white' : 'text-gray-400 hover:text-white'}`}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 Solutions
-                <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`} />
+                <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-90 text-brand-orange" : ""}`} />
             </button>
 
             <AnimatePresence>
@@ -70,42 +70,38 @@ export function SolutionsDropdown() {
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] pt-4 z-50"
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 w-[640px] pt-4 z-50"
                     >
-                        <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden p-2 grid grid-cols-2 gap-2">
-                            {solutions.map((item) => (
-                                <Link
-                                    key={item.title}
-                                    href={item.href}
-                                    className="group flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5"
-                                >
-                                    <div className={`p-2.5 rounded-lg ${item.bg} ${item.color} ${item.border} border group-hover:scale-110 transition-transform duration-300`}>
-                                        <item.icon className="w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                                            {item.title}
-                                            <ChevronRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-orange" />
-                                        </div>
-                                        <p className="text-xs text-gray-400 leading-relaxed">
-                                            {item.description}
-                                        </p>
-                                    </div>
-                                </Link>
-                            ))}
+                        <div className="relative bg-[#050505] border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
+                            {/* Grid Background Effect */}
+                            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
 
-                            {/* Call to Action Area */}
-                            <div className="col-span-2 mt-2 p-3 rounded-xl bg-gradient-to-r from-brand-orange/10 to-orange-600/10 border border-brand-orange/20 flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                    <div className="p-1.5 rounded-lg bg-brand-orange/20 text-brand-orange">
-                                        <Sparkles className="w-4 h-4" />
-                                    </div>
-                                    <span className="text-sm font-medium text-brand-orange">See all use cases</span>
-                                </div>
-                                <span className="text-xs text-brand-orange/80 hover:text-brand-orange cursor-pointer transition-colors">
-                                    View Gallery →
-                                </span>
+                            <div className="relative p-2 grid grid-cols-2 gap-2">
+                                {solutions.map((item) => (
+                                    <Link
+                                        key={item.title}
+                                        href={item.href}
+                                        className="group relative flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-white/[0.03] border border-transparent hover:border-white/10 overflow-hidden"
+                                    >
+                                        {/* Hover Gradient Background */}
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+
+                                        <div className={`relative p-2.5 rounded-lg bg-white/5 border border-white/5 ${item.border} group-hover:scale-110 transition-transform duration-300`}>
+                                            <item.icon className={`w-5 h-5 ${item.color}`} />
+                                        </div>
+
+                                        <div className="relative">
+                                            <div className="text-sm font-bold text-gray-200 group-hover:text-white mb-1 flex items-center gap-2 transition-colors">
+                                                {item.title}
+                                                <ChevronRight className={`w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${item.color}`} />
+                                            </div>
+                                            <p className="text-xs text-gray-500 group-hover:text-gray-400 leading-relaxed transition-colors">
+                                                {item.description}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     </motion.div>
