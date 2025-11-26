@@ -82,7 +82,7 @@ const BorderBeam = () => (
 
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
 
-export function TechnicalSpecs() {
+export function Security() {
     return (
         <section className="py-32 px-4 md:px-6 bg-black relative overflow-hidden">
             {/* Circuit Background */}
@@ -98,51 +98,6 @@ export function TechnicalSpecs() {
             </div>
 
             <div className="container mx-auto max-w-7xl relative z-10">
-                <ScrollReveal className="text-center mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        Technical <span className="text-brand-orange">Specifications</span>
-                    </h2>
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                        Built for developers who need granular control. Full support for the modern AI stack.
-                    </p>
-                </ScrollReveal>
-
-                <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {specs.map((category, catIndex) => (
-                        <StaggerItem
-                            key={category.category}
-                            className="space-y-6"
-                        >
-                            <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
-                                <div className="p-2 rounded-lg bg-brand-orange/10 text-brand-orange">
-                                    <category.icon className="w-5 h-5" />
-                                </div>
-                                <h3 className="text-lg font-bold text-white uppercase tracking-wider">
-                                    {category.category}
-                                </h3>
-                            </div>
-
-                            <div className="grid gap-3">
-                                {category.items.map((item, i) => (
-                                    <motion.div
-                                        key={item.name}
-                                        className="group relative overflow-hidden p-3 rounded-xl bg-white/5 border border-white/10 transition-colors"
-                                        whileHover={{ scale: 1.02 }}
-                                    >
-                                        <Scanner />
-                                        <BorderBeam />
-                                        <div className="relative z-10 flex items-center gap-3 bg-black/50 rounded-lg p-1">
-                                            <item.icon className="w-4 h-4 text-gray-500 group-hover:text-brand-orange transition-colors" />
-                                            <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
-                                                {item.name}
-                                            </span>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </StaggerItem>
-                    ))}
-                </StaggerContainer>
 
                 {/* Security Badge */}
                 <ScrollReveal

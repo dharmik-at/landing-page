@@ -11,8 +11,13 @@ import {
     Video, Mic, Globe, Image as ImageIcon, FileText,
     Database, HardDrive, Search, ArrowRight, CheckCircle2,
     Zap, Shield, Clock, XCircle, TrendingUp, BarChart3,
-    MessageSquare, Layers, Lock, Cpu, Activity, Scan
+    MessageSquare, Layers, Lock, Cpu, Activity, Scan,
+    Users, Sparkles
 } from "lucide-react";
+import { MeetingIntelligenceAnimation } from "@/components/solutions/MeetingIntelligenceAnimation";
+import { WebIntelligenceAnimation } from "@/components/solutions/WebIntelligenceAnimation";
+import { VisualKnowledgeAnimation } from "@/components/solutions/VisualKnowledgeAnimation";
+import { UnifiedKnowledgeAnimation } from "@/components/solutions/UnifiedKnowledgeAnimation";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -79,65 +84,65 @@ const solutionsData: Record<string, any> = {
         ],
         visual: "waveform"
     },
-    "market-pulse": {
-        title: "Market Pulse",
-        subtitle: "Track competitors and news in real-time.",
-        description: "Don't let the market surprise you. Monitor competitor pricing, news releases, and social sentiment 24/7 with our advanced web scraping engine.",
+    "web-intelligence": {
+        title: "Web Intelligence",
+        subtitle: "Turn any website into a conversation.",
+        description: "Don't just browse. Interact. Submit any URL or sitemap, and IngestIQ instantly scrapes, processes, and indexes the content, allowing you to chat with websites, documentation, and wikis as if they were your own data.",
         icon: Globe,
         color: "text-orange-400",
         borderColor: "border-orange-500/50",
         shadowColor: "shadow-orange-500/20",
         gradient: "from-orange-500 to-red-500",
         stats: [
-            { label: "Data Sources", value: "10k+" },
-            { label: "Latency", value: "< 5min" },
-            { label: "Competitors", value: "Unlimited" }
+            { label: "Setup Time", value: "Instant" },
+            { label: "Capacity", value: "Unlimited" },
+            { label: "Sync", value: "Auto-Refresh" }
         ],
         problem: {
-            title: "Flying Blind",
+            title: "The Static Web",
             points: [
-                "Manually checking competitor websites",
-                "Missed pricing changes and product launches",
-                "Delayed reaction to negative PR or reviews",
-                "Scattered data across spreadsheets and emails"
+                "Wasting hours searching through documentation",
+                "Manually copy-pasting content into AI tools",
+                "Broken or outdated internal wikis",
+                "No programmatic access to public web data"
             ]
         },
         solution: {
-            title: "Total Market Visibility",
+            title: "The Interactive Web",
             points: [
-                "Automated 24/7 monitoring of any URL",
-                "Instant alerts for price drops or copy changes",
-                "Sentiment analysis on social media & news",
-                "Centralized dashboard for all market intel"
+                "Instant scraping of dynamic JS websites",
+                "Chat interface for any URL or Sitemap",
+                "API access to queried web data",
+                "Automatic re-crawling to keep data fresh"
             ]
         },
         steps: [
             {
-                title: "Define Targets",
-                description: "Input competitor URLs, keywords, or social handles to monitor.",
+                title: "Add URLs",
+                description: "Paste a link or upload a sitemap. We support any public domain.",
                 icon: Search
             },
             {
-                title: "Smart Crawling",
-                description: "Our headless browsers navigate complex sites, handling auth and captchas.",
+                title: "Smart Crawl",
+                description: "Our headless browsers handle JS rendering, navigation, and auth.",
                 icon: Globe
             },
             {
-                title: "Change Detection",
-                description: "AI compares snapshots to identify meaningful changes (price, copy, features).",
-                icon: TrendingUp
+                title: "Index & Vectorize",
+                description: "Content is chunked and embedded for semantic search.",
+                icon: Layers
             },
             {
-                title: "Insight Delivery",
-                description: "Receive daily digests or instant alerts via Slack/Email.",
+                title: "Chat & Query",
+                description: "Ask questions and get answers with citations from the source.",
                 icon: MessageSquare
             }
         ],
         features: [
-            "Real-time Price Monitoring",
-            "News & PR Aggregation",
-            "Social Sentiment Analysis",
-            "Competitor Product Change Detection"
+            "Sitemap Support",
+            "JavaScript Rendering",
+            "Scheduled Re-crawls",
+            "Citations & Sources"
         ],
         visual: "chart"
     },
@@ -460,83 +465,61 @@ export default function SolutionPage() {
                     </div>
 
                     {/* Visual Placeholder */}
-                    <div className="hero-visual relative aspect-square [perspective:1000px]">
-                        <div className={`absolute inset-0 bg-gradient-to-br ${data.gradient} opacity-20 blur-3xl`} />
-                        <div className="relative h-full w-full rounded-3xl border border-white/10 bg-black/40 backdrop-blur-xl overflow-hidden shadow-2xl [transform-style:preserve-3d]">
-                            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+                    <div className="hero-visual relative aspect-square [perspective:1000px] group">
+                        <div className={`absolute inset-0 bg-gradient-to-br ${data.gradient} opacity-10 blur-[100px] transition-opacity duration-500 group-hover:opacity-20`} />
+
+                        {/* Main Container Frame */}
+                        <div className="relative h-full w-full rounded-3xl border border-white/10 bg-black/80 backdrop-blur-2xl overflow-hidden shadow-2xl [transform-style:preserve-3d] group-hover:[transform:rotateX(2deg)_rotateY(-2deg)] transition-transform duration-500 ease-out">
+                            {/* Background Grid */}
+                            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+                            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                            {/* Window Controls */}
+                            <div className="absolute top-4 right-4 flex gap-2 z-20">
+                                <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                                <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                                <div className="w-2 h-2 rounded-full bg-green-500/50" />
+                            </div>
+
                             <BorderBeam duration={8} colorFrom="#ffffff" colorTo={data.color.split('-')[1]} />
 
-                            <div className="absolute inset-0 flex items-center justify-center [transform-style:preserve-3d] [transform:translateZ(20px)]">
-                                {/* Abstract Visual Representation based on type */}
-                                {data.visual === "waveform" && (
-                                    <div className="flex items-center gap-1.5">
-                                        {[...Array(12)].map((_, i) => (
-                                            <div
-                                                key={i}
-                                                className={`visual-bar w-3 h-10 rounded-full ${data.color.replace('text-', 'bg-')} opacity-80`}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-                                {data.visual === "chart" && (
-                                    <div className="relative w-80 h-64">
-                                        <div className="absolute bottom-0 left-0 w-full h-px bg-white/20" />
-                                        <div className="absolute bottom-0 left-0 w-px h-full bg-white/20" />
-                                        <div className="absolute bottom-0 left-0 right-0 top-0 overflow-hidden">
-                                            <svg className="w-full h-full" viewBox="0 0 320 256">
-                                                <path
-                                                    d="M0 200 Q 80 100 160 150 T 320 50"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    strokeWidth="3"
-                                                    className={data.color}
-                                                />
-                                                <path
-                                                    d="M0 200 Q 80 100 160 150 T 320 50 V 256 H 0 Z"
-                                                    fill={`url(#gradient-${slug})`}
-                                                    opacity="0.2"
-                                                />
-                                                <defs>
-                                                    <linearGradient id={`gradient-${slug}`} x1="0" y1="0" x2="0" y2="1">
-                                                        <stop offset="0%" stopColor="currentColor" className={data.color} />
-                                                        <stop offset="100%" stopColor="transparent" />
-                                                    </linearGradient>
-                                                </defs>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                )}
-                                {data.visual === "scan" && (
-                                    <div className="relative w-72 h-96 bg-white/5 rounded-xl border border-white/10 p-6 flex flex-col gap-4">
-                                        <div className="h-4 w-3/4 bg-white/10 rounded" />
-                                        <div className="h-4 w-1/2 bg-white/10 rounded" />
-                                        <div className="flex-1 bg-white/5 rounded border border-white/5" />
-                                        <div className={`absolute top-0 left-0 w-full h-1 ${data.color.replace('text-', 'bg-')} shadow-[0_0_20px_currentColor] animate-scan`} />
-                                    </div>
-                                )}
-                                {data.visual === "graph" && (
-                                    <div className="relative w-full h-full">
-                                        {[...Array(8)].map((_, i) => (
-                                            <div
-                                                key={i}
-                                                className={`absolute w-3 h-3 rounded-full ${data.color.replace('text-', 'bg-')}`}
-                                                style={{
-                                                    left: `${Math.random() * 80 + 10}%`,
-                                                    top: `${Math.random() * 80 + 10}%`,
-                                                }}
-                                            />
-                                        ))}
-                                        <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                                            <path
-                                                d="M100 100 L 200 200 M 100 200 L 200 100"
-                                                stroke="currentColor"
-                                                strokeWidth="1"
-                                                className={`${data.color} opacity-20`}
-                                            />
-                                        </svg>
-                                    </div>
-                                )}
-                            </div>
+                            {/* ------------------------------------------------------------------
+                                VISUAL 1: MEETING INTELLIGENCE (High-Fidelity Animation)
+                                Concept: Chaos -> AI Core -> Structured Summary
+                               ------------------------------------------------------------------ */}
+                            {data.visual === "waveform" && (
+                                <div className="absolute inset-0">
+                                    <MeetingIntelligenceAnimation />
+                                </div>
+                            )}
+
+                            {/* ------------------------------------------------------------------
+                                VISUAL 2: WEB INTELLIGENCE (Process: URL -> Scan -> Data -> Chat)
+                               ------------------------------------------------------------------ */}
+                            {data.visual === "chart" && (
+                                <div className="absolute inset-0">
+                                    <WebIntelligenceAnimation />
+                                </div>
+                            )}
+
+                            {/* ------------------------------------------------------------------
+                                VISUAL 3: VISUAL KNOWLEDGE (Process: Scan -> Table -> JSON)
+                               ------------------------------------------------------------------ */}
+                            {data.visual === "scan" && (
+                                <div className="absolute inset-0">
+                                    <VisualKnowledgeAnimation />
+                                </div>
+                            )}
+
+                            {/* ------------------------------------------------------------------
+                                VISUAL 4: UNIFIED KNOWLEDGE (Process: Sources -> Core -> Result)
+                               ------------------------------------------------------------------ */}
+                            {data.visual === "graph" && (
+                                <div className="absolute inset-0">
+                                    <UnifiedKnowledgeAnimation />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

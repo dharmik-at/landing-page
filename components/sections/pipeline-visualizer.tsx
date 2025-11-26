@@ -57,9 +57,9 @@ export function PipelineVisualizer() {
             {/* Background Grid */}
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20 pointer-events-none" />
 
-            <div className="container mx-auto max-w-7xl relative z-10">
+            <div className="container mx-auto max-w-6xl relative z-10">
                 <ScrollReveal className="text-center mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                    <h2 className="text-4xl md:text-5xl px-4 md:px-70 font-bold mb-6">
                         The <span className="text-brand-orange">Infrastructure</span> Matrix
                     </h2>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -116,7 +116,7 @@ export function PipelineVisualizer() {
                                                     <div className="absolute top-1/2 -left-4 md:-left-8 w-4 md:w-8 h-px bg-white/10" />
                                                 )}
 
-                                                <div className="flex items-center gap-3">
+                                                <div className="flex flex-col items-center gap-3 text-center">
                                                     <div
                                                         className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 text-gray-400 group-hover:text-white group-hover:scale-110 transition-all duration-300"
                                                         style={{ color: activePipeline === pipeline.id ? pipeline.color : undefined }}

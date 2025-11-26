@@ -77,7 +77,7 @@ export function KnowledgeBases() {
     return (
         <section className="py-24 bg-[#0A0A0A] border-t border-white/5 min-h-[800px]">
             <div className="container mx-auto px-4 md:px-6">
-                <ScrollReveal className="text-center mb-16">
+                <ScrollReveal className="text-center px-4 md:px-116 mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
                         <span className="text-brand-orange">Knowledge</span> Bases
                     </h2>
@@ -98,16 +98,16 @@ export function KnowledgeBases() {
                                     <StaggerItem
                                         key={kb.id}
                                         onClick={() => setSelectedKBId(kb.id)}
-                                        className="group cursor-pointer p-6 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex flex-col"
+                                        className="group cursor-pointer p-6 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex flex-col items-center text-center relative"
                                     >
-                                        <div className="flex items-start justify-between mb-6">
-                                            <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center", kb.bg, kb.color)}>
-                                                <kb.icon className="w-6 h-6" />
-                                            </div>
-                                            <div className={cn("px-2 py-1 rounded text-xs font-medium border", kb.bg, kb.color, kb.border)}>
-                                                Active
-                                            </div>
+                                        <div className={cn("absolute top-4 right-4 px-2 py-1 rounded text-xs font-medium border", kb.bg, kb.color, kb.border)}>
+                                            Active
                                         </div>
+
+                                        <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-6", kb.bg, kb.color)}>
+                                            <kb.icon className="w-6 h-6" />
+                                        </div>
+
                                         <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-orange transition-colors">
                                             {kb.name}
                                         </h3>

@@ -6,9 +6,10 @@ import { DestinationConnectors } from "@/components/sections/destination-connect
 import { AIModels } from "@/components/sections/ai-models";
 import { EmbeddingModels } from "@/components/sections/embedding-models";
 import { KnowledgeBases } from "@/components/sections/knowledge-bases";
-import { TechnicalSpecs } from "@/components/sections/technical-specs";
+import { Security } from "@/components/sections/technical-specs";
 import { FeaturesDeepDive } from "@/components/sections/features-deep-dive";
 import { PipelineVisualizer } from "@/components/sections/pipeline-visualizer";
+import { Contact } from "@/components/sections/contact";
 
 export default function Home() {
   return (
@@ -22,7 +23,8 @@ export default function Home() {
       <KnowledgeBases />
       <PipelineVisualizer />
       <FeaturesDeepDive />
-      <TechnicalSpecs />
+      <Security />
+      <Contact />
     </main>
   );
 }

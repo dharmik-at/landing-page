@@ -42,6 +42,213 @@
   }
 
   --animate-border-beam-spin: border-beam-spin calc(var(--duration)*1s) infinite linear;
+  --animate-scan: scan 3s ease-in-out infinite;
+
+  @keyframes scan {
+
+    0%,
+    100% {
+      top: 0%;
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes type-text {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes pop-in {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    70% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up-fade {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes flow-horizontal {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes extract-card {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: translateY(-20px) scale(1.05);
+      opacity: 0.8;
+    }
+
+    100% {
+      transform: translateY(100px) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.5;
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+
+    70% {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+      transform: scale(0.8);
+      opacity: 0.5;
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
+
+
+
+  @keyframes equalizer {
+    0% {
+      height: 20%;
+    }
+
+    100% {
+      height: 80%;
+    }
+  }
+
+  @keyframes grid-move {
+    0% {
+      transform: rotateX(60deg) translateZ(-100px) translateY(0);
+    }
+
+    100% {
+      transform: rotateX(60deg) translateZ(-100px) translateY(40px);
+    }
+  }
+
+  @keyframes scan-slow {
+    0% {
+      left: 0%;
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes scan-down {
+    0% {
+      top: 0%;
+    }
+
+    100% {
+      top: 100%;
+    }
+  }
+
+  @keyframes orbit-0 {
+    from {
+      transform: rotate(0deg) translateX(120px) rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg) translateX(120px) rotate(-360deg);
+    }
+  }
+
+  @keyframes orbit-1 {
+    from {
+      transform: rotate(90deg) translateX(120px) rotate(-90deg);
+    }
+
+    to {
+      transform: rotate(450deg) translateX(120px) rotate(-450deg);
+    }
+  }
+
+  @keyframes orbit-2 {
+    from {
+      transform: rotate(180deg) translateX(120px) rotate(-180deg);
+    }
+
+    to {
+      transform: rotate(540deg) translateX(120px) rotate(-540deg);
+    }
+  }
+
+  @keyframes orbit-3 {
+    from {
+      transform: rotate(270deg) translateX(120px) rotate(-270deg);
+    }
+
+    to {
+      transform: rotate(630deg) translateX(120px) rotate(-630deg);
+    }
+  }
 }
 
 @keyframes border-beam-spin {
@@ -100,4 +307,188 @@ h6 {
 
 .perspective-1000 {
   perspective: 1000px;
+}
+
+/* Custom Utility Classes for Staggered Animation */
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+.delay-2000 {
+  animation-delay: 2000ms;
+}
+
+.delay-3000 {
+  animation-delay: 3000ms;
+}
+
+.delay-4000 {
+  animation-delay: 4000ms;
+}
+
+.delay-5000 {
+  animation-delay: 5000ms;
+}
+
+.delay-6000 {
+  animation-delay: 6000ms;
+}
+
+.delay-7000 {
+  animation-delay: 7000ms;
+}
+
+.delay-8000 {
+  animation-delay: 8000ms;
+}
+
+/* Meeting Intelligence Loop - 12s Total Duration */
+
+@keyframes chaos-cycle {
+  0% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
+
+  30% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+}
+
+@keyframes core-cycle {
+
+  0%,
+  25% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  40% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  45% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+@keyframes card-cycle {
+
+  0%,
+  40% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8) rotateX(20deg);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotateX(0deg);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotateX(0deg);
+  }
+
+  95% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.1);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8) rotateX(20deg);
+  }
+}
+
+@keyframes item-cycle-1 {
+
+  0%,
+  48% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  53%,
+  90% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  95%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+@keyframes item-cycle-2 {
+
+  0%,
+  53% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  58%,
+  90% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  95%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+@keyframes item-cycle-3 {
+
+  0%,
+  58% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  63%,
+  90% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  95%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
 }

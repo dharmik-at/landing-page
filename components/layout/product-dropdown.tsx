@@ -3,51 +3,60 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
-    Video, Globe, Image as ImageIcon, Database,
+    Zap, Puzzle, CreditCard, History, Book,
     ChevronRight
 } from "lucide-react";
 import { useState } from "react";
 
-const solutions = [
+const productItems = [
     {
-        title: "Meeting Intelligence",
-        description: "Turn calls into actionable summaries.",
-        icon: Video,
-        href: "/solutions/meeting-intelligence",
+        title: "Features",
+        description: "Explore the power of IngestIQ.",
+        icon: Zap,
+        href: "/features",
+        color: "text-yellow-400",
+        gradient: "from-yellow-500/20 to-orange-500/20",
+        border: "group-hover:border-yellow-500/50"
+    },
+    {
+        title: "Integrations",
+        description: "Connect with your favorite tools.",
+        icon: Puzzle,
+        href: "/integrations",
         color: "text-blue-400",
-        gradient: "from-blue-500/20 to-purple-500/20",
+        gradient: "from-blue-500/20 to-indigo-500/20",
         border: "group-hover:border-blue-500/50"
     },
     {
-        title: "Web Intelligence",
-        description: "Chat with any website instantly.",
-        icon: Globe,
-        href: "/solutions/web-intelligence",
-        color: "text-orange-400",
-        gradient: "from-orange-500/20 to-red-500/20",
-        border: "group-hover:border-orange-500/50"
+        title: "Contact Us",
+        description: "Get in touch with our team.",
+        icon: CreditCard,
+        href: "#contact",
+        color: "text-green-400",
+        gradient: "from-green-500/20 to-emerald-500/20",
+        border: "group-hover:border-green-500/50"
     },
     {
-        title: "Visual Knowledge",
-        description: "Chat with charts & blueprints.",
-        icon: ImageIcon,
-        href: "/solutions/visual-knowledge",
-        color: "text-emerald-400",
-        gradient: "from-emerald-500/20 to-cyan-500/20",
-        border: "group-hover:border-emerald-500/50"
+        title: "Changelog",
+        description: "See what's new and improved.",
+        icon: History,
+        href: "/changelog",
+        color: "text-purple-400",
+        gradient: "from-purple-500/20 to-pink-500/20",
+        border: "group-hover:border-purple-500/50"
     },
     {
-        title: "Unified Knowledge",
-        description: "One search bar for everything.",
-        icon: Database,
-        href: "/solutions/unified-knowledge",
-        color: "text-pink-400",
-        gradient: "from-pink-500/20 to-rose-500/20",
-        border: "group-hover:border-pink-500/50"
+        title: "Docs",
+        description: "Guides, references, and API docs.",
+        icon: Book,
+        href: "/docs",
+        color: "text-cyan-400",
+        gradient: "from-cyan-500/20 to-sky-500/20",
+        border: "group-hover:border-cyan-500/50"
     }
 ];
 
-export function SolutionsDropdown() {
+export function ProductDropdown() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -60,7 +69,7 @@ export function SolutionsDropdown() {
                 className={`text-sm font-medium transition-colors flex items-center gap-1 py-2 ${isOpen ? 'text-white' : 'text-gray-400 hover:text-white'}`}
                 onClick={() => setIsOpen(!isOpen)}
             >
-                Solutions
+                Product
                 <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-90 text-brand-orange" : ""}`} />
             </button>
 
@@ -78,7 +87,7 @@ export function SolutionsDropdown() {
                             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
 
                             <div className="relative p-2 grid grid-cols-2 gap-2">
-                                {solutions.map((item) => (
+                                {productItems.map((item) => (
                                     <Link
                                         key={item.title}
                                         href={item.href}

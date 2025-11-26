@@ -33,7 +33,7 @@ const features = [
     {
         title: "Media RAG",
         subtitle: "Video & Audio Understanding",
-        description: "Don't just transcribe—understand. IngestIQ processes video and audio files, identifying speakers, key topics, and visual context for true multi-modal search.",
+        description: "Don't just transcribe. Understand. IngestIQ processes video and audio files, identifying speakers, key topics, and visual context for true multi-modal search.",
         points: ["Speaker Diarization", "Visual Scene Analysis", "Timestamped Citations"],
         visual: (
             <div className="w-full h-full bg-[#0F0F0F] rounded-xl border border-white/10 overflow-hidden relative">

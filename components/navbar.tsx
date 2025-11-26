@@ -23,7 +23,7 @@ export function Navbar() {
                 <Link href="#features" className="hover:text-white transition-colors">Features</Link>
                 <Link href="#pipeline" className="hover:text-white transition-colors">Pipeline</Link>
                 <Link href="#docs" className="hover:text-white transition-colors">Docs</Link>
-                <Link href="#pricing" className="hover:text-white transition-colors">Pricing</Link>
+                <Link href="#contact" className="hover:text-white transition-colors">Contact</Link>
             </div>
 
             <div className="flex items-center gap-4">

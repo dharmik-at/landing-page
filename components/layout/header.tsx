@@ -7,13 +7,13 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
+import { ProductDropdown } from "@/components/layout/product-dropdown";
 import { SolutionsDropdown } from "@/components/layout/solutions-dropdown";
 
 const navItems = [
-    { name: "Product", href: "#features" },
+    // Product is handled separately
     // Solutions is handled separately
     { name: "Developers", href: "#docs" },
-    { name: "Pricing", href: "#pricing" },
 ];
 
 export function Header() {
@@ -51,20 +51,11 @@ export function Header() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-8">
-                    {navItems.slice(0, 1).map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className="text-sm font-medium text-gray-400 hover:text-white transition-colors relative group"
-                        >
-                            {item.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all group-hover:w-full" />
-                        </Link>
-                    ))}
+                    <ProductDropdown />
 
                     <SolutionsDropdown />
 
-                    {navItems.slice(1).map((item) => (
+                    {navItems.map((item) => (
                         <Link
                             key={item.name}
                             href={item.href}
@@ -104,6 +95,22 @@ export function Header() {
                     className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
                 >
                     <div className="container px-4 py-8 flex flex-col gap-6">
+                        <Link
+                            href="#features"
+                            className="text-lg font-medium text-gray-300 hover:text-white flex items-center justify-between group"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Product
+                            <ChevronRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-orange" />
+                        </Link>
+                        <Link
+                            href="#solutions"
+                            className="text-lg font-medium text-gray-300 hover:text-white flex items-center justify-between group"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Solutions
+                            <ChevronRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-orange" />
+                        </Link>
                         {navItems.map((item) => (
                             <Link
                                 key={item.name}

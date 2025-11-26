@@ -9,7 +9,7 @@ const footerLinks = {
     Product: [
         { name: "Features", href: "#" },
         { name: "Integrations", href: "#" },
-        { name: "Pricing", href: "#" },
+        { name: "Contact", href: "#contact" },
         { name: "Changelog", href: "#" },
         { name: "Docs", href: "#" },
     ],
@@ -98,9 +98,15 @@ export function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-sm text-gray-500">
-                        © {new Date().getFullYear()} IngestIQ Inc. All rights reserved.
-                    </p>
+                    <div className="flex flex-col md:flex-row items-center gap-2 md:gap-0">
+                        <p className="text-sm text-gray-500">
+                            © {new Date().getFullYear()} All rights reserved.
+                        </p>
+                        <span className="hidden md:inline mx-4 text-gray-700">|</span>
+                        <p className="text-sm text-gray-500 flex items-center gap-1">
+                            Cooked at <a href="https://avestalabs.ai/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-brand-orange transition-colors font-medium">Avestalabs</a>
+                        </p>
+                    </div>
                     <div className="flex gap-8">
                         <Link href="#" className="text-sm text-gray-500 hover:text-white transition-colors">
                             Privacy Policy
