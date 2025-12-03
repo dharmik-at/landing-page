@@ -42,7 +42,7 @@ export function Footer() {
                             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-brand-orange to-orange-500 text-white font-bold text-lg">
                                 Q
                             </div>
-                            <span className="text-xl font-bold font-outfit text-white">
+                            <span className="text-xl font-bold font-heading text-white">
                                 IngestIQ
                             </span>
                         </Link>

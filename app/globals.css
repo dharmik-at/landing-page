@@ -7,8 +7,8 @@
   --color-glass: rgba(255, 255, 255, 0.03);
   --color-glass-border: rgba(255, 255, 255, 0.08);
 
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-outfit);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
 
   --animate-marquee: marquee 25s linear infinite;
 

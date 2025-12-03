@@ -44,7 +44,7 @@ export function Header() {
                     <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-orange to-orange-500 text-white font-bold text-lg shadow-lg shadow-brand-orange/20 group-hover:shadow-brand-orange/40 transition-all">
                         Q
                     </div>
-                    <span className="text-xl font-bold tracking-tight font-outfit text-white">
+                    <span className="text-xl font-bold tracking-tight font-heading text-white">
                         IngestIQ
                     </span>
                 </Link>
