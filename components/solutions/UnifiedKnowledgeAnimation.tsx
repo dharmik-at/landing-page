@@ -154,12 +154,7 @@ export function UnifiedKnowledgeAnimation() {
             {/* Background Ambience */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent opacity-50" />
 
-            {/* Headline */}
-            <div className="headline-text absolute top-4 left-0 right-0 text-center z-10 pointer-events-none px-2">
-                <h3 className="text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-white opacity-90 leading-tight">
-                    One search bar for your<br />entire company
-                </h3>
-            </div>
+
 
             {/* Connection Lines Layer (SVG) */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">

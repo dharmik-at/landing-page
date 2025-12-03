@@ -13,7 +13,7 @@ import { SolutionsDropdown } from "@/components/layout/solutions-dropdown";
 const navItems = [
     // Product is handled separately
     // Solutions is handled separately
-    { name: "Developers", href: "#docs" },
+    { name: "Developers", href: "/docs" },
 ];
 
 export function Header() {

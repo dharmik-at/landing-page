@@ -142,12 +142,7 @@ export function WebIntelligenceAnimation() {
             {/* Background Ambience */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent opacity-50" />
 
-            {/* Headline */}
-            <div className="headline-text absolute top-6 left-0 right-0 text-center z-10 pointer-events-none px-4">
-                <h3 className="text-lg md:text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white opacity-90">
-                    Turn any website into a conversation
-                </h3>
-            </div>
+
 
             {/* 1. Holographic Browser Window */}
             <div className="browser-window absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[60%] bg-[#0F0F11]/80 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl perspective-1000 z-0">

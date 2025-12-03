@@ -118,12 +118,7 @@ export function VisualKnowledgeAnimation() {
                 </svg>
             </div>
 
-            {/* Headline */}
-            <div className="headline-text absolute top-4 left-0 right-0 text-center z-10 pointer-events-none px-2">
-                <h3 className="text-sm font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white opacity-90 leading-tight">
-                    Chat with blueprints, charts,<br />and diagrams
-                </h3>
-            </div>
+
 
             {/* 2. File Drop Thumbnail */}
             <div className="pdf-thumbnail absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg flex items-center justify-center shadow-2xl z-20">

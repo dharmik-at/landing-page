@@ -2,9 +2,35 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Check, FileText, Globe, Play, Terminal, Folder } from "lucide-react";
+import { Check, FileText, Globe, Play, Terminal, Folder, Video, Image as ImageIcon, Database } from "lucide-react";
 
 const features = [
+    {
+        title: "Meeting Intelligence",
+        subtitle: "Turn Calls into Action",
+        description: "Don't just transcribe. Understand. IngestIQ processes video and audio files, identifying speakers, key topics, and visual context for true multi-modal search.",
+        points: ["Speaker Diarization", "Visual Scene Analysis", "Timestamped Citations"],
+        visual: (
+            <div className="w-full h-full bg-[#0F0F0F] rounded-xl border border-white/10 overflow-hidden relative">
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                        <Play className="w-6 h-6 text-white fill-white" />
+                    </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent p-4 flex flex-col justify-end">
+                    <div className="flex gap-1 mb-2">
+                        {[...Array(20)].map((_, i) => (
+                            <div key={i} className="flex-1 bg-brand-orange/50 rounded-full" style={{ height: Math.random() * 24 + 8 + 'px' }} />
+                        ))}
+                    </div>
+                    <div className="flex items-center justify-between text-xs text-gray-400">
+                        <span>02:14</span>
+                        <span>14:30</span>
+                    </div>
+                </div>
+            </div>
+        ),
+    },
     {
         title: "Web Intelligence",
         subtitle: "Turn the Internet into Context",
@@ -31,34 +57,34 @@ const features = [
         ),
     },
     {
-        title: "Media RAG",
-        subtitle: "Video & Audio Understanding",
-        description: "Don't just transcribe. Understand. IngestIQ processes video and audio files, identifying speakers, key topics, and visual context for true multi-modal search.",
-        points: ["Speaker Diarization", "Visual Scene Analysis", "Timestamped Citations"],
+        title: "Visual Knowledge",
+        subtitle: "Chat with Blueprints & Charts",
+        description: "Unlock the 80% of data trapped in visual formats. Our multimodal AI parses complex PDFs, engineering blueprints, and financial charts with pixel-perfect accuracy.",
+        points: ["OCR for Handwritten Text", "Table Structure Recognition", "CAD File Support"],
         visual: (
-            <div className="w-full h-full bg-[#0F0F0F] rounded-xl border border-white/10 overflow-hidden relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                        <Play className="w-6 h-6 text-white fill-white" />
+            <div className="w-full h-full bg-[#0F0F0F] rounded-xl border border-white/10 overflow-hidden relative p-6 flex flex-col">
+                <div className="flex-1 border-2 border-dashed border-white/10 rounded-lg flex items-center justify-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%,100%_100%] animate-[shimmer_3s_infinite]" />
+                    <ImageIcon className="w-12 h-12 text-white/20" />
+
+                    {/* Bounding Boxes */}
+                    <div className="absolute top-1/4 left-1/4 w-1/2 h-12 border border-brand-orange/50 bg-brand-orange/10 rounded flex items-center justify-center">
+                        <span className="text-[10px] text-brand-orange bg-black/50 px-1 rounded">Table 1.2</span>
+                    </div>
+                    <div className="absolute bottom-1/4 right-1/4 w-1/3 h-24 border border-blue-500/50 bg-blue-500/10 rounded flex items-center justify-center">
+                        <span className="text-[10px] text-blue-500 bg-black/50 px-1 rounded">Chart A</span>
                     </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent p-4 flex flex-col justify-end">
-                    <div className="flex gap-1 mb-2">
-                        {[...Array(20)].map((_, i) => (
-                            <div key={i} className="flex-1 bg-brand-orange/50 rounded-full" style={{ height: Math.random() * 24 + 8 + 'px' }} />
-                        ))}
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-gray-400">
-                        <span>02:14</span>
-                        <span>14:30</span>
-                    </div>
+                <div className="h-12 mt-4 bg-white/5 rounded-lg border border-white/5 p-2 flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-xs font-mono text-gray-400">Processing visual elements...</span>
                 </div>
             </div>
         ),
     },
     {
-        title: "Enterprise Connectors",
-        subtitle: "Sync Your Knowledge Base",
+        title: "Unified Knowledge",
+        subtitle: "One Search Bar for Everything",
         description: "Connect to Google Drive, Notion, Slack, and Jira in seconds. We handle the OAuth, permission syncing, and incremental updates so your data is always fresh.",
         points: ["Real-time Sync", "Permission Mirroring", "SOC2 Compliant"],
         visual: (

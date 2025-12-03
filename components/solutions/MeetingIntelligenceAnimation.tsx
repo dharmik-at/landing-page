@@ -148,12 +148,7 @@ export function MeetingIntelligenceAnimation() {
             {/* Background Ambience */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent opacity-50" />
 
-            {/* 1. Headline */}
-            <div className="headline absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                <h3 className="text-3xl md:text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 px-8">
-                    Turn hours of calls into<br />actionable summaries.
-                </h3>
-            </div>
+
 
             {/* 2. Chaos Elements */}
             <div className="absolute inset-0 z-10">
