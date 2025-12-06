@@ -3,8 +3,9 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, FileText, Globe } from "lucide-react";
 import { DashboardMockup } from "@/components/ui/dashboard-mockup";
+import { NotionIcon, SlackIcon, DriveIcon } from "@/components/ui/icons";
 import { useEffect, useRef } from "react";
 
 export function Hero() {
@@ -115,18 +116,33 @@ export function Hero() {
                             </Link>
                         </motion.div>
 
-                        <motion.div
+                        {/* <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.6 }}
-                            className="mt-12 flex items-center justify-center lg:justify-start gap-8 opacity-50 grayscale"
+                            className="mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-8"
                         >
-                            {/* Simple logos for social proof */}
-                            <div className="text-sm font-semibold">ACME Corp</div>
-                            <div className="text-sm font-semibold">Globex</div>
-                            <div className="text-sm font-semibold">Soylent</div>
-                            <div className="text-sm font-semibold">Umbrella</div>
-                        </motion.div>
+                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
+                                <FileText className="h-6 w-6" />
+                                <span className="text-sm font-medium">PDF</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
+                                <NotionIcon className="h-6 w-6" />
+                                <span className="text-sm font-medium">Notion</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
+                                <DriveIcon className="h-6 w-6" />
+                                <span className="text-sm font-medium">Drive</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
+                                <SlackIcon className="h-6 w-6" />
+                                <span className="text-sm font-medium">Slack</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
+                                <Globe className="h-6 w-6" />
+                                <span className="text-sm font-medium">Website</span>
+                            </div>
+                        </motion.div> */}
                     </div>
 
                     {/* Right: Dashboard Mockup (3D Tilt) */}
