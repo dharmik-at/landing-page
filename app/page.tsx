@@ -6,7 +6,6 @@ import { DestinationConnectors } from "@/components/sections/destination-connect
 import { AIModels } from "@/components/sections/ai-models";
 import { EmbeddingModels } from "@/components/sections/embedding-models";
 import { KnowledgeBases } from "@/components/sections/knowledge-bases";
-import { Security } from "@/components/sections/technical-specs";
 import { PipelineVisualizer } from "@/components/sections/pipeline-visualizer";
 import { Contact } from "@/components/sections/contact";
 
@@ -21,7 +20,6 @@ export default function Home() {
             <EmbeddingModels />
             <KnowledgeBases />
             <PipelineVisualizer />
-            <Security />
             <Contact />
         </main>
     );
