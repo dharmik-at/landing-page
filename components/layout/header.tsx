@@ -13,7 +13,6 @@ import { SolutionsDropdown } from "@/components/layout/solutions-dropdown";
 const navItems = [
     // Product is handled separately
     // Solutions is handled separately
-    { name: "Pipeline", href: "#pipeline" },
     { name: "Developers", href: "/docs" },
     { name: "Contact", href: "#contact" },
 ];
@@ -71,12 +70,11 @@ export function Header() {
 
                 {/* Desktop Actions */}
                 <div className="hidden md:flex items-center gap-4">
-                    <Link href="/login" className="text-sm font-medium text-white hover:text-brand-orange transition-colors">
-                        Sign In
+                    <Link href="https://ingestiq.ai/">
+                        <Button size="sm" className="rounded-full px-6 bg-white text-black hover:bg-gray-200 font-semibold">
+                            Get Started
+                        </Button>
                     </Link>
-                    <Button size="sm" className="rounded-full px-6 bg-white text-black hover:bg-gray-200 font-semibold">
-                        Get Started
-                    </Button>
                 </div>
 
                 {/* Mobile Menu Toggle */}
@@ -125,16 +123,11 @@ export function Header() {
                             </Link>
                         ))}
                         <div className="h-px bg-white/10 my-2" />
-                        <Link
-                            href="/login"
-                            className="text-lg font-medium text-gray-300 hover:text-white"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Sign In
+                        <Link href="https://ingestiq.ai/">
+                            <Button className="w-full rounded-full bg-brand-orange hover:bg-brand-orange/90 text-white">
+                                Get Started
+                            </Button>
                         </Link>
-                        <Button className="w-full rounded-full bg-brand-orange hover:bg-brand-orange/90 text-white">
-                            Get Started
-                        </Button>
                     </div>
                 </motion.div>
             )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { DashboardMockup } from "@/components/ui/dashboard-mockup";
@@ -107,12 +108,11 @@ export function Hero() {
                             transition={{ duration: 0.5, delay: 0.4 }}
                             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pointer-events-auto"
                         >
-                            <Button size="lg" className="h-14 px-8 text-base rounded-full">
-                                Start Building <ArrowRight className="ml-2 w-4 h-4" />
-                            </Button>
-                            <Button variant="secondary" size="lg" className="h-14 px-8 text-base rounded-full bg-white/5 border-white/10 hover:bg-white/10">
-                                <Play className="mr-2 w-4 h-4 fill-current" /> Watch Demo
-                            </Button>
+                            <Link href="https://ingestiq.ai/">
+                                <Button size="lg" className="h-14 px-8 text-base rounded-full">
+                                    Start Building <ArrowRight className="ml-2 w-4 h-4" />
+                                </Button>
+                            </Link>
                         </motion.div>
 
                         <motion.div
