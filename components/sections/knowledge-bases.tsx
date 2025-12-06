@@ -182,7 +182,7 @@ export function KnowledgeBases() {
 
                                     {activeTab === "documents" && (
                                         <div className="space-y-2">
-                                            <div className="grid grid-cols-4 text-xs font-medium text-gray-500 px-4 pb-2">
+                                            <div className="hidden md:grid grid-cols-4 text-xs font-medium text-gray-500 px-4 pb-2">
                                                 <div className="col-span-2">Name</div>
                                                 <div>Status</div>
                                                 <div>Date</div>
@@ -281,22 +281,24 @@ function PipelineRow({ name, status, schedule }: { name: string, status: string,
 
 function DocumentRow({ name, status, date }: { name: string, status: string, date: string }) {
     return (
-        <div className="grid grid-cols-4 items-center p-3 rounded-lg hover:bg-white/5 transition-colors border-b border-white/5 last:border-0">
-            <div className="col-span-2 flex items-center gap-3">
-                <FileText className="w-4 h-4 text-gray-500" />
-                <span className="text-sm text-gray-300">{name}</span>
+        <div className="grid grid-cols-1 md:grid-cols-4 items-center p-3 rounded-lg hover:bg-white/5 transition-colors border-b border-white/5 last:border-0 gap-2 md:gap-0">
+            <div className="col-span-1 md:col-span-2 flex items-center gap-3">
+                <FileText className="w-4 h-4 text-gray-500 shrink-0" />
+                <span className="text-sm text-gray-300 truncate">{name}</span>
             </div>
-            <div>
-                <span className={cn(
-                    "px-2 py-0.5 rounded text-[10px] font-medium border",
-                    status === "Indexed"
-                        ? "bg-green-500/10 text-green-500 border-green-500/20"
-                        : "bg-blue-500/10 text-blue-500 border-blue-500/20"
-                )}>
-                    {status}
-                </span>
+            <div className="flex items-center justify-between md:justify-start md:contents">
+                <div className="md:col-span-1">
+                    <span className={cn(
+                        "px-2 py-0.5 rounded text-[10px] font-medium border",
+                        status === "Indexed"
+                            ? "bg-green-500/10 text-green-500 border-green-500/20"
+                            : "bg-blue-500/10 text-blue-500 border-blue-500/20"
+                    )}>
+                        {status}
+                    </span>
+                </div>
+                <div className="text-xs text-gray-500 md:col-span-1 text-right md:text-left">{date}</div>
             </div>
-            <div className="text-xs text-gray-500">{date}</div>
         </div>
     );
 }

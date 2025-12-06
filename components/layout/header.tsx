@@ -13,7 +13,9 @@ import { SolutionsDropdown } from "@/components/layout/solutions-dropdown";
 const navItems = [
     // Product is handled separately
     // Solutions is handled separately
+    { name: "Pipeline", href: "#pipeline" },
     { name: "Developers", href: "/docs" },
+    { name: "Contact", href: "#contact" },
 ];
 
 export function Header() {

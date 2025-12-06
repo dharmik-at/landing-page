@@ -113,7 +113,7 @@ export function Security() {
                         </div>
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
                         {["SOC2 Type II", "GDPR Ready", "HIPAA", "ISO 27001"].map((badge) => (
                             <div key={badge} className="flex items-center gap-2 px-4 py-2 rounded-full bg-black border border-white/10 text-sm font-mono text-gray-400">
                                 <Lock className="w-3 h-3" />
