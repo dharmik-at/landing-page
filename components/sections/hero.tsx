@@ -7,6 +7,7 @@ import { ArrowRight, Play, FileText, Globe } from "lucide-react";
 import { DashboardMockup } from "@/components/ui/dashboard-mockup";
 import { NotionIcon, SlackIcon, DriveIcon } from "@/components/ui/icons";
 import { useEffect, useRef } from "react";
+import { EncryptedText } from "@/components/ui/encrypted-text";
 
 export function Hero() {
     const ref = useRef<HTMLDivElement>(null);
@@ -77,9 +78,16 @@ export function Hero() {
                             transition={{ duration: 0.5, delay: 0.1 }}
                             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9] text-foreground"
                         >
-                            Your Data, <br />
+                            <EncryptedText
+                                text="Your Data,"
+                                className="block"
+                                revealDelayMs={50}
+                            />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-400">
-                                Your Intelligence
+                                <EncryptedText
+                                    text="Your Intelligence"
+                                    revealDelayMs={50}
+                                />
                             </span>
                         </motion.h1>
 
@@ -89,7 +97,10 @@ export function Hero() {
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className="text-2xl md:text-3xl font-bold text-foreground mb-6 tracking-wide"
                         >
-                            INGESTIQ
+                            <EncryptedText
+                                text="INGESTIQ"
+                                revealDelayMs={50}
+                            />
                         </motion.p>
 
                         <motion.p
