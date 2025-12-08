@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Github, Twitter, Linkedin, Send } from "lucide-react";
+import { Github, Twitter, Linkedin, Send, Youtube, Instagram } from "lucide-react";
 
 const footerLinks = {
     Product: [
@@ -50,14 +50,17 @@ export function Footer() {
                             The complete infrastructure for RAG. Connect, process, and vectorize your enterprise data with a single API.
                         </p>
                         <div className="flex gap-4">
-                            <Link href="#" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                            <Link href="https://x.com/avestalabs" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                                 <Twitter className="w-5 h-5" />
                             </Link>
-                            <Link href="#" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-                                <Github className="w-5 h-5" />
-                            </Link>
-                            <Link href="#" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                            <Link href="https://linkedin.com/company/avestalabs" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                                 <Linkedin className="w-5 h-5" />
+                            </Link>
+                            <Link href="https://www.youtube.com/channel/UCHCxoLxwAy1FCXkdch7Ex0Q" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                                <Youtube className="w-5 h-5" />
+                            </Link>
+                            <Link href="https://www.instagram.com/avestalabs.ai/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                                <Instagram className="w-5 h-5" />
                             </Link>
                         </div>
                     </div>

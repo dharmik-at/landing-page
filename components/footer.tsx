@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Linkedin, Twitter, Youtube, Instagram } from "lucide-react";
 
 export function Footer() {
     return (
@@ -11,11 +12,14 @@ export function Footer() {
                     <span className="font-bold text-lg">IngestIQ</span>
                 </div>
 
-                <div className="flex gap-8 text-sm text-gray-400">
+                <div className="flex gap-6 text-sm text-gray-400 items-center">
                     <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
                     <Link href="#" className="hover:text-white transition-colors">Terms</Link>
-                    <Link href="#" className="hover:text-white transition-colors">Twitter</Link>
-                    <Link href="#" className="hover:text-white transition-colors">GitHub</Link>
+                    <div className="w-px h-4 bg-gray-700 mx-2"></div>
+                    <Link href="https://linkedin.com/company/avestalabs" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Linkedin size={20} /></Link>
+                    <Link href="https://x.com/avestalabs" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Twitter size={20} /></Link>
+                    <Link href="https://www.youtube.com/channel/UCHCxoLxwAy1FCXkdch7Ex0Q" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Youtube size={20} /></Link>
+                    <Link href="https://www.instagram.com/avestalabs.ai/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Instagram size={20} /></Link>
                 </div>
 
                 <div className="text-sm text-gray-500">
