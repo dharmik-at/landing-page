@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -36,9 +36,9 @@ export function Navbar() {
                     <Link href="https://github.com/avestalabs/ingestiq" className="text-gray-400 hover:text-white transition-colors hidden sm:block">
                         GitHub
                     </Link>
-                    <Button variant="default" size="sm">
+                    <ShinyButton>
                         Get Started
-                    </Button>
+                    </ShinyButton>
                 </div>
 
                 {/* Mobile Menu Toggle */}
@@ -68,9 +68,9 @@ export function Navbar() {
                                 <Link href="https://github.com/avestalabs/ingestiq" className="hover:text-white transition-colors" onClick={() => setIsOpen(false)}>
                                     GitHub
                                 </Link>
-                                <Button variant="default" size="sm" className="w-full">
+                                <ShinyButton className="w-full">
                                     Get Started
-                                </Button>
+                                </ShinyButton>
                             </div>
                         </div>
                     </motion.div>

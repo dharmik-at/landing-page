@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { Input } from "@/components/ui/input";
 import { Github, Twitter, Linkedin, Send, Youtube, Instagram } from "lucide-react";
 
@@ -88,9 +88,9 @@ export function Footer() {
                                 placeholder="Enter your email"
                                 className="bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 focus:border-brand-orange/50 text-gray-900 dark:text-white placeholder:text-gray-500"
                             />
-                            <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white">
+                            <ShinyButton className="w-full text-white">
                                 Subscribe <Send className="w-3 h-3 ml-2" />
-                            </Button>
+                            </ShinyButton>
                         </div>
                     </div>
                 </div>

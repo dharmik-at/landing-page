@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Send, Mail, ArrowRight, Sparkles } from "lucide-react";
@@ -145,13 +145,13 @@ export function Contact() {
                                         hello@ingestiq.com
                                     </a>
 
-                                    <Button
+                                    <ShinyButton
                                         type="submit"
-                                        className="w-full md:w-auto bg-gradient-to-r from-brand-orange to-orange-600 hover:from-brand-orange/90 hover:to-orange-600/90 text-white font-bold py-6 px-8 rounded-xl shadow-lg shadow-brand-orange/20 hover:shadow-brand-orange/40 transition-all group"
+                                        className="w-full md:w-auto text-white font-bold py-6 px-8 rounded-xl shadow-lg shadow-brand-orange/20 hover:shadow-brand-orange/40 transition-all group"
                                     >
                                         INITIATE SEQUENCE
                                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                                    </Button>
+                                    </ShinyButton>
                                 </div>
                             </form>
                         </div>

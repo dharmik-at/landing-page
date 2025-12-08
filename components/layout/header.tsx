@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -73,9 +73,9 @@ export function Header() {
                 <div className="hidden md:flex items-center gap-4">
                     <AnimatedThemeToggler className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-gray-600 dark:text-gray-400 hover:text-foreground dark:hover:text-white transition-colors" />
                     <Link href="https://ingestiq.ai/">
-                        <Button size="sm" className="rounded-full px-6 bg-foreground text-background hover:bg-foreground/90 dark:bg-white dark:text-black dark:hover:bg-gray-200 font-semibold">
+                        <ShinyButton className="rounded-full px-6 font-semibold">
                             Get Started
-                        </Button>
+                        </ShinyButton>
                     </Link>
                 </div>
 
@@ -129,9 +129,9 @@ export function Header() {
                         ))}
                         <div className="h-px bg-black/5 dark:bg-white/10 my-2" />
                         <Link href="https://ingestiq.ai/">
-                            <Button className="w-full rounded-full bg-brand-orange hover:bg-brand-orange/90 text-white">
+                            <ShinyButton className="w-full rounded-full text-white">
                                 Get Started
-                            </Button>
+                            </ShinyButton>
                         </Link>
                     </div>
                 </motion.div>

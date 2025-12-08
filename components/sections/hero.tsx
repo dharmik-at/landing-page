@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Play, FileText, Globe } from "lucide-react";
@@ -121,9 +121,9 @@ export function Hero() {
                             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pointer-events-auto"
                         >
                             <Link href="https://ingestiq.ai/">
-                                <Button size="lg" className="h-14 px-8 text-base rounded-full">
+                                <ShinyButton className="h-14 px-8 text-base rounded-full">
                                     Start Building <ArrowRight className="ml-2 w-4 h-4" />
-                                </Button>
+                                </ShinyButton>
                             </Link>
                         </motion.div>
 
