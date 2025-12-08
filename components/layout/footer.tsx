@@ -7,24 +7,20 @@ import { Github, Twitter, Linkedin, Send, Youtube, Instagram } from "lucide-reac
 
 const footerLinks = {
     Product: [
-        { name: "Features", href: "#" },
-        { name: "Integrations", href: "#" },
-        { name: "Contact", href: "#contact" },
-        { name: "Changelog", href: "#" },
-        { name: "Docs", href: "#" },
+        { name: "Features", href: "/features" },
+        { name: "Integrations", href: "/integrations" },
+        { name: "Changelog", href: "/changelog" },
+        { name: "Docs", href: "/docs" },
+    ],
+    Solutions: [
+        { name: "Meeting Intelligence", href: "/solutions/meeting-intelligence" },
+        { name: "Web Intelligence", href: "/solutions/web-intelligence" },
+        { name: "Visual Knowledge", href: "/solutions/visual-knowledge" },
+        { name: "Unified Knowledge", href: "/solutions/unified-knowledge" },
     ],
     Company: [
-        { name: "About", href: "#" },
-        { name: "Blog", href: "#" },
-        { name: "Careers", href: "#" },
-        { name: "Contact", href: "#" },
-        { name: "Privacy", href: "#" },
-    ],
-    Resources: [
-        { name: "Community", href: "#" },
-        { name: "Help Center", href: "#" },
-        { name: "Status", href: "#" },
-        { name: "Terms", href: "#" },
+        { name: "Developers", href: "/docs" },
+        { name: "Contact", href: "#contact" },
     ],
 };
 
