@@ -138,24 +138,24 @@ export function WebIntelligenceAnimation() {
     }, { scope: containerRef });
 
     return (
-        <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/50 to-black/80 backdrop-blur-xl border border-white/10 shadow-2xl perspective-1000">
+        <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-50/50 to-white/80 dark:from-gray-900/50 dark:to-black/80 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl perspective-1000">
             {/* Background Ambience */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent opacity-50" />
 
 
 
             {/* 1. Holographic Browser Window */}
-            <div className="browser-window absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[60%] bg-[#0F0F11]/80 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl perspective-1000 z-0">
+            <div className="browser-window absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[60%] bg-white/80 dark:bg-[#0F0F11]/80 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-xl overflow-hidden shadow-2xl perspective-1000 z-0">
                 {/* Browser Bar */}
-                <div className="h-8 border-b border-white/10 flex items-center px-3 gap-2 bg-white/5">
+                <div className="h-8 border-b border-black/10 dark:border-white/10 flex items-center px-3 gap-2 bg-black/5 dark:bg-white/5">
                     <div className="flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
                     </div>
-                    <div className="flex-1 h-6 bg-black/20 rounded-md flex items-center px-2 relative overflow-hidden">
+                    <div className="flex-1 h-6 bg-white/50 dark:bg-black/20 rounded-md flex items-center px-2 relative overflow-hidden">
                         <Globe className="w-3 h-3 text-gray-500 mr-2" />
-                        <div className="url-text overflow-hidden whitespace-nowrap text-[10px] font-mono text-blue-300 w-0 border-r border-blue-400/50 pr-1">
+                        <div className="url-text overflow-hidden whitespace-nowrap text-[10px] font-mono text-blue-600 dark:text-blue-300 w-0 border-r border-blue-400/50 pr-1">
                             https://ingestiq.ai/docs
                         </div>
                     </div>
@@ -168,19 +168,19 @@ export function WebIntelligenceAnimation() {
                 <div className="relative flex-1 p-4 overflow-hidden">
                     {/* Static Content (Initial) */}
                     <div className="web-content space-y-3 opacity-50">
-                        <div className="h-8 w-1/2 bg-white/10 rounded-lg" />
+                        <div className="h-8 w-1/2 bg-black/10 dark:bg-white/10 rounded-lg" />
                         <div className="flex gap-3">
-                            <div className="h-24 w-1/3 bg-white/5 rounded-lg" />
+                            <div className="h-24 w-1/3 bg-black/5 dark:bg-white/5 rounded-lg" />
                             <div className="flex-1 space-y-2">
-                                <div className="h-3 w-full bg-white/5 rounded" />
-                                <div className="h-3 w-5/6 bg-white/5 rounded" />
-                                <div className="h-3 w-4/6 bg-white/5 rounded" />
+                                <div className="h-3 w-full bg-black/5 dark:bg-white/5 rounded" />
+                                <div className="h-3 w-5/6 bg-black/5 dark:bg-white/5 rounded" />
+                                <div className="h-3 w-4/6 bg-black/5 dark:bg-white/5 rounded" />
                             </div>
                         </div>
                         <div className="grid grid-cols-3 gap-3">
-                            <div className="h-16 bg-white/5 rounded-lg" />
-                            <div className="h-16 bg-white/5 rounded-lg" />
-                            <div className="h-16 bg-white/5 rounded-lg" />
+                            <div className="h-16 bg-black/5 dark:bg-white/5 rounded-lg" />
+                            <div className="h-16 bg-black/5 dark:bg-white/5 rounded-lg" />
+                            <div className="h-16 bg-black/5 dark:bg-white/5 rounded-lg" />
                         </div>
                     </div>
 
@@ -192,7 +192,7 @@ export function WebIntelligenceAnimation() {
                             { icon: FileText, top: "60%", left: "20%", color: "text-green-300" },
                             { icon: Globe, top: "20%", left: "80%", color: "text-orange-300" },
                         ].map((item, i) => (
-                            <div key={i} className="floating-layer absolute p-3 bg-black/40 backdrop-blur-xl border border-white/10 rounded-lg shadow-lg" style={{ top: item.top, left: item.left }}>
+                            <div key={i} className="floating-layer absolute p-3 bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-lg shadow-lg" style={{ top: item.top, left: item.left }}>
                                 <item.icon className={`w-5 h-5 ${item.color}`} />
                             </div>
                         ))}
@@ -203,7 +203,7 @@ export function WebIntelligenceAnimation() {
             {/* AI Scanner Core */}
             <div className="ai-scanner absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 z-20 flex items-center justify-center pointer-events-none">
                 <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl animate-pulse" />
-                <div className="relative w-12 h-12 bg-black rounded-xl border border-blue-400 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.5)]">
+                <div className="relative w-12 h-12 bg-white dark:bg-black rounded-xl border border-blue-400 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.5)]">
                     <Bot className="w-6 h-6 text-blue-400" />
                 </div>
                 {/* Scan Beam */}
@@ -212,20 +212,20 @@ export function WebIntelligenceAnimation() {
 
             {/* Chat Panel (Final State) */}
             <div className="chat-panel absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 z-30">
-                <div className="bg-[#1c1c1e]/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 shadow-2xl">
-                    <div className="flex items-center gap-2 mb-4 border-b border-white/5 pb-2">
+                <div className="bg-white/95 dark:bg-[#1c1c1e]/95 backdrop-blur-2xl border border-black/10 dark:border-white/10 rounded-2xl p-4 shadow-2xl">
+                    <div className="flex items-center gap-2 mb-4 border-b border-black/5 dark:border-white/5 pb-2">
                         <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center">
                             <Sparkles className="w-3 h-3 text-white" />
                         </div>
-                        <span className="text-xs font-semibold text-white">IngestIQ Chat</span>
+                        <span className="text-xs font-semibold text-gray-900 dark:text-white">IngestIQ Chat</span>
                     </div>
 
                     <div className="space-y-2">
                         <div className="chat-bubble self-end bg-blue-600/20 border border-blue-500/30 rounded-lg rounded-tr-none p-2 ml-8">
-                            <p className="text-[10px] text-blue-100">Summarize the pricing page.</p>
+                            <p className="text-[10px] text-blue-800 dark:text-blue-100">Summarize the pricing page.</p>
                         </div>
-                        <div className="chat-bubble self-start bg-white/5 border border-white/10 rounded-lg rounded-tl-none p-2 mr-4">
-                            <p className="text-[10px] text-gray-300">
+                        <div className="chat-bubble self-start bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg rounded-tl-none p-2 mr-4">
+                            <p className="text-[10px] text-gray-600 dark:text-gray-300">
                                 The Pro plan is $29/mo and includes unlimited scraping, API access, and priority support.
                             </p>
                         </div>

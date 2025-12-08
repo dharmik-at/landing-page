@@ -120,12 +120,12 @@ export function DashboardMockup() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full h-full bg-[#0A0A0A] rounded-xl border border-white/10 shadow-2xl flex font-sans relative"
+            className="w-full h-full bg-white dark:bg-[#0A0A0A] rounded-xl border border-black/10 dark:border-white/10 shadow-2xl flex font-sans relative"
             style={{ transformStyle: "preserve-3d" }}
         >
             {/* Glossy Reflection Overlay */}
             <div
-                className="absolute inset-0 rounded-xl bg-gradient-to-tr from-white/5 to-transparent pointer-events-none z-50"
+                className="absolute inset-0 rounded-xl bg-gradient-to-tr from-black/5 dark:from-white/5 to-transparent pointer-events-none z-50"
                 style={{ transform: "translateZ(50px)" }}
             />
 
@@ -136,14 +136,14 @@ export function DashboardMockup() {
 
             {/* Sidebar Layer */}
             <motion.div
-                className="w-64 border-r border-white/5 bg-[#0A0A0A] flex flex-col rounded-l-xl"
+                className="w-64 border-r border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#0A0A0A] flex flex-col rounded-l-xl"
                 style={{ transform: "translateZ(20px)" }}
             >
                 <div className="p-6 flex items-center gap-3">
                     <div className="w-8 h-8 bg-brand-orange rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand-orange/20">
                         <Zap className="w-5 h-5 fill-current" />
                     </div>
-                    <span className="font-bold text-lg text-white tracking-tight">IngestIQ</span>
+                    <span className="font-bold text-lg text-gray-900 dark:text-white tracking-tight">IngestIQ</span>
                 </div>
 
                 <div className="flex-1 px-3 py-4 space-y-6 overflow-y-auto custom-scrollbar">
@@ -191,11 +191,11 @@ export function DashboardMockup() {
                     </div>
                 </div>
 
-                <div className="p-4 border-t border-white/5">
-                    <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer">
+                <div className="p-4 border-t border-black/5 dark:border-white/5">
+                    <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500" />
                         <div className="flex-1 min-w-0">
-                            <div className="text-sm font-medium text-white truncate">Enterprise Team</div>
+                            <div className="text-sm font-medium text-gray-900 dark:text-white truncate">Enterprise Team</div>
                             <div className="text-xs text-gray-500 truncate">Pro Plan</div>
                         </div>
                     </div>
@@ -204,12 +204,12 @@ export function DashboardMockup() {
 
             {/* Main Content Layer */}
             <motion.div
-                className="flex-1 flex flex-col bg-[#0F0F0F] min-w-0 rounded-r-xl"
+                className="flex-1 flex flex-col bg-white dark:bg-[#0F0F0F] min-w-0 rounded-r-xl"
                 style={{ transform: "translateZ(30px)" }}
             >
                 {/* Header Layer */}
                 <motion.header
-                    className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-[#0F0F0F] rounded-tr-xl"
+                    className="h-16 border-b border-black/5 dark:border-white/5 flex items-center justify-between px-8 bg-white dark:bg-[#0F0F0F] rounded-tr-xl"
                     style={{ transform: "translateZ(40px)" }}
                 >
                     <div className="flex items-center gap-4">
@@ -219,7 +219,7 @@ export function DashboardMockup() {
                             Operational
                         </span>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
+                    <div className="w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer">
                         <Search className="w-4 h-4" />
                     </div>
                 </motion.header>
@@ -235,17 +235,17 @@ export function DashboardMockup() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-2xl font-bold text-white">Source Connectors</h2>
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Source Connectors</h2>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     {sources.map((source) => (
                                         <div
                                             key={source.name}
-                                            className="group p-6 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer"
+                                            className="group p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer"
                                         >
-                                            <div className={cn("w-12 h-12 rounded-full bg-white/5 flex items-center justify-center transition-transform group-hover:scale-110", source.color)}>
+                                            <div className={cn("w-12 h-12 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center transition-transform group-hover:scale-110", source.color)}>
                                                 <source.icon className="w-6 h-6" />
                                             </div>
-                                            <span className="font-medium text-gray-300 group-hover:text-white transition-colors text-center">
+                                            <span className="font-medium text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors text-center">
                                                 {source.name}
                                             </span>
                                         </div>
@@ -262,18 +262,18 @@ export function DashboardMockup() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-2xl font-bold text-white">Destination Connectors</h2>
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Destination Connectors</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {destinations.map((dest) => (
                                         <div
                                             key={dest.name}
-                                            className="group p-6 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer"
+                                            className="group p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer"
                                         >
-                                            <div className={cn("w-12 h-12 rounded-full bg-white/5 flex items-center justify-center transition-transform group-hover:scale-110", dest.color)}>
+                                            <div className={cn("w-12 h-12 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center transition-transform group-hover:scale-110", dest.color)}>
                                                 <dest.icon className="w-6 h-6" />
                                             </div>
                                             <div className="text-center">
-                                                <div className="font-medium text-gray-300 group-hover:text-white transition-colors">
+                                                <div className="font-medium text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
                                                     {dest.name}
                                                 </div>
                                             </div>
@@ -291,19 +291,19 @@ export function DashboardMockup() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-2xl font-bold text-white">Parser Models</h2>
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Parser Models</h2>
                                 <div className="grid grid-cols-1 gap-6">
                                     {parserModels.map((model) => (
                                         <div
                                             key={model.name}
-                                            className="relative p-6 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex items-center gap-6 group cursor-pointer"
+                                            className="relative p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-6 group cursor-pointer"
                                         >
-                                            <div className={cn("w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110", model.color)}>
+                                            <div className={cn("w-12 h-12 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110", model.color)}>
                                                 <model.icon className="w-6 h-6" />
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-3 mb-1">
-                                                    <h3 className="text-lg font-bold text-gray-300 group-hover:text-white transition-colors">
+                                                    <h3 className="text-lg font-bold text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
                                                         {model.name}
                                                     </h3>
                                                 </div>
@@ -323,19 +323,19 @@ export function DashboardMockup() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-2xl font-bold text-white">Embedding Models</h2>
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Embedding Models</h2>
                                 <div className="grid grid-cols-1 gap-6">
                                     {embeddingModels.map((model) => (
                                         <div
                                             key={model.name}
-                                            className="relative p-6 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex items-center gap-6 group cursor-pointer"
+                                            className="relative p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-6 group cursor-pointer"
                                         >
-                                            <div className={cn("w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110", model.color)}>
+                                            <div className={cn("w-12 h-12 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110", model.color)}>
                                                 <model.icon className="w-6 h-6" />
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-3 mb-1">
-                                                    <h3 className="text-lg font-bold text-gray-300 group-hover:text-white transition-colors">{model.name}</h3>
+                                                    <h3 className="text-lg font-bold text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{model.name}</h3>
                                                 </div>
                                                 <p className="text-sm text-gray-500">{model.description}</p>
                                             </div>
@@ -355,29 +355,29 @@ export function DashboardMockup() {
                             >
                                 {!selectedKB ? (
                                     <>
-                                        <h2 className="text-2xl font-bold text-white mb-6">Knowledge Bases</h2>
+                                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Knowledge Bases</h2>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             {knowledgeBases.map((kb) => (
                                                 <div
                                                     key={kb.id}
                                                     onClick={() => setSelectedKBId(kb.id)}
-                                                    className="group cursor-pointer p-5 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex flex-col"
+                                                    className="group cursor-pointer p-5 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex flex-col"
                                                 >
                                                     <div className="flex items-start justify-between mb-4">
-                                                        <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 text-brand-orange")}>
+                                                        <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center bg-black/5 dark:bg-white/5 text-brand-orange")}>
                                                             <Sparkles className="w-5 h-5" />
                                                         </div>
                                                         {/* <div className={cn("px-2 py-0.5 rounded text-[10px] font-medium border", kb.bg, kb.color, kb.border)}>
                                                             Active
                                                         </div> */}
                                                     </div>
-                                                    <h3 className="font-bold text-white mb-1 group-hover:text-brand-orange transition-colors">
+                                                    <h3 className="font-bold text-gray-900 dark:text-white mb-1 group-hover:text-brand-orange transition-colors">
                                                         {kb.name}
                                                     </h3>
                                                     <p className="text-xs text-gray-500 mb-3 line-clamp-2">
                                                         {kb.description}
                                                     </p>
-                                                    <div className="flex items-center text-xs text-gray-400 group-hover:text-white transition-colors mt-auto">
+                                                    <div className="flex items-center text-xs text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white transition-colors mt-auto">
                                                         View Details <ChevronRight className="w-3 h-3 ml-1" />
                                                     </div>
                                                 </div>
@@ -389,17 +389,17 @@ export function DashboardMockup() {
                                         <div className="flex items-center gap-3 mb-6">
                                             <button
                                                 onClick={() => setSelectedKBId(null)}
-                                                className="p-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
+                                                className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                                             >
                                                 <ChevronRight className="w-5 h-5 rotate-180" />
                                             </button>
                                             <div>
-                                                <h3 className="font-bold text-white">{selectedKB.name}</h3>
+                                                <h3 className="font-bold text-gray-900 dark:text-white">{selectedKB.name}</h3>
                                                 <div className="text-xs text-gray-500">ID: {selectedKB.id}-8cc...</div>
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-1 border-b border-white/5 mb-4">
+                                        <div className="flex items-center gap-1 border-b border-black/5 dark:border-white/5 mb-4">
                                             {[
                                                 { id: "pipelines", label: "Pipelines", icon: Activity },
                                                 { id: "documents", label: "Documents", icon: FileText },
@@ -412,8 +412,8 @@ export function DashboardMockup() {
                                                     className={cn(
                                                         "flex items-center gap-2 px-3 py-2 text-xs font-medium border-b-2 transition-colors",
                                                         activeKBTab === tab.id
-                                                            ? "border-brand-orange text-white"
-                                                            : "border-transparent text-gray-500 hover:text-gray-300"
+                                                            ? "border-brand-orange text-gray-900 dark:text-white"
+                                                            : "border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
                                                     )}
                                                 >
                                                     <tab.icon className="w-3 h-3" />
@@ -426,7 +426,7 @@ export function DashboardMockup() {
                                             {activeKBTab === "pipelines" && (
                                                 <div className="space-y-3">
                                                     {selectedKB.pipelines.map((pipeline, i) => (
-                                                        <div key={i} className="flex items-center justify-between p-3 rounded-lg border border-white/5 bg-[#111111]">
+                                                        <div key={i} className="flex items-center justify-between p-3 rounded-lg border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111]">
                                                             <div className="flex items-center gap-3">
                                                                 <div className={cn(
                                                                     "w-8 h-8 rounded flex items-center justify-center",
@@ -435,7 +435,7 @@ export function DashboardMockup() {
                                                                     <Activity className="w-4 h-4" />
                                                                 </div>
                                                                 <div>
-                                                                    <div className="text-sm font-medium text-white">{pipeline.name}</div>
+                                                                    <div className="text-sm font-medium text-gray-900 dark:text-white">{pipeline.name}</div>
                                                                     <div className="text-[10px] text-gray-500 flex items-center gap-1">
                                                                         <Clock className="w-3 h-3" /> {pipeline.schedule}
                                                                     </div>
@@ -462,10 +462,10 @@ export function DashboardMockup() {
                                                         <div>Date</div>
                                                     </div>
                                                     {selectedKB.documents.map((doc, i) => (
-                                                        <div key={i} className="grid grid-cols-4 items-center p-2 rounded hover:bg-white/5 transition-colors border-b border-white/5 last:border-0">
+                                                        <div key={i} className="grid grid-cols-4 items-center p-2 rounded hover:bg-black/5 dark:hover:bg-white/5 transition-colors border-b border-black/5 dark:border-white/5 last:border-0">
                                                             <div className="col-span-2 flex items-center gap-2">
                                                                 <FileText className="w-3 h-3 text-gray-500" />
-                                                                <span className="text-xs text-gray-300 truncate pr-2">{doc.name}</span>
+                                                                <span className="text-xs text-gray-700 dark:text-gray-300 truncate pr-2">{doc.name}</span>
                                                             </div>
                                                             <div>
                                                                 <span className={cn(
@@ -490,16 +490,16 @@ export function DashboardMockup() {
                                                         <input
                                                             type="text"
                                                             placeholder="Ask a question..."
-                                                            className="w-full bg-[#111111] border border-white/10 rounded-lg py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-brand-orange/50"
+                                                            className="w-full bg-gray-50 dark:bg-[#111111] border border-black/10 dark:border-white/10 rounded-lg py-3 pl-10 pr-4 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-brand-orange/50"
                                                         />
                                                     </div>
                                                 </div>
                                             )}
 
                                             {activeKBTab === "mcp" && (
-                                                <div className="mt-4 p-4 rounded-xl border border-white/10 bg-[#111111]">
-                                                    <h4 className="text-sm font-medium text-white mb-3">MCP Server</h4>
-                                                    <div className="text-xs text-gray-300 font-mono bg-black/50 p-2 rounded border border-white/5 break-all">
+                                                <div className="mt-4 p-4 rounded-xl border border-black/10 dark:border-white/10 bg-gray-50 dark:bg-[#111111]">
+                                                    <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">MCP Server</h4>
+                                                    <div className="text-xs text-gray-600 dark:text-gray-300 font-mono bg-black/5 dark:bg-black/50 p-2 rounded border border-black/5 dark:border-white/5 break-all">
                                                         https://api.ingestiq.ai/mcp/v1/server/{selectedKB.id}
                                                     </div>
                                                 </div>
@@ -523,8 +523,8 @@ function SidebarItem({ icon: Icon, label, active, onClick }: { icon: any, label:
             className={cn(
                 "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer",
                 active
-                    ? "bg-white/10 text-white"
-                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                    ? "bg-black/10 dark:bg-white/10 text-gray-900 dark:text-white"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
             )}
         >
             <Icon className="w-4 h-4" />

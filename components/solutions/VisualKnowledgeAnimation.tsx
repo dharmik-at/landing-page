@@ -101,7 +101,7 @@ export function VisualKnowledgeAnimation() {
     }, { scope: containerRef });
 
     return (
-        <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/50 to-black/80 backdrop-blur-xl border border-white/10 shadow-2xl perspective-1000">
+        <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-50/50 to-white/80 dark:from-gray-900/50 dark:to-black/80 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl perspective-1000">
             {/* Background Ambience */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent opacity-50" />
 
@@ -121,16 +121,16 @@ export function VisualKnowledgeAnimation() {
 
 
             {/* 2. File Drop Thumbnail */}
-            <div className="pdf-thumbnail absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg flex items-center justify-center shadow-2xl z-20">
+            <div className="pdf-thumbnail absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-20 bg-white/80 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/20 rounded-lg flex items-center justify-center shadow-2xl z-20">
                 <FileText className="w-8 h-8 text-blue-400" />
                 <div className="absolute bottom-2 left-2 right-2 h-0.5 bg-white/20 rounded" />
                 <div className="absolute bottom-3 left-2 right-5 h-0.5 bg-white/20 rounded" />
             </div>
 
             {/* 3. Document Viewer */}
-            <div className="doc-viewer absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[60%] bg-[#0F0F11]/90 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl flex flex-col z-10">
+            <div className="doc-viewer absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[60%] bg-white/90 dark:bg-[#0F0F11]/90 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-xl overflow-hidden shadow-2xl flex flex-col z-10">
                 {/* Header */}
-                <div className="h-6 border-b border-white/10 flex items-center px-2 gap-1.5 bg-white/5">
+                <div className="h-6 border-b border-black/10 dark:border-white/10 flex items-center px-2 gap-1.5 bg-black/5 dark:bg-white/5">
                     <div className="w-1.5 h-1.5 rounded-full bg-red-500/50" />
                     <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/50" />
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
@@ -187,28 +187,28 @@ export function VisualKnowledgeAnimation() {
             {/* 4. AI Orb */}
             <div className="ai-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 z-30 flex items-center justify-center pointer-events-none">
                 <div className="absolute inset-0 bg-blue-500/30 rounded-full blur-xl animate-pulse" />
-                <div className="relative w-10 h-10 bg-black rounded-full border border-blue-400 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)]">
+                <div className="relative w-10 h-10 bg-white dark:bg-black rounded-full border border-blue-400 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)]">
                     <Sparkles className="w-5 h-5 text-blue-400 animate-spin-slow" />
                 </div>
             </div>
 
             {/* 5. Chat Panel */}
             <div className="chat-panel absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-40">
-                <div className="bg-[#1c1c1e]/95 backdrop-blur-2xl border border-white/10 rounded-xl p-3 shadow-2xl">
-                    <div className="flex items-center gap-2 mb-2 border-b border-white/5 pb-2">
+                <div className="bg-white/95 dark:bg-[#1c1c1e]/95 backdrop-blur-2xl border border-black/10 dark:border-white/10 rounded-xl p-3 shadow-2xl">
+                    <div className="flex items-center gap-2 mb-2 border-b border-black/5 dark:border-white/5 pb-2">
                         <div className="w-5 h-5 rounded-md bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
                             <MessageSquare className="w-2.5 h-2.5 text-white" />
                         </div>
-                        <span className="text-[10px] font-semibold text-white">Visual Intelligence</span>
+                        <span className="text-[10px] font-semibold text-gray-900 dark:text-white">Visual Intelligence</span>
                     </div>
 
                     <div className="space-y-1.5">
                         <div className="chat-msg self-end bg-blue-600/20 border border-blue-500/30 rounded-lg rounded-tr-none p-1.5 ml-4">
-                            <p className="text-[8px] text-blue-100">Summarize the Q3 trend.</p>
+                            <p className="text-[8px] text-blue-800 dark:text-blue-100">Summarize the Q3 trend.</p>
                         </div>
-                        <div className="chat-msg self-start bg-white/5 border border-white/10 rounded-lg rounded-tl-none p-1.5 mr-2">
-                            <p className="text-[8px] text-gray-300">
-                                Revenue grew by <span className="text-green-400 font-bold">+15%</span> in Q3.
+                        <div className="chat-msg self-start bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg rounded-tl-none p-1.5 mr-2">
+                            <p className="text-[8px] text-gray-600 dark:text-gray-300">
+                                Revenue grew by <span className="text-green-600 dark:text-green-400 font-bold">+15%</span> in Q3.
                             </p>
                         </div>
                     </div>

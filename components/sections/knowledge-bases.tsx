@@ -75,13 +75,13 @@ export function KnowledgeBases() {
     const selectedKB = knowledgeBases.find(kb => kb.id === selectedKBId);
 
     return (
-        <section className="py-24 bg-[#0A0A0A] border-t border-white/5 min-h-[800px]">
+        <section className="py-24 bg-white dark:bg-[#0A0A0A] border-t border-black/5 dark:border-white/5 min-h-[800px]">
             <div className="container mx-auto px-4 md:px-6">
                 <ScrollReveal className="text-center px-4 md:px-116 mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
                         <span className="text-brand-orange">Knowledge</span> Bases
                     </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
                         Manage your RAG corpus with granular control. Specialized knowledge bases for every department.
                     </p>
                 </ScrollReveal>
@@ -98,7 +98,7 @@ export function KnowledgeBases() {
                                     <StaggerItem
                                         key={kb.id}
                                         onClick={() => setSelectedKBId(kb.id)}
-                                        className="group cursor-pointer p-6 rounded-xl border border-white/5 bg-[#111111] hover:border-brand-orange/50 hover:bg-white/5 transition-all duration-300 flex flex-col items-center text-center relative"
+                                        className="group cursor-pointer p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex flex-col items-center text-center relative"
                                     >
                                         <div className={cn("absolute top-4 right-4 px-2 py-1 rounded text-xs font-medium border", kb.bg, kb.color, kb.border)}>
                                             Active
@@ -108,13 +108,13 @@ export function KnowledgeBases() {
                                             <kb.icon className="w-6 h-6" />
                                         </div>
 
-                                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-orange transition-colors">
+                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-brand-orange transition-colors">
                                             {kb.name}
                                         </h3>
                                         <p className="text-sm text-gray-500 mb-4 flex-1">
                                             {kb.description}
                                         </p>
-                                        <div className="flex items-center text-sm text-gray-400 group-hover:text-white transition-colors mt-auto">
+                                        <div className="flex items-center text-sm text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors mt-auto">
                                             View Details <ChevronRight className="w-4 h-4 ml-1" />
                                         </div>
                                     </StaggerItem>
@@ -125,24 +125,24 @@ export function KnowledgeBases() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
-                                className="rounded-xl border border-white/10 bg-[#0F0F0F] overflow-hidden shadow-2xl"
+                                className="rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#0F0F0F] overflow-hidden shadow-2xl"
                             >
                                 {/* Header */}
-                                <div className="border-b border-white/5 p-4 flex items-center gap-4 bg-[#111111]">
+                                <div className="border-b border-black/5 dark:border-white/5 p-4 flex items-center gap-4 bg-gray-50 dark:bg-[#111111]">
                                     <button
                                         onClick={() => setSelectedKBId(null)}
-                                        className="p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
+                                        className="p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                                     >
                                         <ArrowLeft className="w-5 h-5" />
                                     </button>
                                     <div>
-                                        <h3 className="font-bold text-white">{selectedKB.name}</h3>
+                                        <h3 className="font-bold text-gray-900 dark:text-white">{selectedKB.name}</h3>
                                         <div className="text-xs text-gray-500">ID: {selectedKB.id}-8cc-4372...</div>
                                     </div>
                                 </div>
 
                                 {/* Tabs */}
-                                <div className="flex items-center gap-1 px-4 border-b border-white/5 bg-[#111111]">
+                                <div className="flex items-center gap-1 px-4 border-b border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111]">
                                     {[
                                         { id: "pipelines", label: "Pipelines", icon: Play },
                                         { id: "documents", label: "Documents", icon: FileText },
@@ -155,8 +155,8 @@ export function KnowledgeBases() {
                                             className={cn(
                                                 "flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors",
                                                 activeTab === tab.id
-                                                    ? "border-brand-orange text-white"
-                                                    : "border-transparent text-gray-500 hover:text-gray-300"
+                                                    ? "border-brand-orange text-gray-900 dark:text-white"
+                                                    : "border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
                                             )}
                                         >
                                             <tab.icon className="w-4 h-4" />
@@ -166,7 +166,7 @@ export function KnowledgeBases() {
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-6 min-h-[400px] bg-[#0A0A0A]">
+                                <div className="p-6 min-h-[400px] bg-white dark:bg-[#0A0A0A]">
                                     {activeTab === "pipelines" && (
                                         <div className="space-y-4">
                                             {selectedKB.pipelines.map((pipeline, i) => (
@@ -205,7 +205,7 @@ export function KnowledgeBases() {
                                                 <input
                                                     type="text"
                                                     placeholder={`Ask a question about ${selectedKB.name.toLowerCase()}...`}
-                                                    className="w-full bg-[#111111] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white focus:outline-none focus:border-brand-orange/50"
+                                                    className="w-full bg-gray-50 dark:bg-[#111111] border border-black/10 dark:border-white/10 rounded-xl py-4 pl-12 pr-4 text-gray-900 dark:text-white focus:outline-none focus:border-brand-orange/50"
                                                 />
                                             </div>
                                             <div className="mt-8 text-center text-gray-500 text-sm">
@@ -216,17 +216,17 @@ export function KnowledgeBases() {
 
                                     {activeTab === "mcp" && (
                                         <div className="max-w-2xl mx-auto space-y-6">
-                                            <div className="p-4 rounded-xl border border-white/10 bg-[#111111]">
-                                                <h4 className="font-medium text-white mb-2">MCP Server Configuration</h4>
+                                            <div className="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-gray-50 dark:bg-[#111111]">
+                                                <h4 className="font-medium text-gray-900 dark:text-white mb-2">MCP Server Configuration</h4>
                                                 <div className="space-y-4">
                                                     <div>
                                                         <label className="block text-xs text-gray-500 mb-1">Server URL</label>
-                                                        <div className="text-sm text-gray-300 font-mono bg-black/50 p-2 rounded border border-white/5">
+                                                        <div className="text-sm text-gray-700 dark:text-gray-300 font-mono bg-black/5 dark:bg-black/50 p-2 rounded border border-black/5 dark:border-white/5">
                                                             https://api.ingestiq.ai/mcp/v1/server/{selectedKB.id}
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center justify-between">
-                                                        <span className="text-sm text-gray-300">Enable Context Awareness</span>
+                                                        <span className="text-sm text-gray-700 dark:text-gray-300">Enable Context Awareness</span>
                                                         <div className="w-10 h-6 rounded-full bg-brand-orange p-1 cursor-pointer">
                                                             <div className="w-4 h-4 rounded-full bg-white ml-auto" />
                                                         </div>
@@ -247,7 +247,7 @@ export function KnowledgeBases() {
 
 function PipelineRow({ name, status, schedule }: { name: string, status: string, schedule: string }) {
     return (
-        <div className="flex items-center justify-between p-4 rounded-lg border border-white/5 bg-[#111111] hover:border-white/10 transition-colors">
+        <div className="flex items-center justify-between p-4 rounded-lg border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-black/10 dark:hover:border-white/10 transition-colors">
             <div className="flex items-center gap-4">
                 <div className={cn(
                     "w-10 h-10 rounded-lg flex items-center justify-center",
@@ -256,7 +256,7 @@ function PipelineRow({ name, status, schedule }: { name: string, status: string,
                     {status === "Running" ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
                 </div>
                 <div>
-                    <div className="font-medium text-white">{name}</div>
+                    <div className="font-medium text-gray-900 dark:text-white">{name}</div>
                     <div className="text-xs text-gray-500 flex items-center gap-2">
                         <Clock className="w-3 h-3" /> {schedule}
                     </div>
@@ -271,7 +271,7 @@ function PipelineRow({ name, status, schedule }: { name: string, status: string,
                 )}>
                     {status}
                 </span>
-                <button className="p-2 hover:bg-white/5 rounded-lg text-gray-500 hover:text-white transition-colors">
+                <button className="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
                     <MoreHorizontal className="w-4 h-4" />
                 </button>
             </div>
@@ -281,10 +281,10 @@ function PipelineRow({ name, status, schedule }: { name: string, status: string,
 
 function DocumentRow({ name, status, date }: { name: string, status: string, date: string }) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 items-center p-3 rounded-lg hover:bg-white/5 transition-colors border-b border-white/5 last:border-0 gap-2 md:gap-0">
+        <div className="grid grid-cols-1 md:grid-cols-4 items-center p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors border-b border-black/5 dark:border-white/5 last:border-0 gap-2 md:gap-0">
             <div className="col-span-1 md:col-span-2 flex items-center gap-3">
                 <FileText className="w-4 h-4 text-gray-500 shrink-0" />
-                <span className="text-sm text-gray-300 truncate">{name}</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300 truncate">{name}</span>
             </div>
             <div className="flex items-center justify-between md:justify-start md:contents">
                 <div className="md:col-span-1">

@@ -136,17 +136,17 @@ export function MeetingIntelligenceAnimation() {
         { Icon: Clock, color: "text-purple-400", top: "80%", left: "15%" },
         { Icon: FileAudio, color: "text-sky-400", top: "45%", left: "10%" },
         { Icon: Activity, color: "text-blue-500", top: "10%", left: "60%" },
-        { text: "Action Item", color: "text-white/60", top: "50%", left: "85%" },
-        { text: "Deadline", color: "text-white/60", top: "20%", left: "40%" },
-        { text: "Budget", color: "text-white/60", top: "65%", left: "70%" },
-        { text: "Decision", color: "text-white/60", top: "85%", left: "45%" },
-        { text: "Blocker", color: "text-white/60", top: "35%", left: "25%" },
+        { text: "Action Item", color: "text-gray-500 dark:text-white/60", top: "50%", left: "85%" },
+        { text: "Deadline", color: "text-gray-500 dark:text-white/60", top: "20%", left: "40%" },
+        { text: "Budget", color: "text-gray-500 dark:text-white/60", top: "65%", left: "70%" },
+        { text: "Decision", color: "text-gray-500 dark:text-white/60", top: "85%", left: "45%" },
+        { text: "Blocker", color: "text-gray-500 dark:text-white/60", top: "35%", left: "25%" },
     ];
 
     return (
-        <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/50 to-black/80 backdrop-blur-xl border border-white/10 shadow-2xl">
+        <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-50/50 to-white/80 dark:from-gray-900/50 dark:to-black/80 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl">
             {/* Background Ambience */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent opacity-50" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent opacity-50" />
 
 
 
@@ -155,18 +155,18 @@ export function MeetingIntelligenceAnimation() {
                 {chaosElements.map((item, i) => (
                     <div
                         key={i}
-                        className={`chaos-element absolute flex items-center gap-2 p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg`}
+                        className={`chaos-element absolute flex items-center gap-2 p-3 rounded-xl bg-white/80 dark:bg-white/5 backdrop-blur-sm border border-black/5 dark:border-white/10 shadow-lg`}
                         style={{ top: item.top, left: item.left }}
                     >
                         {item.Icon && <item.Icon className={`w-5 h-5 ${item.color}`} />}
-                        {item.text && <span className="text-xs font-mono text-gray-300">{item.text}</span>}
+                        {item.text && <span className="text-xs font-mono text-gray-600 dark:text-gray-300">{item.text}</span>}
                     </div>
                 ))}
             </div>
 
             {/* 3. AI Core */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center justify-center">
-                <div className="ai-orb relative w-20 h-20 bg-black rounded-3xl border border-[#0A84FF] flex items-center justify-center shadow-[0_0_50px_rgba(10,132,255,0.6)]">
+                <div className="ai-orb relative w-20 h-20 bg-white dark:bg-black rounded-3xl border border-[#0A84FF] flex items-center justify-center shadow-[0_0_50px_rgba(10,132,255,0.6)]">
                     <div className="w-10 h-10 bg-gradient-to-tr from-[#0A84FF] to-[#6E63FF] rounded-xl animate-spin" />
                 </div>
                 {[1, 2, 3].map((_, i) => (
@@ -176,15 +176,15 @@ export function MeetingIntelligenceAnimation() {
 
             {/* 5. Summary Card */}
             <div className="summary-card absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 z-40">
-                <div className="bg-[#1c1c1e]/90 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 shadow-2xl">
+                <div className="bg-white/90 dark:bg-[#1c1c1e]/90 backdrop-blur-2xl border border-black/10 dark:border-white/10 rounded-2xl p-6 shadow-2xl">
                     {/* Header */}
-                    <div className="flex items-center gap-3 mb-5 border-b border-white/5 pb-3">
+                    <div className="flex items-center gap-3 mb-5 border-b border-black/5 dark:border-white/5 pb-3">
                         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0A84FF] to-[#6E63FF] flex items-center justify-center shadow-lg">
                             <Sparkles className="w-4 h-4 text-white" />
                         </div>
                         <div>
-                            <div className="text-sm font-semibold text-white">Actionable Summary</div>
-                            <div className="text-[10px] text-gray-400">Just now • IngestIQ AI</div>
+                            <div className="text-sm font-semibold text-gray-900 dark:text-white">Actionable Summary</div>
+                            <div className="text-[10px] text-gray-500 dark:text-gray-400">Just now • IngestIQ AI</div>
                         </div>
                     </div>
 
@@ -195,8 +195,8 @@ export function MeetingIntelligenceAnimation() {
                                 <CheckCircle2 className="w-2.5 h-2.5 text-blue-400" />
                             </div>
                             <div>
-                                <div className="text-[10px] font-medium text-blue-200 uppercase tracking-wide mb-0.5">Key Decision</div>
-                                <div className="text-xs text-gray-300">Launch Q3 marketing campaign.</div>
+                                <div className="text-[10px] font-medium text-blue-600 dark:text-blue-200 uppercase tracking-wide mb-0.5">Key Decision</div>
+                                <div className="text-xs text-gray-600 dark:text-gray-300">Launch Q3 marketing campaign.</div>
                             </div>
                         </div>
 
@@ -205,8 +205,8 @@ export function MeetingIntelligenceAnimation() {
                                 <Zap className="w-2.5 h-2.5 text-indigo-400" />
                             </div>
                             <div>
-                                <div className="text-[10px] font-medium text-indigo-200 uppercase tracking-wide mb-0.5">Action Item</div>
-                                <div className="text-xs text-gray-300">Update slide deck by Friday.</div>
+                                <div className="text-[10px] font-medium text-indigo-600 dark:text-indigo-200 uppercase tracking-wide mb-0.5">Action Item</div>
+                                <div className="text-xs text-gray-600 dark:text-gray-300">Update slide deck by Friday.</div>
                             </div>
                         </div>
 
@@ -215,8 +215,8 @@ export function MeetingIntelligenceAnimation() {
                                 <Users className="w-2.5 h-2.5 text-purple-400" />
                             </div>
                             <div>
-                                <div className="text-[10px] font-medium text-purple-200 uppercase tracking-wide mb-0.5">Owner</div>
-                                <div className="text-xs text-gray-300">Sarah M. & Engineering Team</div>
+                                <div className="text-[10px] font-medium text-purple-600 dark:text-purple-200 uppercase tracking-wide mb-0.5">Owner</div>
+                                <div className="text-xs text-gray-600 dark:text-gray-300">Sarah M. & Engineering Team</div>
                             </div>
                         </div>
 
@@ -225,8 +225,8 @@ export function MeetingIntelligenceAnimation() {
                                 <Calendar className="w-2.5 h-2.5 text-red-400" />
                             </div>
                             <div>
-                                <div className="text-[10px] font-medium text-red-200 uppercase tracking-wide mb-0.5">Deadline</div>
-                                <div className="text-xs text-gray-300">Oct 24, 2025</div>
+                                <div className="text-[10px] font-medium text-red-600 dark:text-red-200 uppercase tracking-wide mb-0.5">Deadline</div>
+                                <div className="text-xs text-gray-600 dark:text-gray-300">Oct 24, 2025</div>
                             </div>
                         </div>
                     </div>

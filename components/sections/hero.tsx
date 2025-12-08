@@ -62,20 +62,20 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-sm"
+                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 mb-8 backdrop-blur-sm"
                         >
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
                             </span>
-                            <span className="text-xs font-medium text-gray-300 tracking-wide uppercase">Enterprise RAG Platform</span>
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-300 tracking-wide uppercase">Enterprise RAG Platform</span>
                         </motion.div>
 
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9]"
+                            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9] text-foreground"
                         >
                             Your Data, <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-400">
@@ -87,7 +87,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-wide"
+                            className="text-2xl md:text-3xl font-bold text-foreground mb-6 tracking-wide"
                         >
                             INGESTIQ
                         </motion.p>
@@ -96,7 +96,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
-                            className="text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
+                            className="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
                         >
                             Stop building data pipelines from scratch. IngestIQ provides the complete
                             infrastructure to connect, process, and vectorize your enterprise data

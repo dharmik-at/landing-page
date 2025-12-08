@@ -150,7 +150,7 @@ export function UnifiedKnowledgeAnimation() {
     }, { scope: containerRef });
 
     return (
-        <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/50 to-black/80 backdrop-blur-xl border border-white/10 shadow-2xl perspective-1000">
+        <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-3xl bg-gradient-to-br from-gray-50/50 to-white/80 dark:from-gray-900/50 dark:to-black/80 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl perspective-1000">
             {/* Background Ambience */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent opacity-50" />
 
@@ -175,7 +175,7 @@ export function UnifiedKnowledgeAnimation() {
                 ].map((item, i) => (
                     <div
                         key={i}
-                        className="silo-tile absolute w-10 h-10 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg flex items-center justify-center shadow-lg"
+                        className="silo-tile absolute w-10 h-10 bg-white/80 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-lg flex items-center justify-center shadow-lg"
                         style={{ top: item.top, left: item.left, transform: "translate(-50%, -50%)" }}
                     >
                         <item.Icon className={`w-5 h-5 ${item.color}`} />
@@ -186,7 +186,7 @@ export function UnifiedKnowledgeAnimation() {
             {/* AI Core Orb */}
             <div className="ai-orb absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 z-15 flex items-center justify-center pointer-events-none">
                 <div className="absolute inset-0 bg-purple-500/30 rounded-full blur-xl animate-pulse" />
-                <div className="relative w-6 h-6 bg-black rounded-full border border-purple-400 flex items-center justify-center shadow-[0_0_30px_rgba(110,99,255,0.6)]">
+                <div className="relative w-6 h-6 bg-white dark:bg-black rounded-full border border-purple-400 flex items-center justify-center shadow-[0_0_30px_rgba(110,99,255,0.6)]">
                     <Sparkles className="w-3 h-3 text-purple-400 animate-spin-slow" />
                 </div>
             </div>
@@ -205,7 +205,7 @@ export function UnifiedKnowledgeAnimation() {
                     </svg>
                     {/* Nodes */}
                     {[
-                        { top: "50%", left: "50%", size: "w-3 h-3", color: "bg-white" },
+                        { top: "50%", left: "50%", size: "w-3 h-3", color: "bg-gray-900 dark:bg-white" },
                         { top: "30%", left: "30%", size: "w-1.5 h-1.5", color: "bg-blue-400" },
                         { top: "30%", left: "70%", size: "w-1.5 h-1.5", color: "bg-purple-400" },
                         { top: "70%", left: "30%", size: "w-1.5 h-1.5", color: "bg-green-400" },
@@ -222,24 +222,24 @@ export function UnifiedKnowledgeAnimation() {
 
             {/* Search Bar & Answer */}
             <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-30 flex flex-col items-center">
-                <div className="search-bar-container w-full bg-black/40 backdrop-blur-xl border border-white/20 rounded-full h-8 flex items-center px-2 gap-2 shadow-2xl relative z-20">
+                <div className="search-bar-container w-full bg-white/80 dark:bg-black/40 backdrop-blur-xl border border-black/20 dark:border-white/20 rounded-full h-8 flex items-center px-2 gap-2 shadow-2xl relative z-20">
                     <Search className="w-3 h-3 text-gray-400" />
                     <div className="flex-1 h-full flex items-center overflow-hidden">
-                        <div className="search-text text-[10px] text-white whitespace-nowrap overflow-hidden border-r border-white/50 pr-1">
+                        <div className="search-text text-[10px] text-gray-900 dark:text-white whitespace-nowrap overflow-hidden border-r border-gray-900/50 dark:border-white/50 pr-1">
                             Q3 Revenue?
                         </div>
                     </div>
                 </div>
 
-                <div className="answer-panel w-[95%] bg-[#1c1c1e]/95 backdrop-blur-xl border border-white/10 rounded-b-xl -mt-3 pt-5 pb-2 px-3 shadow-xl overflow-hidden z-10">
+                <div className="answer-panel w-[95%] bg-white/95 dark:bg-[#1c1c1e]/95 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-b-xl -mt-3 pt-5 pb-2 px-3 shadow-xl overflow-hidden z-10">
                     <div className="answer-content space-y-2">
                         <div className="flex items-start gap-2">
                             <div className="mt-0.5 w-3 h-3 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">
                                 <Sparkles className="w-2 h-2 text-purple-400" />
                             </div>
                             <div>
-                                <div className="text-[9px] font-semibold text-purple-200 mb-0.5">Summary</div>
-                                <div className="text-[9px] text-gray-300 leading-tight">
+                                <div className="text-[9px] font-semibold text-purple-600 dark:text-purple-200 mb-0.5">Summary</div>
+                                <div className="text-[9px] text-gray-600 dark:text-gray-300 leading-tight">
                                     Revenue up 15%.
                                 </div>
                             </div>

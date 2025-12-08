@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand-orange: #FF4F00;
   --color-brand-orange-hover: #CC3F00;
   --color-obsidian: #050505;
   --color-glass: rgba(255, 255, 255, 0.03);
   --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
 
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
@@ -262,8 +266,25 @@
 }
 
 :root {
+  /* Light mode defaults */
+  --background: #ffffff;
+  --foreground: #050505;
+  --color-obsidian: #ffffff;
+  /* In light mode, obsidian might need to be light or inverted? Let's keep it as background equivalent */
+
+  /* We need to redefine these for light mode if they are used as background */
+}
+
+.dark {
   --background: #050505;
   --foreground: #ffffff;
+  --color-obsidian: #050505;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 body {
@@ -271,6 +292,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Noise Texture */

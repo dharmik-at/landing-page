@@ -411,7 +411,7 @@ export default function SolutionPage() {
 
     if (!data) {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center text-white">
+            <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center text-gray-900 dark:text-white">
                 Solution not found.
             </div>
         );
@@ -420,12 +420,7 @@ export default function SolutionPage() {
     const Icon = data.icon;
 
     return (
-        <main ref={containerRef} className="min-h-screen bg-[#050505] text-white pt-24 pb-20 overflow-hidden font-sans selection:bg-brand-orange/30">
-            {/* Grid Background */}
-            <div className="fixed inset-0 z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
-            </div>
+        <main ref={containerRef} className="min-h-screen text-gray-900 dark:text-white pt-24 pb-20 overflow-hidden font-sans selection:bg-brand-orange/30">
 
             {/* Hero Section */}
             <section ref={heroRef} className="relative px-4 md:px-8 py-20 z-10 [perspective:1000px]">
@@ -433,32 +428,32 @@ export default function SolutionPage() {
 
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
-                        <div className={`hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 ${data.color} mb-8 backdrop-blur-md`}>
+                        <div className={`hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 ${data.color} mb-8 backdrop-blur-md`}>
                             <Icon className="w-4 h-4" />
                             <span className="text-sm font-mono tracking-wide uppercase">{data.title}</span>
                         </div>
-                        <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
+                        <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60">
                             {data.subtitle}
                         </h1>
-                        <p className="hero-desc text-xl text-gray-400 mb-10 leading-relaxed max-w-xl">
+                        <p className="hero-desc text-xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed max-w-xl">
                             {data.description}
                         </p>
 
                         {/* HUD Stats */}
-                        <div className="hero-stats grid grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden mb-10 backdrop-blur-sm">
+                        <div className="hero-stats grid grid-cols-3 gap-px bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden mb-10 backdrop-blur-sm">
                             {data.stats.map((stat: any, i: number) => (
-                                <div key={i} className="bg-black/40 p-6 flex flex-col items-center justify-center text-center group hover:bg-white/5 transition-colors">
-                                    <div className={`text-2xl font-bold text-white mb-1 ${data.color}`}>{stat.value}</div>
+                                <div key={i} className="bg-white/40 dark:bg-black/40 p-6 flex flex-col items-center justify-center text-center group hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                                    <div className={`text-2xl font-bold text-gray-900 dark:text-white mb-1 ${data.color}`}>{stat.value}</div>
                                     <div className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
 
                         <div className="hero-buttons flex flex-wrap gap-4">
-                            <Button size="lg" className="magnetic-btn h-12 rounded-full bg-white text-black hover:bg-gray-200 px-8 font-semibold text-base">
+                            <Button size="lg" className="magnetic-btn h-12 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 px-8 font-semibold text-base">
                                 Start Free Trial
                             </Button>
-                            <Button size="lg" variant="outline" className="magnetic-btn h-12 rounded-full border-white/20 hover:bg-white/10 text-white px-8 text-base">
+                            <Button size="lg" variant="outline" className="magnetic-btn h-12 rounded-full border-black/20 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/10 text-gray-900 dark:text-white px-8 text-base">
                                 Schedule Demo
                             </Button>
                         </div>
@@ -469,11 +464,11 @@ export default function SolutionPage() {
                         <div className={`absolute inset-0 bg-gradient-to-br ${data.gradient} opacity-10 blur-[100px] transition-opacity duration-500 group-hover:opacity-20`} />
 
                         {/* Main Container Frame */}
-                        <div className="relative h-full w-full rounded-3xl border border-white/10 bg-black/80 backdrop-blur-2xl overflow-hidden shadow-2xl [transform-style:preserve-3d] group-hover:[transform:rotateX(2deg)_rotateY(-2deg)] transition-transform duration-500 ease-out">
+                        <div className="relative h-full w-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-2xl overflow-hidden shadow-2xl [transform-style:preserve-3d] group-hover:[transform:rotateX(2deg)_rotateY(-2deg)] transition-transform duration-500 ease-out">
                             {/* Background Grid */}
                             <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-                            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-black/20 dark:via-white/20 to-transparent" />
+                            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-black/20 dark:via-white/20 to-transparent" />
 
                             {/* Window Controls */}
                             <div className="absolute top-4 right-4 flex gap-2 z-20">
@@ -529,19 +524,19 @@ export default function SolutionPage() {
             <section className="px-4 md:px-8 py-32 z-10 relative">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-20">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Evolution of Intelligence</h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">Evolution of Intelligence</h2>
+                        <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg">
                             Upgrade from manual workflows to autonomous AI agents.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 [perspective:1000px]">
                         {/* The Old Way */}
-                        <div className="tilt-card step-card group relative p-8 rounded-3xl bg-[#0A0A0A] border border-white/5 overflow-hidden">
+                        <div className="tilt-card step-card group relative p-8 rounded-3xl bg-gray-50 dark:bg-[#0A0A0A] border border-black/5 dark:border-white/5 overflow-hidden">
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent opacity-50" />
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h3 className="text-2xl font-bold text-gray-300">Legacy Process</h3>
+                                    <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-300">Legacy Process</h3>
                                     <XCircle className="w-8 h-8 text-red-500/50" />
                                 </div>
                                 <ul className="space-y-6">
@@ -556,20 +551,20 @@ export default function SolutionPage() {
                         </div>
 
                         {/* The IngestIQ Way */}
-                        <div className={`tilt-card step-card group relative p-8 rounded-3xl bg-[#0A0A0A] border ${data.borderColor} overflow-hidden shadow-2xl ${data.shadowColor}`}>
+                        <div className={`tilt-card step-card group relative p-8 rounded-3xl bg-white dark:bg-[#0A0A0A] border ${data.borderColor} overflow-hidden shadow-2xl ${data.shadowColor}`}>
                             <div className={`absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] ${data.gradient.replace('from-', 'from-').replace('to-', 'via-transparent to-transparent')} opacity-10`} />
-                            <BorderBeam duration={10} size={300} colorFrom="transparent" colorTo="white" />
+                            <BorderBeam duration={10} size={300} colorFrom="transparent" colorTo="var(--foreground)" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h3 className="text-2xl font-bold text-white">IngestIQ AI</h3>
-                                    <div className={`p-2 rounded-lg bg-white/5 ${data.color}`}>
+                                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">IngestIQ AI</h3>
+                                    <div className={`p-2 rounded-lg bg-black/5 dark:bg-white/5 ${data.color}`}>
                                         <Zap className="w-6 h-6" />
                                     </div>
                                 </div>
                                 <ul className="space-y-6">
                                     {data.solution.points.map((point: string, i: number) => (
-                                        <li key={i} className="flex items-start gap-4 text-gray-200">
+                                        <li key={i} className="flex items-start gap-4 text-gray-700 dark:text-gray-200">
                                             <div className={`w-1.5 h-1.5 rounded-full ${data.color.replace('text-', 'bg-')} mt-2.5 shadow-[0_0_10px_currentColor]`} />
                                             <span className="text-lg">{point}</span>
                                         </li>
@@ -585,13 +580,13 @@ export default function SolutionPage() {
             <section className="px-4 md:px-8 py-32 relative z-10" ref={stepsRef}>
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-24">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">System Architecture</h2>
-                        <p className="text-gray-400">Autonomous processing pipeline.</p>
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">System Architecture</h2>
+                        <p className="text-gray-500 dark:text-gray-400">Autonomous processing pipeline.</p>
                     </div>
 
                     <div className="relative">
                         {/* Central Progress Line */}
-                        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block">
+                        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-black/10 dark:bg-white/10 -translate-x-1/2 hidden md:block">
                             <div
                                 ref={progressLineRef}
                                 className={`w-full h-full bg-gradient-to-b ${data.gradient} origin-top`}
@@ -607,16 +602,16 @@ export default function SolutionPage() {
                                         {/* Left Content (Text for Even, Empty for Odd) */}
                                         <div className={`tilt-card step-card hidden md:block w-1/2 pr-12 text-right ${!isEven ? 'invisible' : ''}`}>
                                             <div>
-                                                <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
-                                                <p className="text-gray-400">{step.description}</p>
+                                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{step.title}</h3>
+                                                <p className="text-gray-500 dark:text-gray-400">{step.description}</p>
                                             </div>
                                         </div>
 
                                         {/* Center Icon */}
-                                        <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-2xl bg-[#0A0A0A] border border-white/10 flex items-center justify-center shadow-2xl group hover:scale-110 transition-transform duration-300 cursor-default">
+                                        <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-2xl bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 flex items-center justify-center shadow-2xl group hover:scale-110 transition-transform duration-300 cursor-default">
                                             <div className={`absolute inset-0 bg-gradient-to-br ${data.gradient} opacity-0 group-hover:opacity-20 transition-opacity rounded-2xl blur-md`} />
                                             <StepIcon className={`w-6 h-6 ${data.color}`} />
-                                            <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-[#0A0A0A] border border-white/10 flex items-center justify-center text-[10px] font-mono font-bold text-gray-500">
+                                            <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-white dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 flex items-center justify-center text-[10px] font-mono font-bold text-gray-500">
                                                 0{i + 1}
                                             </div>
                                         </div>
@@ -624,8 +619,8 @@ export default function SolutionPage() {
                                         {/* Right Content (Text for Odd, Empty for Even) */}
                                         <div className={`tilt-card step-card flex-1 md:w-1/2 pl-8 md:pl-12 text-left ${isEven ? 'hidden md:invisible md:block' : ''}`}>
                                             <div>
-                                                <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
-                                                <p className="text-gray-400">{step.description}</p>
+                                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{step.title}</h3>
+                                                <p className="text-gray-500 dark:text-gray-400">{step.description}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -637,22 +632,22 @@ export default function SolutionPage() {
             </section>
 
             {/* Technical Capabilities Grid */}
-            <section className="px-4 md:px-8 py-24 bg-white/[0.02] border-t border-white/5">
+            <section className="px-4 md:px-8 py-24 bg-black/[0.02] dark:bg-white/[0.02] border-t border-black/5 dark:border-white/5">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex items-center justify-between mb-12">
-                        <h2 className="text-2xl font-bold">Core Capabilities</h2>
-                        <div className="h-px flex-1 bg-white/10 ml-8" />
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Core Capabilities</h2>
+                        <div className="h-px flex-1 bg-black/10 dark:bg-white/10 ml-8" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 [perspective:1000px]">
                         {data.features.map((feature: string, i: number) => (
                             <div
                                 key={i}
-                                className="tilt-card step-card group p-6 rounded-xl bg-black border border-white/10 hover:border-white/20 transition-all hover:bg-white/[0.02]"
+                                className="tilt-card step-card group p-6 rounded-xl bg-white dark:bg-black border border-black/10 dark:border-white/10 hover:border-brand-orange/30 dark:hover:border-white/20 transition-all hover:bg-black/[0.02] dark:hover:bg-white/[0.02]"
                             >
-                                <div className={`w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-4 ${data.color} group-hover:scale-110 transition-transform duration-500`}>
+                                <div className={`w-10 h-10 rounded-lg bg-black/5 dark:bg-white/5 flex items-center justify-center mb-4 ${data.color} group-hover:scale-110 transition-transform duration-500`}>
                                     <Cpu className="w-5 h-5" />
                                 </div>
-                                <h3 className="text-sm font-bold text-white uppercase tracking-wide mb-2">{feature}</h3>
+                                <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wide mb-2">{feature}</h3>
                                 <div className={`h-0.5 w-8 ${data.color.replace('text-', 'bg-')} opacity-50`} />
                             </div>
                         ))}

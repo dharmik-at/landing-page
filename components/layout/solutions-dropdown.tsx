@@ -57,7 +57,7 @@ export function SolutionsDropdown() {
             onMouseLeave={() => setIsOpen(false)}
         >
             <button
-                className={`text-sm font-medium transition-colors flex items-center gap-1 py-2 ${isOpen ? 'text-white' : 'text-gray-400 hover:text-white'}`}
+                className={`text-sm font-medium transition-colors flex items-center gap-1 py-2 ${isOpen ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 Solutions
@@ -73,7 +73,7 @@ export function SolutionsDropdown() {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute top-full left-1/2 -translate-x-1/2 w-[640px] pt-4 z-50"
                     >
-                        <div className="relative bg-[#050505] border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
+                        <div className="relative bg-white dark:bg-[#050505] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
                             {/* Grid Background Effect */}
                             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
 
@@ -82,21 +82,21 @@ export function SolutionsDropdown() {
                                     <Link
                                         key={item.title}
                                         href={item.href}
-                                        className="group relative flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-white/[0.03] border border-transparent hover:border-white/10 overflow-hidden"
+                                        className="group relative flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-black/5 dark:hover:bg-white/[0.03] border border-transparent hover:border-black/10 dark:hover:border-white/10 overflow-hidden"
                                     >
                                         {/* Hover Gradient Background */}
                                         <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 
-                                        <div className={`relative p-2.5 rounded-lg bg-white/5 border border-white/5 ${item.border} group-hover:scale-110 transition-transform duration-300`}>
+                                        <div className={`relative p-2.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 ${item.border} group-hover:scale-110 transition-transform duration-300`}>
                                             <item.icon className={`w-5 h-5 ${item.color}`} />
                                         </div>
 
                                         <div className="relative">
-                                            <div className="text-sm font-bold text-gray-200 group-hover:text-white mb-1 flex items-center gap-2 transition-colors">
+                                            <div className="text-sm font-bold text-gray-800 dark:text-gray-200 group-hover:text-gray-900 dark:group-hover:text-white mb-1 flex items-center gap-2 transition-colors">
                                                 {item.title}
                                                 <ChevronRight className={`w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${item.color}`} />
                                             </div>
-                                            <p className="text-xs text-gray-500 group-hover:text-gray-400 leading-relaxed transition-colors">
+                                            <p className="text-xs text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-400 leading-relaxed transition-colors">
                                                 {item.description}
                                             </p>
                                         </div>

@@ -84,7 +84,7 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scr
 
 export function Security() {
     return (
-        <section className="py-32 px-4 md:px-6 bg-black relative overflow-hidden">
+        <section className="py-32 px-4 md:px-6 bg-white dark:bg-black relative overflow-hidden">
             {/* Circuit Background */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
                 <svg className="w-full h-full" width="100%" height="100%">
@@ -101,21 +101,21 @@ export function Security() {
 
                 {/* Security Badge */}
                 <ScrollReveal
-                    className="mt-20 p-8 rounded-2xl bg-gradient-to-r from-white/5 to-transparent border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8"
+                    className="mt-20 p-8 rounded-2xl bg-gradient-to-r from-black/5 dark:from-white/5 to-transparent border border-black/10 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-8"
                 >
                     <div className="flex items-center gap-6">
                         <div className="p-4 rounded-full bg-green-500/10 border border-green-500/20">
                             <Shield className="w-8 h-8 text-green-500" />
                         </div>
                         <div>
-                            <h4 className="text-xl font-bold text-white mb-2">Enterprise Grade Security</h4>
-                            <p className="text-gray-400">Your data never leaves your VPC unless you want it to.</p>
+                            <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Enterprise Grade Security</h4>
+                            <p className="text-gray-600 dark:text-gray-400">Your data never leaves your VPC unless you want it to.</p>
                         </div>
                     </div>
 
                     <div className="flex flex-wrap gap-4">
                         {["SOC2 Type II", "GDPR Ready", "HIPAA", "ISO 27001"].map((badge) => (
-                            <div key={badge} className="flex items-center gap-2 px-4 py-2 rounded-full bg-black border border-white/10 text-sm font-mono text-gray-400">
+                            <div key={badge} className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-50 dark:bg-black border border-black/10 dark:border-white/10 text-sm font-mono text-gray-600 dark:text-gray-400">
                                 <Lock className="w-3 h-3" />
                                 {badge}
                             </div>

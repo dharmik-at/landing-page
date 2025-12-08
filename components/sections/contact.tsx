@@ -32,7 +32,7 @@ export function Contact() {
     }
 
     return (
-        <section id="contact" className="relative py-32 overflow-hidden bg-black selection:bg-brand-orange/30">
+        <section id="contact" className="relative py-32 overflow-hidden bg-white dark:bg-black selection:bg-brand-orange/30">
             {/* Ambient Background */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-brand-orange/5 rounded-full blur-[120px] opacity-50" />
@@ -47,7 +47,7 @@ export function Contact() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-5xl md:text-7xl font-bold tracking-tight text-white"
+                            className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 dark:text-white"
                         >
                             Start the <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-200">Revolution</span>
                         </motion.h2>
@@ -56,7 +56,7 @@ export function Contact() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-lg text-gray-400 max-w-2xl mx-auto"
+                            className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto"
                         >
                             Ready to transform your data infrastructure? Initialize the protocol below.
                         </motion.p>
@@ -69,7 +69,7 @@ export function Contact() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                         onMouseMove={handleMouseMove}
-                        className="group relative rounded-3xl bg-white/[0.02] border border-white/10 p-1"
+                        className="group relative rounded-3xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/10 dark:border-white/10 p-1"
                     >
                         {/* Spotlight Effect */}
                         <motion.div
@@ -85,7 +85,7 @@ export function Contact() {
                             }}
                         />
 
-                        <div className="relative rounded-[22px] bg-black/50 backdrop-blur-xl p-8 md:p-12 overflow-hidden">
+                        <div className="relative rounded-[22px] bg-white/50 dark:bg-black/50 backdrop-blur-xl p-8 md:p-12 overflow-hidden">
 
 
                             <form onSubmit={handleSubmit} className="relative z-10 space-y-8">
@@ -97,7 +97,7 @@ export function Contact() {
                                             placeholder="FULL NAME"
                                             value={formData.name}
                                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            className="bg-white/5 border-white/10 focus:border-brand-orange/50 text-white placeholder:text-gray-600 h-12 rounded-lg transition-all focus:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                            className="bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 focus:border-brand-orange/50 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 h-12 rounded-lg transition-all focus:bg-black/10 dark:focus:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
                                             required
                                         />
                                     </div>
@@ -108,7 +108,7 @@ export function Contact() {
                                             placeholder="EMAIL ADDRESS"
                                             value={formData.email}
                                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            className="bg-white/5 border-white/10 focus:border-brand-orange/50 text-white placeholder:text-gray-600 h-12 rounded-lg transition-all focus:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                            className="bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 focus:border-brand-orange/50 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 h-12 rounded-lg transition-all focus:bg-black/10 dark:focus:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
                                             required
                                         />
                                     </div>
@@ -121,7 +121,7 @@ export function Contact() {
                                         placeholder="COMPANY NAME (OPTIONAL)"
                                         value={formData.company}
                                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                                        className="bg-white/5 border-white/10 focus:border-brand-orange/50 text-white placeholder:text-gray-600 h-12 rounded-lg transition-all focus:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                        className="bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 focus:border-brand-orange/50 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 h-12 rounded-lg transition-all focus:bg-black/10 dark:focus:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
                                     />
                                 </div>
 
@@ -131,7 +131,7 @@ export function Contact() {
                                         placeholder="ENTER YOUR MESSAGE..."
                                         value={formData.message}
                                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                        className="bg-white/5 border-white/10 focus:border-brand-orange/50 text-white placeholder:text-gray-600 min-h-[150px] resize-none rounded-lg transition-all focus:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                        className="bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 focus:border-brand-orange/50 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600 min-h-[150px] resize-none rounded-lg transition-all focus:bg-black/10 dark:focus:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0"
                                         required
                                     />
                                 </div>
@@ -139,7 +139,7 @@ export function Contact() {
                                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">
                                     <a
                                         href="mailto:hello@ingestiq.com"
-                                        className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+                                        className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                                     >
                                         <Mail className="w-4 h-4" />
                                         hello@ingestiq.com

@@ -15,9 +15,11 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "IngestIQ | The Stripe for RAG",
+  title: "IngestIQ",
   description: "Unified RAG infrastructure to connect, process, and vectorize unstructured data in hours.",
 };
+
+import { GridBackground } from "@/components/ui/grid-background";
 
 export default function RootLayout({
   children,
@@ -27,8 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${dmSans.variable} ${spaceGrotesk.variable} antialiased bg-obsidian text-white`}
+        className={`${dmSans.variable} ${spaceGrotesk.variable} antialiased text-foreground`}
       >
+        <GridBackground />
         <Header />
         <main className="min-h-screen">
           {children}

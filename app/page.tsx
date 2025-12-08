@@ -11,7 +11,7 @@ import { Contact } from "@/components/sections/contact";
 
 export default function Home() {
     return (
-        <main className="min-h-screen bg-black text-white selection:bg-brand-orange/30">
+        <main className="min-h-screen text-foreground selection:bg-brand-orange/30">
             <Hero />
             <Solutions />
             <SourceConnectors />

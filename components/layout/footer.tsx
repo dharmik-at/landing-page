@@ -30,7 +30,7 @@ const footerLinks = {
 
 export function Footer() {
     return (
-        <footer className="relative bg-black border-t border-white/10 pt-20 pb-24 overflow-hidden">
+        <footer className="relative bg-white dark:bg-black border-t border-black/10 dark:border-white/10 pt-20 pb-24 overflow-hidden">
             {/* Background Gradients */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-brand-orange/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -42,21 +42,21 @@ export function Footer() {
                             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-brand-orange to-orange-500 text-white font-bold text-lg">
                                 Q
                             </div>
-                            <span className="text-xl font-bold font-heading text-white">
+                            <span className="text-xl font-bold font-heading text-gray-900 dark:text-white">
                                 IngestIQ
                             </span>
                         </Link>
-                        <p className="text-gray-400 mb-6 max-w-sm leading-relaxed">
+                        <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-sm leading-relaxed">
                             The complete infrastructure for RAG. Connect, process, and vectorize your enterprise data with a single API.
                         </p>
                         <div className="flex gap-4">
-                            <Link href="#" className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+                            <Link href="#" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                                 <Twitter className="w-5 h-5" />
                             </Link>
-                            <Link href="#" className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+                            <Link href="#" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                                 <Github className="w-5 h-5" />
                             </Link>
-                            <Link href="#" className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+                            <Link href="#" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
                                 <Linkedin className="w-5 h-5" />
                             </Link>
                         </div>
@@ -65,11 +65,11 @@ export function Footer() {
                     {/* Links Columns */}
                     {Object.entries(footerLinks).map(([category, links]) => (
                         <div key={category} className="lg:col-span-1">
-                            <h3 className="font-semibold text-white mb-6">{category}</h3>
+                            <h3 className="font-semibold text-gray-900 dark:text-white mb-6">{category}</h3>
                             <ul className="space-y-4">
                                 {links.map((link) => (
                                     <li key={link.name}>
-                                        <Link href={link.href} className="text-gray-400 hover:text-brand-orange transition-colors text-sm">
+                                        <Link href={link.href} className="text-gray-500 dark:text-gray-400 hover:text-brand-orange transition-colors text-sm">
                                             {link.name}
                                         </Link>
                                     </li>
@@ -80,14 +80,14 @@ export function Footer() {
 
                     {/* Newsletter Column */}
                     <div className="lg:col-span-1">
-                        <h3 className="font-semibold text-white mb-6">Stay Updated</h3>
-                        <p className="text-sm text-gray-400 mb-4">
+                        <h3 className="font-semibold text-gray-900 dark:text-white mb-6">Stay Updated</h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                             Get the latest updates and resources.
                         </p>
                         <div className="flex flex-col gap-3">
                             <Input
                                 placeholder="Enter your email"
-                                className="bg-white/5 border-white/10 focus:border-brand-orange/50 text-white placeholder:text-gray-500"
+                                className="bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 focus:border-brand-orange/50 text-gray-900 dark:text-white placeholder:text-gray-500"
                             />
                             <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white">
                                 Subscribe <Send className="w-3 h-3 ml-2" />
@@ -97,24 +97,24 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="pt-8 border-t border-black/10 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex flex-col md:flex-row items-center gap-2 md:gap-0">
                         <p className="text-sm text-gray-500">
                             © {new Date().getFullYear()} All rights reserved.
                         </p>
-                        <span className="hidden md:inline mx-4 text-gray-700">|</span>
+                        <span className="hidden md:inline mx-4 text-gray-300 dark:text-gray-700">|</span>
                         <p className="text-sm text-gray-500 flex items-center gap-1">
-                            Cooked at <a href="https://avestalabs.ai/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-brand-orange transition-colors font-medium">Avestalabs</a>
+                            Cooked at <a href="https://avestalabs.ai/" target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-brand-orange transition-colors font-medium">Avestalabs</a>
                         </p>
                     </div>
                     <div className="flex gap-8">
-                        <Link href="#" className="text-sm text-gray-500 hover:text-white transition-colors">
+                        <Link href="#" className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
                             Privacy Policy
                         </Link>
-                        <Link href="#" className="text-sm text-gray-500 hover:text-white transition-colors">
+                        <Link href="#" className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
                             Terms of Service
                         </Link>
-                        <Link href="#" className="text-sm text-gray-500 hover:text-white transition-colors">
+                        <Link href="#" className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
                             Cookie Settings
                         </Link>
                     </div>

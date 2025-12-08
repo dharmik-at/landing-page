@@ -41,10 +41,10 @@ export function FeaturesGrid() {
         <section id="features" className="py-24 px-4 md:px-6">
             <div className="container mx-auto max-w-6xl">
                 <ScrollReveal className="mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
                         Universal <span className="text-brand-orange">Ingestion</span>
                     </h2>
-                    <p className="text-xl text-gray-400 max-w-2xl">
+                    <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl">
                         One API to handle every data type. We take care of the parsing, chunking,
                         and embedding so you don't have to.
                     </p>
@@ -55,22 +55,22 @@ export function FeaturesGrid() {
                         <StaggerItem
                             key={feature.title}
                             className={cn(
-                                "group relative overflow-hidden rounded-3xl border border-glass-border bg-obsidian p-8 hover:border-brand-orange/30 transition-colors",
+                                "group relative overflow-hidden rounded-3xl border border-black/10 dark:border-white/10 bg-gray-50 dark:bg-obsidian p-8 hover:border-brand-orange/30 transition-colors",
                                 feature.className
                             )}
                         >
                             <div className={cn("absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500", feature.gradient)} />
 
                             <div className="relative z-10">
-                                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                    <feature.icon className="w-6 h-6 text-white" />
+                                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <feature.icon className="w-6 h-6 text-gray-900 dark:text-white" />
                                 </div>
 
-                                <h3 className="text-2xl font-bold mb-3 flex items-center gap-2">
+                                <h3 className="text-2xl font-bold mb-3 flex items-center gap-2 text-gray-900 dark:text-white">
                                     {feature.title}
-                                    <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400" />
+                                    <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-gray-500 dark:text-gray-400" />
                                 </h3>
-                                <p className="text-gray-400 leading-relaxed">
+                                <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
                                     {feature.description}
                                 </p>
                             </div>
