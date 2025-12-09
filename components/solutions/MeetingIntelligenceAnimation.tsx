@@ -130,17 +130,17 @@ export function MeetingIntelligenceAnimation() {
 
     // Chaos elements data
     const chaosElements = [
-        { Icon: Mic, color: "text-blue-400", top: "15%", left: "20%" },
+        { Icon: Mic, color: "text-blue-400", top: "15%", left: "60%" }, // Moved from 20% left
         { Icon: FileText, color: "text-indigo-400", top: "75%", left: "80%" },
         { Icon: Users, color: "text-blue-300", top: "25%", left: "85%" },
         { Icon: Clock, color: "text-purple-400", top: "80%", left: "15%" },
         { Icon: FileAudio, color: "text-sky-400", top: "45%", left: "10%" },
-        { Icon: Activity, color: "text-blue-500", top: "10%", left: "60%" },
+        { Icon: Activity, color: "text-blue-500", top: "10%", left: "70%" }, // Moved from 60% left
         { text: "Action Item", color: "text-gray-500 dark:text-white/60", top: "50%", left: "85%" },
-        { text: "Deadline", color: "text-gray-500 dark:text-white/60", top: "20%", left: "40%" },
+        { text: "Deadline", color: "text-gray-500 dark:text-white/60", top: "60%", left: "40%" }, // Moved from 20% top
         { text: "Budget", color: "text-gray-500 dark:text-white/60", top: "65%", left: "70%" },
         { text: "Decision", color: "text-gray-500 dark:text-white/60", top: "85%", left: "45%" },
-        { text: "Blocker", color: "text-gray-500 dark:text-white/60", top: "35%", left: "25%" },
+        { text: "Blocker", color: "text-gray-500 dark:text-white/60", top: "35%", left: "65%" }, // Moved from 25% left
     ];
 
     return (
@@ -165,7 +165,7 @@ export function MeetingIntelligenceAnimation() {
             </div>
 
             {/* 3. AI Core */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center justify-center">
+            <div className="absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center justify-center">
                 <div className="ai-orb relative w-20 h-20 bg-white dark:bg-black rounded-3xl border border-[#0A84FF] flex items-center justify-center shadow-[0_0_50px_rgba(10,132,255,0.6)]">
                     <div className="w-10 h-10 bg-gradient-to-tr from-[#0A84FF] to-[#6E63FF] rounded-xl animate-spin" />
                 </div>
@@ -175,7 +175,7 @@ export function MeetingIntelligenceAnimation() {
             </div>
 
             {/* 5. Summary Card */}
-            <div className="summary-card absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 z-40">
+            <div className="summary-card absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 z-40">
                 <div className="bg-white/90 dark:bg-[#1c1c1e]/90 backdrop-blur-2xl border border-black/10 dark:border-white/10 rounded-2xl p-6 shadow-2xl">
                     {/* Header */}
                     <div className="flex items-center gap-3 mb-5 border-b border-black/5 dark:border-white/5 pb-3">

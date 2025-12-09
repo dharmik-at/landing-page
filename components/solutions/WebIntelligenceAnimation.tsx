@@ -145,7 +145,7 @@ export function WebIntelligenceAnimation() {
 
 
             {/* 1. Holographic Browser Window */}
-            <div className="browser-window absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[60%] bg-white/80 dark:bg-[#0F0F11]/80 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-xl overflow-hidden shadow-2xl perspective-1000 z-0">
+            <div className="browser-window absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[60%] bg-white/80 dark:bg-[#0F0F11]/80 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-xl overflow-hidden shadow-2xl perspective-1000 z-0">
                 {/* Browser Bar */}
                 <div className="h-8 border-b border-black/10 dark:border-white/10 flex items-center px-3 gap-2 bg-black/5 dark:bg-white/5">
                     <div className="flex gap-1.5">
@@ -187,7 +187,7 @@ export function WebIntelligenceAnimation() {
                     {/* Floating Layers (Scraping Phase) */}
                     <div className="absolute inset-0 p-4 pointer-events-none">
                         {[
-                            { icon: Layout, top: "10%", left: "10%", color: "text-blue-300" },
+                            { icon: Layout, top: "10%", left: "70%", color: "text-blue-300" }, // Moved from 10% left
                             { icon: ImageIcon, top: "40%", left: "60%", color: "text-purple-300" },
                             { icon: FileText, top: "60%", left: "20%", color: "text-green-300" },
                             { icon: Globe, top: "20%", left: "80%", color: "text-orange-300" },

@@ -184,7 +184,7 @@ export function UnifiedKnowledgeAnimation() {
             </div>
 
             {/* AI Core Orb */}
-            <div className="ai-orb absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 z-15 flex items-center justify-center pointer-events-none">
+            <div className="ai-orb absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 z-15 flex items-center justify-center pointer-events-none">
                 <div className="absolute inset-0 bg-purple-500/30 rounded-full blur-xl animate-pulse" />
                 <div className="relative w-6 h-6 bg-white dark:bg-black rounded-full border border-purple-400 flex items-center justify-center shadow-[0_0_30px_rgba(110,99,255,0.6)]">
                     <Sparkles className="w-3 h-3 text-purple-400 animate-spin-slow" />
@@ -221,7 +221,7 @@ export function UnifiedKnowledgeAnimation() {
             </div>
 
             {/* Search Bar & Answer */}
-            <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-30 flex flex-col items-center">
+            <div className="absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-30 flex flex-col items-center">
                 <div className="search-bar-container w-full bg-white/80 dark:bg-black/40 backdrop-blur-xl border border-black/20 dark:border-white/20 rounded-full h-8 flex items-center px-2 gap-2 shadow-2xl relative z-20">
                     <Search className="w-3 h-3 text-gray-400" />
                     <div className="flex-1 h-full flex items-center overflow-hidden">

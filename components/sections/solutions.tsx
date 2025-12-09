@@ -56,7 +56,7 @@ export function Solutions() {
                             <MeetingIntelligenceAnimation />
 
                             {/* Static Overlay */}
-                            <div className="absolute top-6 left-6 md:top-8 md:left-8 z-20 pointer-events-none">
+                            <div className="absolute top-6 left-6 md:top-8 md:left-8 z-50 pointer-events-none">
                                 <div className="flex items-center gap-3 mb-3">
                                     <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-500 dark:text-blue-400">
                                         <Video className="w-5 h-5" />
@@ -89,7 +89,7 @@ export function Solutions() {
                         >
                             <WebIntelligenceAnimation />
 
-                            <div className="absolute top-6 left-6 md:top-8 md:left-8 z-20 pointer-events-none">
+                            <div className="absolute top-6 left-6 md:top-8 md:left-8 z-50 pointer-events-none">
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="p-2 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-500 dark:text-orange-400">
                                         <Globe className="w-5 h-5" />
