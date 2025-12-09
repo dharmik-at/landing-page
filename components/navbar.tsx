@@ -43,10 +43,11 @@ export function Navbar() {
 
                 {/* Mobile Menu Toggle */}
                 <button
-                    className="md:hidden text-gray-400 hover:text-white"
+                    className="md:hidden text-gray-400 hover:text-white p-2"
                     onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle menu"
                 >
-                    {isOpen ? <X /> : <Menu />}
+                    {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
             </div>
 
@@ -59,18 +60,20 @@ export function Navbar() {
                         exit={{ opacity: 0, height: 0 }}
                         className="md:hidden border-t border-white/5 bg-black/95 backdrop-blur-xl overflow-hidden"
                     >
-                        <div className="flex flex-col p-6 space-y-4 text-sm font-medium text-gray-400">
-                            <Link href="#features" className="hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Features</Link>
-                            <Link href="#pipeline" className="hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Pipeline</Link>
-                            <Link href="#docs" className="hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Docs</Link>
-                            <Link href="#contact" className="hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Contact</Link>
-                            <div className="pt-4 border-t border-white/5 flex flex-col gap-4">
-                                <Link href="https://github.com/avestalabs/ingestiq" className="hover:text-white transition-colors" onClick={() => setIsOpen(false)}>
+                        <div className="flex flex-col p-6 space-y-6 text-base font-medium text-gray-400">
+                            <Link href="#features" className="hover:text-white transition-colors py-2" onClick={() => setIsOpen(false)}>Features</Link>
+                            <Link href="#pipeline" className="hover:text-white transition-colors py-2" onClick={() => setIsOpen(false)}>Pipeline</Link>
+                            <Link href="#docs" className="hover:text-white transition-colors py-2" onClick={() => setIsOpen(false)}>Docs</Link>
+                            <Link href="#contact" className="hover:text-white transition-colors py-2" onClick={() => setIsOpen(false)}>Contact</Link>
+                            <div className="pt-6 border-t border-white/5 flex flex-col gap-4">
+                                <Link href="https://github.com/avestalabs/ingestiq" className="hover:text-white transition-colors py-2" onClick={() => setIsOpen(false)}>
                                     GitHub
                                 </Link>
-                                <ShinyButton className="w-full">
-                                    Get Started
-                                </ShinyButton>
+                                <Link href="https://ingestiq.ai/" onClick={() => setIsOpen(false)} className="w-full">
+                                    <ShinyButton className="w-full justify-center text-base py-3">
+                                        Get Started
+                                    </ShinyButton>
+                                </Link>
                             </div>
                         </div>
                     </motion.div>

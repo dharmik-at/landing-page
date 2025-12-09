@@ -43,7 +43,7 @@ export function Hero() {
 
     return (
         <section
-            className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-32 pb-20 bg-noise perspective-1000"
+            className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24 pb-12 md:pt-32 md:pb-20 bg-noise perspective-1000"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             ref={ref}
@@ -55,7 +55,7 @@ export function Hero() {
             </div>
 
             <div className="container relative z-10 px-4 md:px-6 mx-auto">
-                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-20">
 
                     {/* Left: Content */}
                     <div className="flex-1 text-center lg:text-left pointer-events-none lg:pointer-events-auto">
@@ -63,7 +63,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 mb-8 backdrop-blur-sm"
+                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 mb-6 md:mb-8 backdrop-blur-sm"
                         >
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
@@ -76,7 +76,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[0.9] text-foreground"
+                            className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 md:mb-6 leading-[1.1] md:leading-[0.9] text-foreground"
                         >
                             <EncryptedText
                                 text="Your Data,"
@@ -95,7 +95,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="text-2xl md:text-3xl font-bold text-foreground mb-6 tracking-wide"
+                            className="text-xl md:text-3xl font-bold text-foreground mb-4 md:mb-6 tracking-wide"
                         >
                             <EncryptedText
                                 text="INGESTIQ"
@@ -107,7 +107,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
-                            className="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
+                            className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 mb-8 md:mb-10 leading-relaxed"
                         >
                             Stop building data pipelines from scratch. IngestIQ provides the complete
                             infrastructure to connect, process, and vectorize your enterprise data
@@ -120,40 +120,12 @@ export function Hero() {
                             transition={{ duration: 0.5, delay: 0.4 }}
                             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pointer-events-auto"
                         >
-                            <Link href="https://ingestiq.ai/">
-                                <ShinyButton className="h-14 px-8 text-base rounded-full">
+                            <Link href="https://ingestiq.ai/" className="w-full sm:w-auto">
+                                <ShinyButton className="h-12 md:h-14 px-8 text-sm md:text-base rounded-full w-full sm:w-auto">
                                     Start Building <ArrowRight className="ml-2 w-4 h-4" />
                                 </ShinyButton>
                             </Link>
                         </motion.div>
-
-                        {/* <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.6 }}
-                            className="mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-8"
-                        >
-                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
-                                <FileText className="h-6 w-6" />
-                                <span className="text-sm font-medium">PDF</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
-                                <NotionIcon className="h-6 w-6" />
-                                <span className="text-sm font-medium">Notion</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
-                                <DriveIcon className="h-6 w-6" />
-                                <span className="text-sm font-medium">Drive</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
-                                <SlackIcon className="h-6 w-6" />
-                                <span className="text-sm font-medium">Slack</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-gray-500 hover:text-white transition-colors duration-300">
-                                <Globe className="h-6 w-6" />
-                                <span className="text-sm font-medium">Website</span>
-                            </div>
-                        </motion.div> */}
                     </div>
 
                     {/* Right: Dashboard Mockup (3D Tilt) */}
@@ -161,7 +133,7 @@ export function Hero() {
                         initial={{ opacity: 0, rotateX: 20, y: 50, scale: 0.9 }}
                         animate={{ opacity: 1, rotateX: 0, y: 0, scale: 1 }}
                         transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 50 }}
-                        className="flex-1 w-full max-w-[800px] lg:max-w-none perspective-1000"
+                        className="flex-1 w-full max-w-full lg:max-w-none perspective-1000 px-2 md:px-0"
                     >
                         <motion.div
                             style={{

@@ -136,19 +136,19 @@ export function DashboardMockup() {
 
             {/* Sidebar Layer */}
             <motion.div
-                className="w-64 border-r border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#0A0A0A] flex flex-col rounded-l-xl"
+                className="w-16 md:w-64 border-r border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#0A0A0A] flex flex-col rounded-l-xl transition-all duration-300"
                 style={{ transform: "translateZ(20px)" }}
             >
-                <div className="p-6 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-brand-orange rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand-orange/20">
+                <div className="p-4 md:p-6 flex items-center justify-center md:justify-start gap-3">
+                    <div className="w-8 h-8 bg-brand-orange rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand-orange/20 shrink-0">
                         <Zap className="w-5 h-5 fill-current" />
                     </div>
-                    <span className="font-bold text-lg text-gray-900 dark:text-white tracking-tight">IngestIQ</span>
+                    <span className="font-bold text-lg text-gray-900 dark:text-white tracking-tight hidden md:block">IngestIQ</span>
                 </div>
 
-                <div className="flex-1 px-3 py-4 space-y-6 overflow-y-auto custom-scrollbar">
+                <div className="flex-1 px-2 md:px-3 py-4 space-y-6 overflow-y-auto custom-scrollbar">
                     <div>
-                        <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Connectors</div>
+                        <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:block">Connectors</div>
                         <div className="space-y-1">
                             <SidebarItem
                                 icon={Share2}
@@ -164,7 +164,7 @@ export function DashboardMockup() {
                     </div>
 
                     <div>
-                        <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">AI Models</div>
+                        <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:block">AI Models</div>
                         <div className="space-y-1">
                             <SidebarItem
                                 icon={Bot}
@@ -180,7 +180,7 @@ export function DashboardMockup() {
                     </div>
 
                     <div>
-                        <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Knowledge</div>
+                        <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:block">Knowledge</div>
                         <div className="space-y-1">
                             <SidebarItem
                                 icon={BookOpen}
@@ -191,10 +191,10 @@ export function DashboardMockup() {
                     </div>
                 </div>
 
-                <div className="p-4 border-t border-black/5 dark:border-white/5">
-                    <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500" />
-                        <div className="flex-1 min-w-0">
+                <div className="p-2 md:p-4 border-t border-black/5 dark:border-white/5">
+                    <div className="flex items-center justify-center md:justify-start gap-3 p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 shrink-0" />
+                        <div className="flex-1 min-w-0 hidden md:block">
                             <div className="text-sm font-medium text-gray-900 dark:text-white truncate">Enterprise Team</div>
                             <div className="text-xs text-gray-500 truncate">Pro Plan</div>
                         </div>
@@ -209,14 +209,15 @@ export function DashboardMockup() {
             >
                 {/* Header Layer */}
                 <motion.header
-                    className="h-16 border-b border-black/5 dark:border-white/5 flex items-center justify-between px-8 bg-white dark:bg-[#0F0F0F] rounded-tr-xl"
+                    className="h-16 border-b border-black/5 dark:border-white/5 flex items-center justify-between px-4 md:px-8 bg-white dark:bg-[#0F0F0F] rounded-tr-xl"
                     style={{ transform: "translateZ(40px)" }}
                 >
                     <div className="flex items-center gap-4">
-                        <span className="text-sm text-gray-400">Pipeline Status</span>
+                        <span className="text-sm text-gray-400 hidden md:inline">Pipeline Status</span>
                         <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            Operational
+                            <span className="hidden md:inline">Operational</span>
+                            <span className="md:hidden">OK</span>
                         </span>
                     </div>
                     <div className="w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer">
@@ -225,7 +226,7 @@ export function DashboardMockup() {
                 </motion.header>
 
                 {/* Dynamic Content Area */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-8">
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-8">
                     <AnimatePresence mode="wait">
                         {activeView === 'source' && (
                             <motion.div
@@ -235,17 +236,17 @@ export function DashboardMockup() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Source Connectors</h2>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Source Connectors</h2>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                                     {sources.map((source) => (
                                         <div
                                             key={source.name}
-                                            className="group p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer"
+                                            className="group p-4 md:p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer"
                                         >
                                             <div className={cn("w-12 h-12 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center transition-transform group-hover:scale-110", source.color)}>
                                                 <source.icon className="w-6 h-6" />
                                             </div>
-                                            <span className="font-medium text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors text-center">
+                                            <span className="font-medium text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors text-center text-sm md:text-base">
                                                 {source.name}
                                             </span>
                                         </div>
@@ -262,18 +263,18 @@ export function DashboardMockup() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Destination Connectors</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Destination Connectors</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                                     {destinations.map((dest) => (
                                         <div
                                             key={dest.name}
-                                            className="group p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer"
+                                            className="group p-4 md:p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer"
                                         >
                                             <div className={cn("w-12 h-12 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center transition-transform group-hover:scale-110", dest.color)}>
                                                 <dest.icon className="w-6 h-6" />
                                             </div>
                                             <div className="text-center">
-                                                <div className="font-medium text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                                                <div className="font-medium text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors text-sm md:text-base">
                                                     {dest.name}
                                                 </div>
                                             </div>
@@ -291,23 +292,23 @@ export function DashboardMockup() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Parser Models</h2>
-                                <div className="grid grid-cols-1 gap-6">
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Parser Models</h2>
+                                <div className="grid grid-cols-1 gap-4 md:gap-6">
                                     {parserModels.map((model) => (
                                         <div
                                             key={model.name}
-                                            className="relative p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-6 group cursor-pointer"
+                                            className="relative p-4 md:p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-4 md:gap-6 group cursor-pointer"
                                         >
                                             <div className={cn("w-12 h-12 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110", model.color)}>
                                                 <model.icon className="w-6 h-6" />
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-3 mb-1">
-                                                    <h3 className="text-lg font-bold text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                                                    <h3 className="text-base md:text-lg font-bold text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
                                                         {model.name}
                                                     </h3>
                                                 </div>
-                                                <p className="text-sm text-gray-500">{model.description}</p>
+                                                <p className="text-xs md:text-sm text-gray-500">{model.description}</p>
                                             </div>
                                         </div>
                                     ))}
@@ -323,21 +324,21 @@ export function DashboardMockup() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-6"
                             >
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Embedding Models</h2>
-                                <div className="grid grid-cols-1 gap-6">
+                                <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Embedding Models</h2>
+                                <div className="grid grid-cols-1 gap-4 md:gap-6">
                                     {embeddingModels.map((model) => (
                                         <div
                                             key={model.name}
-                                            className="relative p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-6 group cursor-pointer"
+                                            className="relative p-4 md:p-6 rounded-xl border border-black/5 dark:border-white/5 bg-gray-50 dark:bg-[#111111] hover:border-brand-orange/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-4 md:gap-6 group cursor-pointer"
                                         >
                                             <div className={cn("w-12 h-12 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 transition-transform group-hover:scale-110", model.color)}>
                                                 <model.icon className="w-6 h-6" />
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-3 mb-1">
-                                                    <h3 className="text-lg font-bold text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{model.name}</h3>
+                                                    <h3 className="text-base md:text-lg font-bold text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{model.name}</h3>
                                                 </div>
-                                                <p className="text-sm text-gray-500">{model.description}</p>
+                                                <p className="text-xs md:text-sm text-gray-500">{model.description}</p>
                                             </div>
                                         </div>
                                     ))}
@@ -355,7 +356,7 @@ export function DashboardMockup() {
                             >
                                 {!selectedKB ? (
                                     <>
-                                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Knowledge Bases</h2>
+                                        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6">Knowledge Bases</h2>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             {knowledgeBases.map((kb) => (
                                                 <div
@@ -394,12 +395,12 @@ export function DashboardMockup() {
                                                 <ChevronRight className="w-5 h-5 rotate-180" />
                                             </button>
                                             <div>
-                                                <h3 className="font-bold text-gray-900 dark:text-white">{selectedKB.name}</h3>
+                                                <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{selectedKB.name}</h3>
                                                 <div className="text-xs text-gray-500">ID: {selectedKB.id}-8cc...</div>
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-1 border-b border-black/5 dark:border-white/5 mb-4">
+                                        <div className="flex items-center gap-1 border-b border-black/5 dark:border-white/5 mb-4 overflow-x-auto">
                                             {[
                                                 { id: "pipelines", label: "Pipelines", icon: Activity },
                                                 { id: "documents", label: "Documents", icon: FileText },
@@ -410,7 +411,7 @@ export function DashboardMockup() {
                                                     key={tab.id}
                                                     onClick={() => setActiveKBTab(tab.id)}
                                                     className={cn(
-                                                        "flex items-center gap-2 px-3 py-2 text-xs font-medium border-b-2 transition-colors",
+                                                        "flex items-center gap-2 px-3 py-2 text-xs font-medium border-b-2 transition-colors whitespace-nowrap",
                                                         activeKBTab === tab.id
                                                             ? "border-brand-orange text-gray-900 dark:text-white"
                                                             : "border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
@@ -521,14 +522,14 @@ function SidebarItem({ icon: Icon, label, active, onClick }: { icon: any, label:
         <div
             onClick={onClick}
             className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer",
+                "flex items-center justify-center md:justify-start gap-3 px-2 md:px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer",
                 active
                     ? "bg-black/10 dark:bg-white/10 text-gray-900 dark:text-white"
                     : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
             )}
         >
-            <Icon className="w-4 h-4" />
-            {label}
+            <Icon className="w-4 h-4 shrink-0" />
+            <span className="hidden md:block">{label}</span>
         </div>
     );
 }
