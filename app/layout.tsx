@@ -17,6 +17,9 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "IngestIQ",
   description: "Unified RAG infrastructure to connect, process, and vectorize unstructured data in hours.",
+  icons: {
+    icon: "/ingestiqlogo2.png",
+  },
 };
 
 import { GridBackground } from "@/components/ui/grid-background";

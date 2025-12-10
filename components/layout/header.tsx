@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { motion } from "framer-motion";
@@ -43,8 +44,13 @@ export function Header() {
             <div className="container px-4 md:px-6 mx-auto flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 group">
-                    <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-orange to-orange-500 text-white font-bold text-lg shadow-lg shadow-brand-orange/20 group-hover:shadow-brand-orange/40 transition-all">
-                        Q
+                    <div className="relative flex h-8 w-8 items-center justify-center">
+                        <Image
+                            src="/ingestiqlogo2.png"
+                            alt="IngestIQ Logo"
+                            fill
+                            className="object-contain"
+                        />
                     </div>
                     <span className="text-xl font-bold tracking-tight font-heading text-foreground">
                         IngestIQ

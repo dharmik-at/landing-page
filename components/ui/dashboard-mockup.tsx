@@ -7,10 +7,11 @@ import {
     Search, Zap, MoreHorizontal,
     Share2, Bot, Cpu, BookOpen,
     FileAudio, Upload, HardDrive, FileSpreadsheet,
-    Image, Video, Globe, Server, Sparkles, Network,
+    Image as ImageIcon, Video, Globe, Server, Sparkles, Network,
     Shield, Users, Plane, Play, Pause, Clock,
     ChevronRight, ArrowLeft, Settings
 } from "lucide-react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     PostgresIcon, PineconeIcon, S3Icon,
@@ -23,7 +24,7 @@ const sources = [
     { name: "File Upload", icon: Upload, color: "text-emerald-400" },
     { name: "Google Drive", icon: HardDrive, color: "text-yellow-400" },
     { name: "Google Sheet", icon: FileSpreadsheet, color: "text-green-500" },
-    { name: "Image Upload", icon: Image, color: "text-purple-400" },
+    { name: "Image Upload", icon: ImageIcon, color: "text-purple-400" },
     { name: "S3 Source", icon: S3Icon, color: "text-orange-400" },
     { name: "Video Upload", icon: Video, color: "text-red-400" },
     { name: "Web Scrape", icon: Globe, color: "text-cyan-400" },
@@ -140,8 +141,13 @@ export function DashboardMockup() {
                 style={{ transform: "translateZ(20px)" }}
             >
                 <div className="p-4 md:p-6 flex items-center justify-center md:justify-start gap-3">
-                    <div className="w-8 h-8 bg-brand-orange rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand-orange/20 shrink-0">
-                        <Zap className="w-5 h-5 fill-current" />
+                    <div className="w-8 h-8 relative flex items-center justify-center shrink-0">
+                        <Image
+                            src="/ingestiqlogo2.png"
+                            alt="IngestIQ Logo"
+                            fill
+                            className="object-contain"
+                        />
                     </div>
                     <span className="font-bold text-lg text-gray-900 dark:text-white tracking-tight hidden md:block">IngestIQ</span>
                 </div>
