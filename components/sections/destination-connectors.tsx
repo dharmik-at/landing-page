@@ -1,13 +1,14 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { PostgresIcon, PineconeIcon, S3Icon, MilvusIcon } from "@/components/ui/icons";
+import { PostgresIcon, PineconeIcon, MilvusIcon, QdrantIcon, MongoDBIcon } from "@/components/ui/icons";
 
 const destinations = [
     { name: "PgVector", icon: PostgresIcon, color: "text-blue-400" },
     { name: "Milvus", icon: MilvusIcon, color: "text-blue-500" },
     { name: "Pinecone", icon: PineconeIcon, color: "text-cyan-500" },
-    { name: "S3 Vector Storage", icon: S3Icon, color: "text-orange-500" },
+    { name: "Qdrant", icon: QdrantIcon, color: "text-red-500" },
+    { name: "MongoDB", icon: MongoDBIcon, color: "text-green-500" },
 ];
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";

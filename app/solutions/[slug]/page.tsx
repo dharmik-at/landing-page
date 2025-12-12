@@ -156,7 +156,7 @@ const solutionsData: Record<string, any> = {
         shadowColor: "shadow-emerald-500/20",
         gradient: "from-emerald-500 to-cyan-500",
         stats: [
-            { label: "Formats", value: "PDF, PNG, CAD" },
+            { label: "Formats", value: "PDF, PNG" },
             { label: "Extraction Speed", value: "2s / page" },
             { label: "Accuracy", value: "99.5%" }
         ],
@@ -204,7 +204,7 @@ const solutionsData: Record<string, any> = {
             "OCR for Handwritten Text",
             "Table Structure Recognition",
             "Technical Diagram Parsing",
-            "CAD File Support"
+
         ],
         visual: "scan"
     },

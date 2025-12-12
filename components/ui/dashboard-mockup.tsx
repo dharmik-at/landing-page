@@ -15,7 +15,8 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     PostgresIcon, PineconeIcon, S3Icon,
-    GeminiIcon, AnthropicIcon, OpenAIIcon, MilvusIcon
+    GeminiIcon, AnthropicIcon, OpenAIIcon, MilvusIcon,
+    QdrantIcon, MongoDBIcon
 } from "./icons";
 
 // Data Definitions
@@ -34,7 +35,8 @@ const destinations = [
     { name: "PgVector", icon: PostgresIcon, color: "text-blue-400" },
     { name: "Milvus", icon: MilvusIcon, color: "text-blue-500" },
     { name: "Pinecone", icon: PineconeIcon, color: "text-cyan-500" },
-    { name: "S3 Vector Storage", icon: S3Icon, color: "text-orange-500" },
+    { name: "Qdrant", icon: QdrantIcon, color: "text-red-500" },
+    { name: "MongoDB", icon: MongoDBIcon, color: "text-green-500" },
 ];
 
 const parserModels = [

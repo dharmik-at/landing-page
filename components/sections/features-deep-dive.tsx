@@ -60,7 +60,7 @@ const features = [
         title: "Visual Knowledge",
         subtitle: "Chat with Blueprints & Charts",
         description: "Unlock the 80% of data trapped in visual formats. Our multimodal AI parses complex PDFs, engineering blueprints, and financial charts with pixel-perfect accuracy.",
-        points: ["OCR for Handwritten Text", "Table Structure Recognition", "CAD File Support"],
+        points: ["OCR for Handwritten Text", "Table Structure Recognition"],
         visual: (
             <div className="w-full h-full bg-white dark:bg-[#0F0F0F] rounded-xl border border-black/10 dark:border-white/10 overflow-hidden relative p-6 flex flex-col">
                 <div className="flex-1 border-2 border-dashed border-black/10 dark:border-white/10 rounded-lg flex items-center justify-center relative overflow-hidden">

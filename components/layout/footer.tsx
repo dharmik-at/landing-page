@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { Input } from "@/components/ui/input";
@@ -34,9 +35,14 @@ export function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-16">
                     {/* Brand Column */}
                     <div className="lg:col-span-2">
-                        <Link href="/" className="flex items-center gap-2 mb-6">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-brand-orange to-orange-500 text-white font-bold text-lg">
-                                Q
+                        <Link href="/" className="flex items-center gap-2 mb-6 group">
+                            <div className="relative flex h-8 w-8 items-center justify-center">
+                                <Image
+                                    src="/ingestiqlogo2.png"
+                                    alt="IngestIQ Logo"
+                                    fill
+                                    className="object-contain"
+                                />
                             </div>
                             <span className="text-xl font-bold font-heading text-gray-900 dark:text-white">
                                 IngestIQ
