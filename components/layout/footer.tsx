@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { Input } from "@/components/ui/input";
+import { NewsletterForm } from "@/components/layout/newsletter-form";
 import { Github, Twitter, Linkedin, Send, Youtube, Instagram } from "lucide-react";
 
 const footerLinks = {
@@ -84,21 +85,7 @@ export function Footer() {
                     ))}
 
                     {/* Newsletter Column */}
-                    <div className="lg:col-span-1">
-                        <h3 className="font-semibold text-gray-900 dark:text-white mb-6">Stay Updated</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                            Get the latest updates and resources.
-                        </p>
-                        <div className="flex flex-col gap-3">
-                            <Input
-                                placeholder="Enter your email"
-                                className="bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 focus:border-brand-orange/50 text-gray-900 dark:text-white placeholder:text-gray-500"
-                            />
-                            <ShinyButton className="w-full text-white">
-                                Subscribe <Send className="w-3 h-3 ml-2" />
-                            </ShinyButton>
-                        </div>
-                    </div>
+                    <NewsletterForm />
                 </div>
 
                 {/* Bottom Bar */}

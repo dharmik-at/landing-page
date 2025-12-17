@@ -1,27 +1,25 @@
-import { Resend } from 'resend';
+import { sendEmail } from '@/lib/email';
 import { NextRequest, NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
-    try {
-        const body = await request.json();
-        const { name, email, company, message } = body;
+  try {
+    const body = await request.json();
+    const { name, email, company, message } = body;
 
-        // Validate required fields
-        if (!name || !email || !message) {
-            return NextResponse.json(
-                { error: 'Name, email, and message are required' },
-                { status: 400 }
-            );
-        }
+    // Validate required fields
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { error: 'Name, email, and message are required' },
+        { status: 400 }
+      );
+    }
 
-        // Send email to the business
-        const { data, error } = await resend.emails.send({
-            from: 'IngestIQ Contact <onboarding@resend.dev>', // Use your verified domain later
-            to: process.env.CONTACT_EMAIL || 'dharmik.gohil@avestatechnologies.com',
-            subject: `New Contact from ${name}`,
-            html: `
+    // Send email notification
+    await sendEmail({
+      to: process.env.GMAIL_USER || 'dharmik.gohil@avestatechnologies.com',
+      subject: `New Contact from ${name}`,
+      replyTo: email,
+      html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #f97316; border-bottom: 2px solid #f97316; padding-bottom: 10px;">
             New Contact Form Submission
@@ -43,25 +41,17 @@ export async function POST(request: NextRequest) {
           </p>
         </div>
       `,
-        });
+    });
 
-        if (error) {
-            console.error('Resend error:', error);
-            return NextResponse.json(
-                { error: 'Failed to send email' },
-                { status: 500 }
-            );
-        }
-
-        return NextResponse.json(
-            { success: true, message: 'Email sent successfully' },
-            { status: 200 }
-        );
-    } catch (error) {
-        console.error('Contact API error:', error);
-        return NextResponse.json(
-            { error: 'Internal server error' },
-            { status: 500 }
-        );
-    }
+    return NextResponse.json(
+      { success: true, message: 'Email sent successfully' },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Contact API error:', error);
+    return NextResponse.json(
+      { error: 'Failed to send email' },
+      { status: 500 }
+    );
+  }
 }
