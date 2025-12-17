@@ -120,7 +120,7 @@ export function Hero() {
                             transition={{ duration: 0.5, delay: 0.4 }}
                             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pointer-events-auto"
                         >
-                            <Link href="https://ingestiq.ai/" className="w-full sm:w-auto">
+                            <Link href="https://platform.ingestiq.ai/" className="w-full sm:w-auto" target="_blank" rel="noopener noreferrer">
                                 <ShinyButton className="h-12 md:h-14 px-8 text-sm md:text-base rounded-full w-full sm:w-auto">
                                     Start Building <ArrowRight className="ml-2 w-4 h-4" />
                                 </ShinyButton>

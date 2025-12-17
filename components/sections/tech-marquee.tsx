@@ -8,11 +8,11 @@ import { cn } from "@/lib/utils";
 
 const sources = [
     { name: "Audio Upload", icon: FileAudio, color: "text-blue-400" },
-    { name: "File Upload", icon: Upload, color: "text-emerald-400" },
+    { name: "PDF, DOCX, TXT", icon: Upload, color: "text-emerald-400" },
     { name: "Google Drive", icon: HardDrive, color: "text-yellow-400" },
     { name: "Google Sheet", icon: FileSpreadsheet, color: "text-green-500" },
     { name: "Image Upload", icon: Image, color: "text-purple-400" },
-    { name: "S3 Source", icon: Database, color: "text-orange-400" },
+    // { name: "S3 Source", icon: Database, color: "text-orange-400" },
     { name: "Video Upload", icon: Video, color: "text-red-400" },
     { name: "Web Scrape", icon: Globe, color: "text-cyan-400" },
 ];

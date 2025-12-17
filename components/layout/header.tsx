@@ -78,7 +78,7 @@ export function Header() {
                 {/* Desktop Actions */}
                 <div className="hidden md:flex items-center gap-4">
                     <AnimatedThemeToggler className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-gray-600 dark:text-gray-400 hover:text-foreground dark:hover:text-white transition-colors" />
-                    <Link href="https://ingestiq.ai/">
+                    <Link href="https://platform.ingestiq.ai/" target="_blank" rel="noopener noreferrer">
                         <ShinyButton className="rounded-full px-6 font-semibold">
                             Get Started
                         </ShinyButton>
@@ -134,7 +134,7 @@ export function Header() {
                             </Link>
                         ))}
                         <div className="h-px bg-black/5 dark:bg-white/10 my-2" />
-                        <Link href="https://ingestiq.ai/">
+                        <Link href="https://platform.ingestiq.ai/" target="_blank" rel="noopener noreferrer">
                             <ShinyButton className="w-full rounded-full text-white">
                                 Get Started
                             </ShinyButton>

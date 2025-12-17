@@ -7,14 +7,10 @@ import {
 } from "@/components/ui/icons";
 
 const models = [
-    { name: "OpenAI Embeddings", icon: OpenAIIcon, color: "text-green-400", description: "text-embedding-3-small & large" },
-    { name: "Google Gecko", icon: GoogleIcon, color: "text-blue-400", description: "Multimodal embedding models" },
-    { name: "Cohere Embed", icon: CohereIcon, color: "text-purple-400", description: "High-performance English & Multilingual" },
-    { name: "Amazon Titan", icon: AWSIcon, color: "text-orange-400", description: "Titan Embeddings G1 - Text" },
-    { name: "Voyage AI", icon: VoyageIcon, color: "text-emerald-400", description: "State-of-the-art retrieval models" },
-    { name: "Mistral Embed", icon: MistralIcon, color: "text-yellow-400", description: "Efficient open-weight embeddings" },
-    { name: "Jina Embeddings", icon: JinaIcon, color: "text-cyan-400", description: "8k context length support" },
-    { name: "Ollama", icon: OllamaIcon, color: "text-white", description: "Local embedding models (Llama 3, etc.)" },
+    { name: "OpenAI", icon: OpenAIIcon, color: "text-green-400", description: "" },
+    { name: "Google", icon: GoogleIcon, color: "text-blue-400", description: "" },
+    { name: "Voyage", icon: VoyageIcon, color: "text-emerald-400", description: "" },
+    { name: "Jina", icon: JinaIcon, color: "text-cyan-400", description: "" },
 ];
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -40,6 +36,12 @@ export function EmbeddingModels() {
                     ))}
                     {models.map((model, i) => (
                         <MarqueeCard key={`2-${i}`} model={model} />
+                    ))}
+                    {models.map((model, i) => (
+                        <MarqueeCard key={`3-${i}`} model={model} />
+                    ))}
+                    {models.map((model, i) => (
+                        <MarqueeCard key={`4-${i}`} model={model} />
                     ))}
                 </div>
 

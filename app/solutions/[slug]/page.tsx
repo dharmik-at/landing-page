@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -273,6 +273,7 @@ const solutionsData: Record<string, any> = {
 };
 
 export default function SolutionPage() {
+    const router = useRouter();
     const params = useParams();
     const slug = params.slug as string;
     const data = solutionsData[slug];
@@ -450,12 +451,12 @@ export default function SolutionPage() {
                         </div>
 
                         <div className="hero-buttons flex flex-wrap gap-4">
-                            <Button size="lg" className="magnetic-btn h-12 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 px-8 font-semibold text-base">
-                                Start Free Trial
+                            <Button size="lg" className="magnetic-btn h-12 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 px-8 font-semibold text-base" onClick={() => router.push("/#contact")}>
+                                Contact Us
                             </Button>
-                            <Button size="lg" variant="outline" className="magnetic-btn h-12 rounded-full border-black/20 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/10 text-gray-900 dark:text-white px-8 text-base">
+                            {/* <Button size="lg" variant="outline" className="magnetic-btn h-12 rounded-full border-black/20 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/10 text-gray-900 dark:text-white px-8 text-base">
                                 Schedule Demo
-                            </Button>
+                            </Button> */}
                         </div>
                     </div>
 
