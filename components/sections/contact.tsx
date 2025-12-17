@@ -15,10 +15,33 @@ export function Contact() {
         company: "",
         message: ""
     });
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
+        setStatus('loading');
+        setErrorMessage('');
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send message');
+            }
+
+            setStatus('success');
+            setFormData({ name: '', email: '', company: '', message: '' });
+        } catch (error) {
+            setStatus('error');
+            setErrorMessage(error instanceof Error ? error.message : 'Something went wrong');
+        }
     };
 
     // Mouse tracking for spotlight effect
@@ -136,21 +159,52 @@ export function Contact() {
                                     />
                                 </div>
 
+                                {/* Success Message */}
+                                {status === 'success' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm text-center"
+                                    >
+                                        ✓ Message sent successfully! We'll get back to you soon.
+                                    </motion.div>
+                                )}
+
+                                {/* Error Message */}
+                                {status === 'error' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm text-center"
+                                    >
+                                        ✕ {errorMessage || 'Failed to send message. Please try again.'}
+                                    </motion.div>
+                                )}
+
                                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">
                                     <a
-                                        href="mailto:hello@ingestiq.com"
+                                        href="mailto:dharmik.gohil@avestatechnologies.com"
                                         className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                                     >
                                         <Mail className="w-4 h-4" />
-                                        hello@ingestiq.com
+                                        dharmik.gohil@avestatechnologies.com
                                     </a>
 
                                     <ShinyButton
                                         type="submit"
-                                        className="w-full md:w-auto text-white font-bold py-6 px-8 rounded-xl shadow-lg shadow-brand-orange/20 hover:shadow-brand-orange/40 transition-all group"
+                                        disabled={status === 'loading'}
+                                        className="w-full md:w-auto text-white font-bold py-6 px-8 rounded-xl shadow-lg shadow-brand-orange/20 hover:shadow-brand-orange/40 transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        INITIATE SEQUENCE
-                                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                        {status === 'loading' ? (
+                                            <>
+                                                <span className="animate-pulse">TRANSMITTING...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                INITIATE SEQUENCE
+                                                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                            </>
+                                        )}
                                     </ShinyButton>
                                 </div>
                             </form>
