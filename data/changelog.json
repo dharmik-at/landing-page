@@ -1,0 +1,195 @@
+[{
+    "date": "December 15, 2025",
+    "title": "Dynamic Destination Connector Support",
+    "description": "Introduced dynamic destination connector support to RAG pipeline.",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Supports Pinecone, Milvus, Qdrant, MongoDB, Postgres"
+        }
+    ]
+},{
+    "date": "November 20, 2025",
+    "title": "Image Source Connector Support",
+    "description": "Introduced image source connector support to RAG any type of image files.",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Supports Local image files, Any image url"
+        }
+    ]
+},
+    {
+    "date": "November 16, 2025",
+    "title": "Audio Source Connector Support",
+    "description": "Introduced audio source connector support to RAG any type of audio files.",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Supports Local audio files, Any audio url"
+        }
+    ]
+},
+    {
+    "date":"November 14, 2025",
+    "title": "Video Source Connector Support",
+    "description": "Introduced video source connector support to RAG any type of video files.",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Supports Local video files, Youtube Video, Any video url"
+        }
+    ]
+},
+    {
+    "date":"November 4, 2025",
+    "title": "Organization Wise Platfrom Feature",
+    "description": "Introduced organization wise platform feature!",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Organization wise platform feature!"
+        }
+    ]
+},
+{
+    "date": "October 30, 2025",
+    "title": "Migrated v1 apis to v2 apis",
+    "description": "Migrated v1 apis to v2 apis",
+    "changes": [
+        {
+            "type": "improvement",
+            "text": "Migrated v1 apis to v2 apis"
+        }
+    ]
+},
+    {
+    "date": "October 15, 2025",
+    "title": "Google Drive Source connector Support",
+    "description": "Introduced google drive support for dynamic RAG-as-a-Service.",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Google drive support"
+        }
+    ]
+},
+{
+    "date": "October 10, 2025",
+    "title": "Google Sheets Source connector Support with BullMQ",
+    "description": "Introduced google sheets support for dynamic RAG-as-a-Service.",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Google sheets support with BullMQ"
+        }
+    ]
+},
+    {
+    "date": "October 7, 2025",
+    "title": "Web Scraping Source connector Support",
+    "description": "Introduced web scraping support for dynamic RAG-as-a-Service.",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Web scraping support"
+        }
+    ]
+},
+    {
+    "date": "September 15, 2025", 
+    "title" : "Hypothetical Question Support",
+    "description": "Introduced hypothetical question support for dynamic RAG-as-a-Service.",
+    "changes": [
+        {
+            "type": "feature",
+            "text": "Hypothetical questions generation with chunking to improve similarity search"
+        }
+    ]
+},
+    {
+    "date": "August 15, 2025",
+    "title": "Introduced PDF Chunking by batch processing",
+    "description": "Improved PDF chunking by batch processing",
+    "changes": [
+        {
+            "type": "improvement",
+            "text": "Improved PDF chunking by batch processing"
+        }
+    ]
+},
+    {
+        "date": "August 10, 2025",
+        "title": "MCP support",
+        "description": "Introduced Knowledgebase wise MCP support for dynamic RAG-as-a-Service.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Knowledgebase wise MCP support for dynamic RAG-as-a-Service"
+            }
+        ]
+    },
+    {
+        "date": "August 6, 2025",
+        "title": "Pipeline Supports",
+        "description": "Introduced knowledgebase wise pipeline supports for dynamic RAG-as-a-Service.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Knowledgebase wise pipeline supports for dynamic RAG-as-a-Service"
+            }
+        ]
+    },
+    {
+        "date": "July 31, 2025",
+        "title": "Dynamic Embeding Model support",
+        "description": "Added support for dynamic embedding models includes OpenAI, Gemini",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Dynamic embedding model support"
+            }
+        ]
+    },
+    {
+        "date": "July 28, 2025",
+        "title": "Knowledge Base",
+        "description": "implement knowledgebase feature for dynamic RAG-as-a-Service",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Introduced a new knowledgebase feature allowing users to create isolated knowledgebases with configurable pipelines."
+            },
+            {
+                "type": "feature",
+                "text": "Implemented CRUD operations for knowledgebases, including validation and error handling."
+            },
+            {
+                "type": "improvement",
+                "text": "Enhanced the API with new endpoints for managing knowledgebases, including activation, deactivation, and searching"
+            }
+        ]
+    },
+    {
+        "date": "April 24, 2025",
+        "title": "PDF Parsing Support",
+        "description": "Added support for PDF parsing.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "PDF parsing support"
+            }
+        ]
+    },
+    {
+        "date": "March 8, 2025",
+        "title": "IngestIQ Launch",
+        "description": "The first release of IngestIQ. Unified RAG infrastructure for everyone.",
+        "changes": [
+            {
+                "type": "feature",
+                "text": "Core API release"
+            }
+        ]
+    }
+]
