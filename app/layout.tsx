@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 };
 
 import { GridBackground } from "@/components/ui/grid-background";
+import { AppWrapper } from "@/components/layout/client-layout";
 
 export default function RootLayout({
   children,
@@ -34,12 +35,14 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${spaceGrotesk.variable} antialiased text-foreground`}
       >
-        <GridBackground />
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <AppWrapper>
+          <GridBackground />
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </AppWrapper>
       </body>
     </html>
   );
