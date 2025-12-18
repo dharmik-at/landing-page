@@ -8,6 +8,7 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { usePathname } from "next/navigation";
 
 import { ProductDropdown } from "@/components/layout/product-dropdown";
 import { SolutionsDropdown } from "@/components/layout/solutions-dropdown";
@@ -22,6 +23,7 @@ const navItems = [
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -30,6 +32,13 @@ export function Header() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    const getHref = (href: string) => {
+        if (href.startsWith("#") && pathname !== "/") {
+            return `/${href}`;
+        }
+        return href;
+    };
 
     return (
         <motion.header
@@ -66,7 +75,7 @@ export function Header() {
                     {navItems.map((item) => (
                         <Link
                             key={item.name}
-                            href={item.href}
+                            href={getHref(item.href)}
                             className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-foreground dark:hover:text-white transition-colors relative group"
                         >
                             {item.name}
@@ -107,7 +116,7 @@ export function Header() {
                 >
                     <div className="container px-4 py-8 flex flex-col gap-6">
                         <Link
-                            href="#features"
+                            href={getHref("#features")}
                             className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-foreground dark:hover:text-white flex items-center justify-between group"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
@@ -115,7 +124,7 @@ export function Header() {
                             <ChevronRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-orange" />
                         </Link>
                         <Link
-                            href="#solutions"
+                            href={getHref("#solutions")}
                             className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-foreground dark:hover:text-white flex items-center justify-between group"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
@@ -125,7 +134,7 @@ export function Header() {
                         {navItems.map((item) => (
                             <Link
                                 key={item.name}
-                                href={item.href}
+                                href={getHref(item.href)}
                                 className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-foreground dark:hover:text-white flex items-center justify-between group"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
