@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 
 import { GridBackground } from "@/components/ui/grid-background";
 import { AppWrapper } from "@/components/layout/client-layout";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 export default function RootLayout({
   children,
@@ -31,18 +32,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${dmSans.variable} ${spaceGrotesk.variable} antialiased text-foreground`}
       >
-        <AppWrapper>
-          <GridBackground />
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </AppWrapper>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AppWrapper>
+            <GridBackground />
+            <Header />
+            <main className="min-h-screen">
+              {children}
+            </main>
+            <Footer />
+          </AppWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

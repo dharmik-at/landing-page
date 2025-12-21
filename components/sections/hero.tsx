@@ -7,7 +7,7 @@ import { ArrowRight, Play, FileText, Globe } from "lucide-react";
 import { DashboardMockup } from "@/components/ui/dashboard-mockup";
 import { NotionIcon, SlackIcon, DriveIcon } from "@/components/ui/icons";
 import { useEffect, useRef } from "react";
-import { EncryptedText } from "@/components/ui/encrypted-text";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export function Hero() {
     const ref = useRef<HTMLDivElement>(null);
@@ -73,34 +73,22 @@ export function Hero() {
                         </motion.div>
 
                         <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
                             className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 md:mb-6 leading-[1.1] md:leading-[0.9] text-foreground"
                         >
-                            <EncryptedText
-                                text="Your Data,"
-                                className="block"
-                                revealDelayMs={50}
-                            />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-400">
-                                <EncryptedText
-                                    text="Your Intelligence"
-                                    revealDelayMs={50}
-                                />
-                            </span>
+                            <BlurReveal delay={0.2} as="span">
+                                Your Data,
+                            </BlurReveal>
+                            <BlurReveal delay={0.4} className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-400 pb-2" as="span">
+                                Your Intelligence
+                            </BlurReveal>
                         </motion.h1>
 
                         <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
                             className="text-xl md:text-3xl font-bold text-foreground mb-4 md:mb-6 tracking-wide"
                         >
-                            <EncryptedText
-                                text="INGESTIQ"
-                                revealDelayMs={50}
-                            />
+                            <BlurReveal delay={0.6} as="span">
+                                INGESTIQ
+                            </BlurReveal>
                         </motion.p>
 
                         <motion.p
