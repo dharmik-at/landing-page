@@ -99,7 +99,7 @@ export function Footer() {
                             Cooked at <a href="https://avestalabs.ai/" target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-brand-orange transition-colors font-medium">Avestalabs</a>
                         </p>
                     </div>
-                    <div className="flex gap-8">
+                    {/* <div className="flex gap-8">
                         <Link href="#" className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
                             Privacy Policy
                         </Link>
@@ -109,7 +109,7 @@ export function Footer() {
                         <Link href="#" className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
                             Cookie Settings
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>
