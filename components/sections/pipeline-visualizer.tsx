@@ -17,7 +17,7 @@ const pipelines = [
         steps: [
             { id: "p1-1", title: "Ingest", tool: "PDF/Docs", icon: FileText },
             { id: "p1-2", title: "Process", tool: "", icon: FileJson },
-            { id: "p1-3", title: "Vectorize", tool: "OpenAI V3", icon: Cpu },
+            { id: "p1-3", title: "Vectorize", tool: "OpenAI", icon: Cpu },
             { id: "p1-4", title: "Index", tool: "Pinecone", icon: Database },
         ]
     },
@@ -29,7 +29,7 @@ const pipelines = [
         steps: [
             { id: "p2-1", title: "Ingest", tool: "MP4/WAV", icon: Video },
             { id: "p2-2", title: "Transcribe", tool: "", icon: Mic },
-            { id: "p2-3", title: "Vectorize", tool: "Gemini 1.5", icon: Sparkles },
+            { id: "p2-3", title: "Vectorize", tool: "Gemini", icon: Sparkles },
             { id: "p2-4", title: "Index", tool: "Weaviate", icon: Box },
         ]
     },
@@ -41,7 +41,7 @@ const pipelines = [
         steps: [
             { id: "p3-1", title: "Crawl", tool: "URL/Sitemap", icon: Globe },
             { id: "p3-2", title: "Scrape", tool: "", icon: Search },
-            { id: "p3-3", title: "Embed", tool: "Cohere V3", icon: Layers },
+            { id: "p3-3", title: "Embed", tool: "Cohere", icon: Layers },
             { id: "p3-4", title: "Index", tool: "Qdrant", icon: Database },
         ]
     }

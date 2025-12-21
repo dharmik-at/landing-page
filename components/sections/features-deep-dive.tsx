@@ -2,106 +2,133 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Check, FileText, Globe, Play, Terminal, Folder, Video, Image as ImageIcon, Database } from "lucide-react";
+import { Check, Image as ImageIcon, Database, Search, Server } from "lucide-react";
+
+// ... existing imports (if any)
+
 
 const features = [
     {
-        title: "Meeting Intelligence",
-        subtitle: "Turn Calls into Action",
-        description: "Don't just transcribe. Understand. IngestIQ processes video and audio files, identifying speakers, key topics, and visual context for true multi-modal search.",
-        points: ["Speaker Diarization", "Visual Scene Analysis", "Timestamped Citations"],
+        title: "Dynamic Destination & Unified Search",
+        subtitle: "Enterprise-Scale Neural Retrieval",
+        description: "Break free from vendor lock-in. IngestIQ allows you to route data to any combination of vector databases while maintaining a single, unified search interface. Query across your entire organization's knowledge base in parallel, regardless of the underlying storage architecture.",
+        points: [
+            "Multi-Destination Routing: Sync data to Pinecone, Qdrant, Milvus, and more simultaneously.",
+            "Parallel Neural Search: Query multiple knowledge bases in parallel with sub-100ms latency.",
+            "Schema Agnostic: Automatically handles different metadata schemas across different providers.",
+            "Vendor Agnostic: Switch providers or add new ones without changing your application code.",
+            "Organization-Level Intelligence: Search across departments, projects, and legacy silos in one go."
+        ],
         visual: (
-            <div className="w-full h-full bg-white dark:bg-[#0F0F0F] rounded-xl border border-black/10 dark:border-white/10 overflow-hidden relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm flex items-center justify-center border border-black/20 dark:border-white/20">
-                        <Play className="w-6 h-6 text-gray-900 dark:text-white fill-current" />
-                    </div>
+            <div className="w-full h-full bg-white dark:bg-[#0F0F0F] rounded-xl border border-black/10 dark:border-white/10 overflow-hidden relative p-8 flex flex-col justify-center">
+                {/* Central Query Node */}
+                <div className="relative z-20 flex justify-center mb-12">
+                    <motion.div
+                        animate={{
+                            boxShadow: ["0 0 0 0px rgba(255,79,0,0.2)", "0 0 0 20px rgba(255,79,0,0)", "0 0 0 0px rgba(255,79,0,0.2)"]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="w-20 h-20 rounded-2xl bg-brand-orange flex items-center justify-center shadow-lg shadow-brand-orange/20"
+                    >
+                        <Search className="w-10 h-10 text-white" />
+                    </motion.div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-black to-transparent p-4 flex flex-col justify-end">
-                    <div className="flex gap-1 mb-2">
-                        {[...Array(20)].map((_, i) => (
-                            <div key={i} className="flex-1 bg-brand-orange/50 rounded-full" style={{ height: Math.random() * 24 + 8 + 'px' }} />
-                        ))}
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-                        <span>02:14</span>
-                        <span>14:30</span>
-                    </div>
-                </div>
-            </div>
-        ),
-    },
-    {
-        title: "Web Intelligence",
-        subtitle: "Turn the Internet into Context",
-        description: "Crawl, scrape, and parse any website with a single API call. Our intelligent agents handle dynamic content, auth walls, and rate limiting automatically.",
-        points: ["Firecrawl Integration", "JavaScript Rendering", "Anti-Bot Bypass"],
-        visual: (
-            <div className="w-full h-full bg-white dark:bg-[#0F0F0F] rounded-xl border border-black/10 dark:border-white/10 overflow-hidden flex flex-col font-mono text-xs">
-                <div className="h-8 bg-black/5 dark:bg-white/5 border-b border-black/5 dark:border-white/5 flex items-center px-3 gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/20" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/20" />
-                    <div className="ml-auto text-gray-500">bash</div>
-                </div>
-                <div className="p-4 text-gray-700 dark:text-gray-300 space-y-2">
-                    <div><span className="text-green-500">➜</span> <span className="text-blue-500 dark:text-blue-400">ingestiq</span> crawl --url https://stripe.com/docs</div>
-                    <div className="text-gray-500">Initializing crawler...</div>
-                    <div className="text-gray-500">Found 1,240 pages.</div>
-                    <div className="text-gray-500">Parsing HTML structure...</div>
-                    <div><span className="text-green-500">✔</span> Extracted 450MB of clean text</div>
-                    <div><span className="text-green-500">✔</span> Generated 12,500 vector embeddings</div>
-                    <div className="animate-pulse">_</div>
-                </div>
-            </div>
-        ),
-    },
-    {
-        title: "Visual Knowledge",
-        subtitle: "Chat with Blueprints & Charts",
-        description: "Unlock the 80% of data trapped in visual formats. Our multimodal AI parses complex PDFs, engineering blueprints, and financial charts with pixel-perfect accuracy.",
-        points: ["OCR for Handwritten Text", "Table Structure Recognition"],
-        visual: (
-            <div className="w-full h-full bg-white dark:bg-[#0F0F0F] rounded-xl border border-black/10 dark:border-white/10 overflow-hidden relative p-6 flex flex-col">
-                <div className="flex-1 border-2 border-dashed border-black/10 dark:border-white/10 rounded-lg flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.05)_50%,transparent_75%,transparent_100%)] dark:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%,100%_100%] animate-[shimmer_3s_infinite]" />
-                    <ImageIcon className="w-12 h-12 text-black/20 dark:text-white/20" />
 
-                    {/* Bounding Boxes */}
-                    <div className="absolute top-1/4 left-1/4 w-1/2 h-12 border border-brand-orange/50 bg-brand-orange/10 rounded flex items-center justify-center">
-                        <span className="text-[10px] text-brand-orange bg-white/80 dark:bg-black/50 px-1 rounded">Table 1.2</span>
-                    </div>
-                    <div className="absolute bottom-1/4 right-1/4 w-1/3 h-24 border border-blue-500/50 bg-blue-500/10 rounded flex items-center justify-center">
-                        <span className="text-[10px] text-blue-500 bg-white/80 dark:bg-black/50 px-1 rounded">Chart A</span>
-                    </div>
+                {/* Destination Nodes */}
+                <div className="grid grid-cols-3 gap-4 relative z-20">
+                    {[
+                        { name: "Pinecone", icon: Database, color: "text-blue-500" },
+                        { name: "Qdrant", icon: Database, color: "text-green-500" },
+                        { name: "Milvus", icon: Database, color: "text-purple-500" },
+                        { name: "MongoDB", icon: Database, color: "text-emerald-500" },
+                        { name: "pgvector", icon: Database, color: "text-indigo-500" },
+                        { name: "Elastic", icon: Database, color: "text-yellow-500" },
+                    ].map((db, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: i * 0.1 }}
+                            className="flex flex-col items-center gap-2 p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5"
+                        >
+                            <db.icon className={cn("w-6 h-6", db.color)} />
+                            <span className="text-[10px] font-mono text-gray-500">{db.name}</span>
+
+                            {/* Connection Line Animation */}
+                            <motion.div
+                                animate={{
+                                    opacity: [0.2, 1, 0.2],
+                                    scaleY: [1, 1.2, 1]
+                                }}
+                                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                                className="absolute -top-8 w-px h-8 bg-gradient-to-b from-brand-orange/50 to-transparent"
+                            />
+                        </motion.div>
+                    ))}
                 </div>
-                <div className="h-12 mt-4 bg-black/5 dark:bg-white/5 rounded-lg border border-black/5 dark:border-white/5 p-2 flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-xs font-mono text-gray-500 dark:text-gray-400">Processing visual elements...</span>
+
+                {/* Background Pulse */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-[300px] h-[300px] bg-brand-orange/5 rounded-full blur-3xl" />
                 </div>
             </div>
         ),
     },
     {
-        title: "Unified Knowledge",
-        subtitle: "One Search Bar for Everything",
-        description: "Connect to Google Drive, Notion, Slack, and Jira in seconds. We handle the OAuth, permission syncing, and incremental updates so your data is always fresh.",
-        points: ["Real-time Sync", "Permission Mirroring", "SOC2 Compliant"],
+        title: "Specialized Agents with MCP Servers",
+        subtitle: "Targeted Accuracy for Every Department",
+        description: "Isolate your data into department-specific knowledge bases like HR, Finance, or Legal. Expose each knowledge base via a dedicated MCP server URL to build hyper-focused agents or combine multiple servers for a unified, high-precision chatbot experience.",
+        points: [
+            "Dedicated MCP URLs: Unique endpoints for HR, Policies, Financials, and more.",
+            "Multi-Server Orchestration: Connect one or many MCP servers to a single chatbot.",
+            "Departmental Data Isolation: Ensure agents only access the data they are authorized for.",
+            "High-Precision Retrieval: Targeted querying leads to more accurate and relevant answers.",
+            "Agentic Infrastructure: Build specialized bots for every team in your organization."
+        ],
         visual: (
-            <div className="w-full h-full bg-white dark:bg-[#0F0F0F] rounded-xl border border-black/10 dark:border-white/10 overflow-hidden p-6">
-                <div className="space-y-3">
+            <div className="w-full h-full bg-white dark:bg-[#0F0F0F] rounded-xl border border-black/10 dark:border-white/10 overflow-hidden relative p-8 flex flex-col justify-center">
+                {/* Chatbot Node */}
+                <div className="relative z-20 flex justify-center mb-12">
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.05, 1],
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                        className="w-20 h-20 rounded-full bg-brand-orange flex items-center justify-center shadow-lg shadow-brand-orange/20"
+                    >
+                        <div className="w-10 h-10 text-white flex items-center justify-center font-bold text-2xl">AI</div>
+                    </motion.div>
+                </div>
+
+                {/* MCP Server Nodes */}
+                <div className="flex justify-around relative z-20">
                     {[
-                        { icon: Folder, name: "Engineering Docs", status: "Synced", color: "text-blue-500 dark:text-blue-400" },
-                        { icon: Folder, name: "Q3 Financials", status: "Synced", color: "text-green-500 dark:text-green-400" },
-                        { icon: Folder, name: "Product Roadmap", status: "Syncing...", color: "text-yellow-500 dark:text-yellow-400" },
-                    ].map((item, i) => (
-                        <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                            <div className="flex items-center gap-3">
-                                <item.icon className={cn("w-5 h-5", item.color)} />
-                                <span className="text-sm font-medium text-gray-900 dark:text-gray-200">{item.name}</span>
+                        { name: "HR MCP", color: "text-blue-500" },
+                        { name: "Finance MCP", color: "text-green-500" },
+                        { name: "Legal MCP", color: "text-purple-500" },
+                    ].map((mcp, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.2 }}
+                            className="flex flex-col items-center gap-2"
+                        >
+                            <div className={cn("p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5", mcp.color)}>
+                                <Server className="w-6 h-6" />
                             </div>
-                            <span className="text-xs text-gray-500">{item.status}</span>
-                        </div>
+                            <span className="text-[10px] font-mono text-gray-500">{mcp.name}</span>
+
+                            {/* Connection Line */}
+                            <motion.div
+                                animate={{
+                                    height: [0, 48, 48],
+                                    opacity: [0, 1, 0]
+                                }}
+                                transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+                                className="absolute -top-12 w-px bg-brand-orange/30"
+                            />
+                        </motion.div>
                     ))}
                 </div>
             </div>

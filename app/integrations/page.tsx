@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { SourceConnectors } from "@/components/sections/tech-marquee";
 import { DestinationConnectors } from "@/components/sections/destination-connectors";
 import { Button } from "@/components/ui/button";
@@ -49,13 +50,17 @@ export default function IntegrationsPage() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="flex flex-wrap justify-center gap-4"
                     >
-                        <Button size="lg" className="rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 px-8 font-semibold text-base h-12">
-                            View All Integrations
-                        </Button>
-                        <Button size="lg" variant="outline" className="rounded-full border-black/20 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/10 text-gray-900 dark:text-white px-8 text-base h-12 group">
-                            Request Integration
-                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                        <Link href="https://platform.ingestiq.ai/" target="_blank">
+                            <Button size="lg" className="rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 px-8 font-semibold text-base h-12">
+                                View All Integrations
+                            </Button>
+                        </Link>
+                        <Link href="/#contact">
+                            <Button size="lg" variant="outline" className="rounded-full border-black/20 dark:border-white/20 hover:bg-black/10 dark:hover:bg-white/10 text-gray-900 dark:text-white px-8 text-base h-12 group">
+                                Request Integration
+                                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                        </Link>
                     </motion.div>
                 </div>
 
@@ -77,9 +82,11 @@ export default function IntegrationsPage() {
                     <p className="text-xl text-gray-500 dark:text-gray-400 mb-10">
                         We add new integrations every week. Let us know what you need.
                     </p>
-                    <Button size="lg" className="rounded-full bg-blue-500 hover:bg-blue-600 text-white px-10 h-14 text-lg font-semibold shadow-lg shadow-blue-500/20">
-                        Request Integration
-                    </Button>
+                    <Link href="/#contact">
+                        <Button size="lg" className="rounded-full bg-blue-500 hover:bg-blue-600 text-white px-10 h-14 text-lg font-semibold shadow-lg shadow-blue-500/20">
+                            Request Integration
+                        </Button>
+                    </Link>
                 </div>
             </section>
         </main>

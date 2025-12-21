@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FeaturesDeepDive } from "@/components/sections/features-deep-dive";
+import { FeatureGrid } from "@/components/sections/feature-grid";
 import { Button } from "@/components/ui/button";
 import { Zap, ArrowRight } from "lucide-react";
 
@@ -48,19 +50,26 @@ export default function FeaturesPage() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="flex flex-wrap justify-center gap-4"
                     >
-                        <Button size="lg" className="rounded-full bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 px-8 font-semibold text-base h-12">
-                            Start Building
-                        </Button>
-                        <Button size="lg" variant="outline" className="rounded-full border-black/20 hover:bg-black/5 text-gray-900 dark:border-white/20 dark:hover:bg-white/10 dark:text-white px-8 text-base h-12 group">
-                            View Documentation
-                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                        <Link href="https://platform.ingestiq.ai" target="_blank">
+                            <Button size="lg" className="rounded-full bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 px-8 font-semibold text-base h-12">
+                                Start Building
+                            </Button>
+                        </Link>
+                        <Link href="/docs">
+                            <Button size="lg" variant="outline" className="rounded-full border-black/20 hover:bg-black/5 text-gray-900 dark:border-white/20 dark:hover:bg-white/10 dark:text-white px-8 text-base h-12 group">
+                                View Documentation
+                                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                        </Link>
                     </motion.div>
                 </div>
 
                 {/* Grid Background */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none -z-10" />
             </section>
+
+            {/* Feature Grid Section */}
+            <FeatureGrid />
 
             {/* Features Deep Dive Section */}
             <FeaturesDeepDive />
@@ -73,9 +82,11 @@ export default function FeaturesPage() {
                     <p className="text-xl text-gray-500 dark:text-gray-400 mb-10">
                         Join hundreds of engineering teams building the next generation of AI apps.
                     </p>
-                    <Button size="lg" className="rounded-full bg-brand-orange hover:bg-brand-orange-hover text-white px-10 h-14 text-lg font-semibold shadow-lg shadow-brand-orange/20">
-                        Get Started for Free
-                    </Button>
+                    <Link href="https://platform.ingestiq.ai/" target="_blank">
+                        <Button size="lg" className="rounded-full bg-brand-orange hover:bg-brand-orange-hover text-white px-10 h-14 text-lg font-semibold shadow-lg shadow-brand-orange/20">
+                            Start Building
+                        </Button>
+                    </Link>
                 </div>
             </section>
         </main>
