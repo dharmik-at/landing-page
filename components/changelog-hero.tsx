@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { History } from "lucide-react";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export default function ChangelogHero() {
     return (
@@ -20,21 +21,19 @@ export default function ChangelogHero() {
                 </motion.div>
 
                 <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60"
+                    className="text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight"
                 >
-                    What's New
+                    <BlurReveal delay={0.1} className="text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60" as="span">
+                        What's New
+                    </BlurReveal>
                 </motion.h1>
 
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
                     className="text-xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed"
                 >
-                    We ship fast. Here's what we've been working on.
+                    <BlurReveal delay={0.3} as="span">
+                        We ship fast. Here's what we've been working on.
+                    </BlurReveal>
                 </motion.p>
             </div>
         </section>

@@ -6,6 +6,7 @@ import { FeaturesDeepDive } from "@/components/sections/features-deep-dive";
 import { FeatureGrid } from "@/components/sections/feature-grid";
 import { Button } from "@/components/ui/button";
 import { Zap, ArrowRight } from "lucide-react";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export default function FeaturesPage() {
     return (
@@ -26,22 +27,23 @@ export default function FeaturesPage() {
                     </motion.div>
 
                     <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60"
+                        className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight"
                     >
-                        Everything you need to build <br />
-                        <span className="text-gray-900 dark:text-white">Enterprise RAG</span>
+                        <BlurReveal delay={0.1} className="text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60" as="span">
+                            Everything you need to build
+                        </BlurReveal>
+                        <br />
+                        <BlurReveal delay={0.3} className="text-gray-900 dark:text-white" as="span">
+                            Enterprise RAG
+                        </BlurReveal>
                     </motion.h1>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto"
                     >
-                        From ingestion to retrieval, IngestIQ provides the complete infrastructure for building production-grade AI applications.
+                        <BlurReveal delay={0.5} as="span">
+                            From ingestion to retrieval, IngestIQ provides the complete infrastructure for building production-grade AI applications.
+                        </BlurReveal>
                     </motion.p>
 
                     <motion.div

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Construction, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export default function DocsPage() {
     return (
@@ -22,23 +23,24 @@ export default function DocsPage() {
                 </motion.div>
 
                 <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60"
+                    className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight"
                 >
-                    Documentation <br />
-                    Coming Soon
+                    <BlurReveal delay={0.1} className="text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60" as="span">
+                        Documentation
+                    </BlurReveal>
+                    <br />
+                    <BlurReveal delay={0.3} className="text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60" as="span">
+                        Coming Soon
+                    </BlurReveal>
                 </motion.h1>
 
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
                     className="text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-10"
                 >
-                    We're working hard to bring you comprehensive documentation for IngestIQ.
-                    Stay tuned for detailed guides, API references, and more.
+                    <BlurReveal delay={0.5} as="span">
+                        We're working hard to bring you comprehensive documentation for IngestIQ.
+                        Stay tuned for detailed guides, API references, and more.
+                    </BlurReveal>
                 </motion.p>
 
                 <motion.div

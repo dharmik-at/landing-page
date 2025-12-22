@@ -18,6 +18,7 @@ import { MeetingIntelligenceAnimation } from "@/components/solutions/MeetingInte
 import { WebIntelligenceAnimation } from "@/components/solutions/WebIntelligenceAnimation";
 import { VisualKnowledgeAnimation } from "@/components/solutions/VisualKnowledgeAnimation";
 import { UnifiedKnowledgeAnimation } from "@/components/solutions/UnifiedKnowledgeAnimation";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -291,8 +292,6 @@ export default function SolutionPage() {
         const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
         tl.from(".hero-badge", { y: -20, opacity: 0, duration: 0.6 })
-            .from(".hero-title", { y: 50, opacity: 0, duration: 1, ease: "back.out(1.2)" }, "-=0.4")
-            .from(".hero-desc", { y: 20, opacity: 0, duration: 0.8 }, "-=0.8")
             .from(".hero-stats", { scale: 0.9, opacity: 0, duration: 0.6 }, "-=0.6")
             .from(".hero-buttons", { y: 20, opacity: 0, duration: 0.6 }, "-=0.5")
             .from(".hero-visual", { scale: 0.5, opacity: 0, rotationY: 45, duration: 1.2, ease: "elastic.out(1, 0.75)" }, "-=1");
@@ -433,11 +432,15 @@ export default function SolutionPage() {
                             <Icon className="w-4 h-4" />
                             <span className="text-sm font-mono tracking-wide uppercase">{data.title}</span>
                         </div>
-                        <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60">
-                            {data.subtitle}
+                        <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                            <BlurReveal delay={0.2} className="text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60" as="span">
+                                {data.subtitle}
+                            </BlurReveal>
                         </h1>
                         <p className="hero-desc text-xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed max-w-xl">
-                            {data.description}
+                            <BlurReveal delay={0.4} as="span">
+                                {data.description}
+                            </BlurReveal>
                         </p>
 
                         {/* HUD Stats */}

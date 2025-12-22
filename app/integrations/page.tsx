@@ -6,6 +6,7 @@ import { SourceConnectors } from "@/components/sections/tech-marquee";
 import { DestinationConnectors } from "@/components/sections/destination-connectors";
 import { Button } from "@/components/ui/button";
 import { Puzzle, ArrowRight } from "lucide-react";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export default function IntegrationsPage() {
     return (
@@ -26,22 +27,23 @@ export default function IntegrationsPage() {
                     </motion.div>
 
                     <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60"
+                        className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight"
                     >
-                        Connect with your <br />
-                        <span className="text-gray-900 dark:text-white">Favorite Tools</span>
+                        <BlurReveal delay={0.1} className="text-transparent bg-clip-text bg-gradient-to-b from-gray-900 to-gray-600 dark:from-white dark:to-white/60" as="span">
+                            Connect with your
+                        </BlurReveal>
+                        <br />
+                        <BlurReveal delay={0.3} className="text-gray-900 dark:text-white" as="span">
+                            Favorite Tools
+                        </BlurReveal>
                     </motion.h1>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-xl text-gray-500 dark:text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto"
                     >
-                        IngestIQ integrates seamlessly with your existing stack. From data sources to vector databases, we've got you covered.
+                        <BlurReveal delay={0.5} as="span">
+                            IngestIQ integrates seamlessly with your existing stack. From data sources to vector databases, we've got you covered.
+                        </BlurReveal>
                     </motion.p>
 
                     <motion.div
