@@ -11,6 +11,7 @@ import { MeetingIntelligenceAnimation } from "@/components/solutions/MeetingInte
 import { WebIntelligenceAnimation } from "@/components/solutions/WebIntelligenceAnimation";
 import { VisualKnowledgeAnimation } from "@/components/solutions/VisualKnowledgeAnimation";
 import { UnifiedKnowledgeAnimation } from "@/components/solutions/UnifiedKnowledgeAnimation";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export function Solutions() {
     return (
@@ -23,23 +24,18 @@ export function Solutions() {
 
             <div className="max-w-7xl mx-auto relative z-10">
                 <div className="text-center mb-10 md:mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight"
-                    >
-                        Real-World <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-500">Solutions</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto"
-                    >
-                        Transform raw data into actionable intelligence. Solve complex business problems with a unified RAG platform.
-                    </motion.p>
+                    <div className="text-center mb-10 md:mb-16">
+                        <BlurReveal delay={0.2} inView className="w-full">
+                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 tracking-tight">
+                                Real-World <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-500">Solutions</span>
+                            </h2>
+                        </BlurReveal>
+                        <BlurReveal delay={0.4} inView className="w-full">
+                            <p className="text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+                                Transform raw data into actionable intelligence. Solve complex business problems with a unified RAG platform.
+                            </p>
+                        </BlurReveal>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(300px,auto)] md:auto-rows-[350px]">

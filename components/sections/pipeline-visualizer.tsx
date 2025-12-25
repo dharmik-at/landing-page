@@ -48,6 +48,7 @@ const pipelines = [
 ];
 
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export function PipelineVisualizer() {
     const [activePipeline, setActivePipeline] = useState<string | null>(null);
@@ -58,15 +59,19 @@ export function PipelineVisualizer() {
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20 pointer-events-none" />
 
             <div className="container mx-auto max-w-6xl relative z-10">
-                <ScrollReveal className="text-center mb-20">
-                    <h2 className="text-4xl md:text-5xl px-4 md:px-70 font-bold mb-6 text-gray-900 dark:text-white">
-                        The <span className="text-brand-orange">Infrastructure</span> Matrix
-                    </h2>
-                    <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-                        One platform, infinite possibilities. Orchestrate complex multi-modal pipelines
-                        with a drag-and-drop interface.
-                    </p>
-                </ScrollReveal>
+                <div className="text-center mb-20">
+                    <BlurReveal delay={0.2} inView className="w-full">
+                        <h2 className="text-4xl md:text-5xl px-4 md:px-70 font-bold mb-6 text-gray-900 dark:text-white">
+                            The <span className="text-brand-orange">Infrastructure</span> Matrix
+                        </h2>
+                    </BlurReveal>
+                    <BlurReveal delay={0.4} inView className="w-full">
+                        <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+                            One platform, infinite possibilities. Orchestrate complex multi-modal pipelines
+                            with a drag-and-drop interface.
+                        </p>
+                    </BlurReveal>
+                </div>
 
                 <StaggerContainer className="flex flex-col gap-12">
                     {pipelines.map((pipeline, pIndex) => (

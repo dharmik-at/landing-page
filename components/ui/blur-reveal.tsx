@@ -18,7 +18,9 @@ export const BlurReveal = ({
     delay = 0,
     duration = 0.8,
     as: Component = "div",
-}: BlurRevealProps & { as?: any }) => {
+    inView = false,
+    inViewMargin = "-50px",
+}: BlurRevealProps & { as?: any; inView?: boolean; inViewMargin?: string }) => {
     const transition = {
         duration: duration,
         delay: delay,
@@ -30,39 +32,14 @@ export const BlurReveal = ({
         visible: { opacity: 1, filter: "blur(0px)", y: 0 },
     };
 
-    if (Component === "div") {
-        return (
-            <motion.div
-                initial="hidden"
-                animate="visible"
-                transition={transition}
-                variants={variants}
-                className={cn("inline-block", className)}
-            >
-                {children}
-            </motion.div>
-        );
-    }
-
-    if (Component === "span") {
-        return (
-            <motion.span
-                initial="hidden"
-                animate="visible"
-                transition={transition}
-                variants={variants}
-                className={cn("inline-block", className)}
-            >
-                {children}
-            </motion.span>
-        );
-    }
-
     const MotionComponent = useMemo(() => motion(Component), [Component]);
+
     return (
         <MotionComponent
             initial="hidden"
-            animate="visible"
+            animate={inView ? undefined : "visible"}
+            whileInView={inView ? "visible" : undefined}
+            viewport={inView ? { once: true, margin: inViewMargin } : undefined}
             transition={transition}
             variants={variants}
             className={cn("inline-block", className)}

@@ -67,6 +67,7 @@ const knowledgeBases = [
 ];
 
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/scroll-reveal";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export function KnowledgeBases() {
     const [selectedKBId, setSelectedKBId] = useState<string | null>(null);
@@ -77,14 +78,18 @@ export function KnowledgeBases() {
     return (
         <section className="py-24 bg-white dark:bg-[#0A0A0A] border-t border-black/5 dark:border-white/5 min-h-[800px]">
             <div className="container mx-auto px-4 md:px-6">
-                <ScrollReveal className="text-center px-4 md:px-116 mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-                        <span className="text-brand-orange">Knowledge</span> Bases
-                    </h2>
-                    <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-                        Manage your RAG corpus with granular control. Specialized knowledge bases for every department.
-                    </p>
-                </ScrollReveal>
+                <div className="text-center px-4 md:px-116 mb-16">
+                    <BlurReveal delay={0.2} inView className="w-full">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+                            <span className="text-brand-orange">Knowledge</span> Bases
+                        </h2>
+                    </BlurReveal>
+                    <BlurReveal delay={0.4} inView className="w-full">
+                        <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+                            Manage your RAG corpus with granular control. Specialized knowledge bases for every department.
+                        </p>
+                    </BlurReveal>
+                </div>
 
                 <div className="max-w-6xl mx-auto">
                     <AnimatePresence mode="wait">

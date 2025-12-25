@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Send, Mail, ArrowRight, Sparkles } from "lucide-react";
 import { useState, MouseEvent } from "react";
 import { cn } from "@/lib/utils";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export function Contact() {
     const [formData, setFormData] = useState({
@@ -66,23 +67,16 @@ export function Contact() {
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16 space-y-4">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 dark:text-white"
-                        >
-                            Start the <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-200">Revolution</span>
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto"
-                        >
-                            Ready to transform your data infrastructure? Initialize the protocol below.
-                        </motion.p>
+                        <BlurReveal delay={0.2} inView className="w-full">
+                            <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Start the <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-200">Revolution</span>
+                            </h2>
+                        </BlurReveal>
+                        <BlurReveal delay={0.4} inView className="w-full">
+                            <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+                                Ready to transform your data infrastructure? Initialize the protocol below.
+                            </p>
+                        </BlurReveal>
                     </div>
 
                     {/* Futuristic Form Container */}

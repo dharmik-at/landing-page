@@ -12,19 +12,24 @@ const destinations = [
 ];
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { BlurReveal } from "@/components/ui/blur-reveal";
 
 export function DestinationConnectors() {
     return (
         <section className="py-24 bg-gray-50 dark:bg-[#0F0F0F] overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 mb-12">
-                <ScrollReveal className="text-center" width="100%">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-                        <span className="text-brand-orange">Destination</span> Connectors
-                    </h2>
-                    <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-                        Sync your vectors where you need them. Support for leading vector databases and storage solutions.
-                    </p>
-                </ScrollReveal>
+                <div className="text-center">
+                    <BlurReveal delay={0.2} inView className="w-full">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+                            <span className="text-brand-orange">Destination</span> Connectors
+                        </h2>
+                    </BlurReveal>
+                    <BlurReveal delay={0.4} inView className="w-full">
+                        <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+                            Sync your vectors where you need them. Support for leading vector databases and storage solutions.
+                        </p>
+                    </BlurReveal>
+                </div>
             </div>
 
             <ScrollReveal className="relative flex w-full overflow-hidden mask-gradient" width="100%" delay={0.2}>
