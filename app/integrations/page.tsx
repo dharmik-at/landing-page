@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { SourceConnectors } from "@/components/sections/tech-marquee";
+import { SourceConnectors } from "@/components/sections/source-connectors";
 import { DestinationConnectors } from "@/components/sections/destination-connectors";
 import { Button } from "@/components/ui/button";
 import { Puzzle, ArrowRight } from "lucide-react";
