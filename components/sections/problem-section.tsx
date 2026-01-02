@@ -4,7 +4,7 @@ import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { AlertTriangle, ArrowRight, CheckCircle2, Clock, Database, Lock, Zap, Layers, FileText, DollarSign, BrainCircuit } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BlurReveal } from "@/components/ui/blur-reveal";
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 
 const anxieties = [
     {
@@ -133,9 +133,15 @@ function SpotlightCard({ item }: { item: any }) {
         mouseY.set(clientY - top);
     }
 
+    const [rotate, setRotate] = useState(0);
+
+    useEffect(() => {
+        setRotate(Math.random() * 4 - 2);
+    }, []);
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20, rotate: Math.random() * 4 - 2 }}
+            initial={{ opacity: 0, y: 20, rotate: rotate }}
             whileInView={{ opacity: 1, y: 0, rotate: 0 }}
             whileHover={{ scale: 1.02, rotate: 0, zIndex: 10 }}
             viewport={{ once: true, margin: "-50px" }}

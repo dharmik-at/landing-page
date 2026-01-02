@@ -4,10 +4,15 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Play, FileText, Globe } from "lucide-react";
-import { DashboardMockup } from "@/components/ui/dashboard-mockup";
+import dynamic from "next/dynamic";
 import { NotionIcon, SlackIcon, DriveIcon } from "@/components/ui/icons";
 import { useEffect, useRef } from "react";
 import { BlurReveal } from "@/components/ui/blur-reveal";
+
+const DashboardMockup = dynamic(() => import("@/components/ui/dashboard-mockup").then(mod => mod.DashboardMockup), {
+    ssr: false,
+    loading: () => <div className="w-full h-full min-h-[300px] md:min-h-[500px] bg-gray-100 dark:bg-white/5 rounded-xl animate-pulse border border-black/5 dark:border-white/5" />
+});
 
 export function Hero() {
     const ref = useRef<HTMLDivElement>(null);
@@ -78,8 +83,8 @@ export function Hero() {
                             <BlurReveal delay={0.2} as="span">
                                 Your Data,
                             </BlurReveal>
-                            <BlurReveal delay={0.4} className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-400 pb-2" as="span">
-                                Your Intelligence
+                            <BlurReveal delay={0.4} className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-400 pb-2 block md:inline" as="span">
+                                {" "}Your Intelligence
                             </BlurReveal>
                         </motion.h1>
 
