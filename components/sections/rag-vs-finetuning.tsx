@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Flame, TrendingDown, Zap, CheckCircle2, RefreshCw } from "lucide-react";
+import { Flame, TrendingDown, Zap } from "lucide-react";
 import { BlurReveal } from "@/components/ui/blur-reveal";
 import { cn } from "@/lib/utils";
 
 export function RagVsFinetuning() {
     const [updates, setUpdates] = useState(10);
-    const fineTuningCost = 5000 + (updates * 5000); // Base training + retrains
-    const ragCost = 10 + (updates * 0.001); // Ingestion + updates
+    const fineTuningCost = 1000 + (updates * 800); // Base training + retrains
+    const ragCost = 50 + (updates * 50); // Ingestion + updates
 
     return (
         <section className="py-32 px-4 md:px-8 bg-white dark:bg-[#050505] relative overflow-hidden transition-colors duration-300">
@@ -44,7 +44,7 @@ export function RagVsFinetuning() {
                         <BlurReveal delay={0.4} inView className="w-full">
                             <p className="text-xl text-gray-500 dark:text-gray-400 mb-12 leading-relaxed max-w-xl">
                                 Fine-tuning embeds knowledge into the model. When facts change, you pay to retrain.
-                                <span className="text-gray-900 dark:text-white font-medium"> RAG keeps knowledge separate—updates are instant and free.</span>
+                                <span className="text-gray-900 dark:text-white font-medium"> RAG keeps knowledge separate updates are instant and free.</span>
                             </p>
                         </BlurReveal>
 
@@ -89,9 +89,7 @@ export function RagVsFinetuning() {
                                     </div>
                                     <div className="text-gray-500 dark:text-gray-400 text-sm">Slow & Expensive</div>
                                 </div>
-                                <div className="p-3 rounded-full bg-red-100 dark:bg-red-500/10 text-red-600 dark:text-red-500">
-                                    <RefreshCw className="w-6 h-6 animate-spin-slow" />
-                                </div>
+
                             </div>
 
                             <div className="flex items-baseline gap-1">
@@ -105,7 +103,7 @@ export function RagVsFinetuning() {
                                 <motion.div
                                     className="h-full bg-red-500 dark:bg-red-600"
                                     initial={{ width: 0 }}
-                                    animate={{ width: `${Math.min((fineTuningCost / 250000) * 100, 100)}%` }}
+                                    animate={{ width: `${Math.min((fineTuningCost / 50000) * 100, 100)}%` }}
                                     transition={{ type: "spring", stiffness: 50 }}
                                 />
                             </div>
@@ -124,14 +122,12 @@ export function RagVsFinetuning() {
                                     </div>
                                     <div className="text-gray-500 dark:text-gray-400 text-sm">Instant & Free</div>
                                 </div>
-                                <div className="p-3 rounded-full bg-orange-100 dark:bg-brand-orange/10 text-brand-orange">
-                                    <CheckCircle2 className="w-6 h-6" />
-                                </div>
+
                             </div>
 
                             <div className="flex items-baseline gap-1">
                                 <span className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white tracking-tighter">
-                                    ${ragCost.toFixed(2)}
+                                    ${ragCost.toLocaleString()}
                                 </span>
                                 <span className="text-gray-500 font-medium">/ year</span>
                             </div>
@@ -140,7 +136,7 @@ export function RagVsFinetuning() {
                                 <motion.div
                                     className="h-full bg-brand-orange"
                                     initial={{ width: 0 }}
-                                    animate={{ width: "1%" }} // Always tiny
+                                    animate={{ width: `${Math.max((ragCost / 50000) * 100, 1)}%` }} // Dynamic but keeps scale
                                 />
                             </div>
 
@@ -149,7 +145,7 @@ export function RagVsFinetuning() {
                                     Savings: <span className="text-green-600 dark:text-green-400 font-bold">${(fineTuningCost - ragCost).toLocaleString()}</span>
                                 </div>
                                 <div className="text-xs font-mono text-brand-orange bg-orange-100 dark:bg-brand-orange/10 px-2 py-1 rounded">
-                                    99.9% CHEAPER
+                                    {((fineTuningCost - ragCost) / fineTuningCost * 100).toFixed(1)}% CHEAPER
                                 </div>
                             </div>
                         </motion.div>
