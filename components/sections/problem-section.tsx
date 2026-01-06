@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { AlertTriangle, ArrowRight, CheckCircle2, Clock, Database, Lock, Zap, Layers, FileText, DollarSign, BrainCircuit } from "lucide-react";
+import { AlertTriangle, ArrowRight, CheckCircle2, Clock, Database, Lock, Zap, Layers, FileText, DollarSign, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BlurReveal } from "@/components/ui/blur-reveal";
 import { MouseEvent, useEffect, useState } from "react";
@@ -11,7 +11,7 @@ const anxieties = [
         icon: Clock,
         title: "Building RAG takes forever",
         pain: "6+ months to build pipelines",
-        solution: "Deploy in hours with zero code",
+        solution: "Deploy in Minutes with zero code",
         color: "text-blue-500",
         bg: "bg-blue-500/10",
         border: "border-blue-500/20",
@@ -20,9 +20,9 @@ const anxieties = [
     },
     {
         icon: Database,
-        title: "Data Silos",
-        pain: "Data scattered in Notion, Slack, Drive",
-        solution: "Unified search across all apps",
+        title: "Scattered Knowledge",
+        pain: "No single source of truth for your org",
+        solution: "One unified home for all company data",
         color: "text-purple-500",
         bg: "bg-purple-500/10",
         border: "border-purple-500/20",
@@ -41,7 +41,7 @@ const anxieties = [
         delay: 0.3
     },
     {
-        icon: AlertTriangle,
+        icon: Brain,
         title: "Hallucinations",
         pain: "Liability risks from wrong answers",
         solution: "Grounded, accurate retrieval",
@@ -54,7 +54,7 @@ const anxieties = [
     {
         icon: DollarSign,
         title: "Fine-Tuning Tax",
-        pain: "$50k/year to retrain models",
+        pain: "$41k/year to retrain models",
         solution: "Update docs instantly for pennies",
         color: "text-pink-500",
         bg: "bg-pink-500/10",
@@ -63,10 +63,10 @@ const anxieties = [
         delay: 0.5
     },
     {
-        icon: BrainCircuit,
-        title: "Fragmented Tools",
-        pain: "Separate tools for every team",
-        solution: "Unified platform for all depts",
+        icon: FileText,
+        title: "Messy Data",
+        pain: "PDFs, tables & images break RAG",
+        solution: "Perfect extraction for any format",
         color: "text-emerald-500",
         bg: "bg-emerald-500/10",
         border: "border-emerald-500/20",
