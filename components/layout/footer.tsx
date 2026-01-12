@@ -50,7 +50,7 @@ export function Footer() {
                             </span>
                         </Link>
                         <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-sm leading-relaxed">
-                            The complete infrastructure for RAG. Connect, process, and vectorize your enterprise data with a single API.
+                            Stop building data pipelines from scratch. IngestIQ provides the complete infrastructure to connect, process, and vectorize your enterprise data at scale.
                         </p>
                         <div className="flex gap-4">
                             <Link href="https://x.com/avestalabs" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
