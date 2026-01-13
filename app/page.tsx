@@ -16,6 +16,21 @@ import { SourceConnectors } from "@/components/sections/source-connectors";
 export default function Home() {
     return (
         <main className="min-h-screen text-foreground selection:bg-brand-orange/30">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        name: "IngestIQ",
+                        url: "https://ingestiq.ai",
+                        logo: "https://ingestiq.ai/ingestiqlogo2.png",
+                        sameAs: ["https://twitter.com/ingestiq"],
+                        description:
+                            "Unified RAG infrastructure to connect, process, and vectorize unstructured data in hours.",
+                    }),
+                }}
+            />
             <Hero />
             <ProblemSection />
             <HowItWorks />
