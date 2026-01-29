@@ -1,34 +1,57 @@
 import { Metadata } from "next";
-import { getMdxContent, getDocMeta } from "@/lib/mdx-utils";
-import { getAdjacentPages } from "@/lib/docs-config";
+import { notFound } from "next/navigation";
+import { getMdxContent, getDocMeta, docExists } from "@/lib/mdx-utils";
+import { getAllDocSlugs, getAdjacentPages } from "@/lib/docs-config";
 import { TableOfContents } from "@/components/docs/table-of-contents";
 import { DocNavigation } from "@/components/docs/doc-navigation";
 
-export async function generateMetadata(): Promise<Metadata> {
-    const meta = getDocMeta("index");
+interface PageProps {
+    params: Promise<{ slug: string[] }>;
+}
+
+// Generate static paths for all docs
+export async function generateStaticParams() {
+    const slugs = getAllDocSlugs();
+    return slugs.map((slug) => ({
+        slug: slug.split("/"),
+    }));
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const slugPath = slug.join("/");
+    const meta = getDocMeta(slugPath);
+
+    if (!meta) {
+        return {
+            title: "Not Found",
+            description: "Page not found",
+        };
+    }
+
     return {
-        title: meta?.title || "Documentation",
-        description: meta?.description || "IngestIQ Documentation",
+        title: meta.title,
+        description: meta.description,
     };
 }
 
-export default async function DocsHomePage() {
-    const doc = await getMdxContent("index");
+export default async function DocPage({ params }: PageProps) {
+    const { slug } = await params;
+    const slugPath = slug.join("/");
 
-    if (!doc) {
-        return (
-            <div className="text-center py-16">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                    Documentation Not Found
-                </h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                    The documentation index page could not be loaded.
-                </p>
-            </div>
-        );
+    // Check if doc exists
+    if (!docExists(slugPath)) {
+        notFound();
     }
 
-    const { prev, next } = getAdjacentPages("index");
+    const doc = await getMdxContent(slugPath);
+
+    if (!doc) {
+        notFound();
+    }
+
+    const { prev, next } = getAdjacentPages(slugPath);
 
     return (
         <div className="flex gap-8 lg:gap-12">
