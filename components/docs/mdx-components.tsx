@@ -3,8 +3,10 @@ import Image from "next/image";
 import { Card, CardGroup } from "./mdx/card";
 import { Accordion, AccordionGroup } from "./mdx/accordion";
 import { Tabs, Tab } from "./mdx/tabs";
+import { Steps, Step } from "./mdx/steps";
 import { Warning, Check, Note, Tip, Caution, IconCheck, IconCross, BadgeRequired, BadgeOptional } from "./mdx/callouts";
 import { CodeBlock, InlineCode } from "./mdx/code-block";
+import { ParamField } from "./mdx/param-field";
 import { Mermaid } from "./mdx/mermaid";
 import { cn } from "@/lib/utils";
 import type { MDXComponents } from "mdx/types";
@@ -192,11 +194,14 @@ export const mdxComponents: MDXComponents = {
     AccordionGroup,
     Tabs,
     Tab,
+    Steps,
+    Step,
     Warning,
     Check,
     Note,
     Tip,
     Caution,
+    ParamField,
     // Inline icons and badges for tables/lists (replacing emojis)
     IconCheck,
     IconCross,
