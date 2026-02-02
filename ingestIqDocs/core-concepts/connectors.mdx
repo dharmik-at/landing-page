@@ -1,0 +1,197 @@
+---
+title: "Connectors"
+description: "Source and destination connectors for data ingestion"
+---
+
+## What are Connectors?
+
+**Connectors** are the integration points that define where data comes from (sources) and where it's stored (destinations). Each pipeline uses one source connector and one destination connector.
+
+## Connector Categories
+
+<CardGroup cols={2}>
+  <Card title="Source Connectors" icon="arrow-right-to-bracket">
+    Define where data originates from
+  </Card>
+  <Card title="Destination Connectors" icon="arrow-right-from-bracket">
+    Define where processed data is stored
+  </Card>
+</CardGroup>
+
+## Available Source Connectors
+
+| Connector | Code | Description |
+|-----------|------|-------------|
+| **File Upload** | `file_upload` | Direct file uploads (PDF, CSV, Excel) |
+| **Web Scraping** | `web_scrape` | Crawl4AI web content extraction |
+| **Google Drive** | `google_drive` | OAuth2 Google Drive integration |
+| **Video/YouTube** | `video` | Video transcription via Whisper |
+| **Audio** | `audio` | Audio file transcription |
+| **Image** | `image` | Image OCR via Gemini Vision |
+
+## Available Destination Connectors
+
+| Connector | Code | Description |
+|-----------|------|-------------|
+| **pgvector** | `pgvector` | PostgreSQL with pgvector extension |
+
+## Connector Configuration
+
+Each connector type has a configuration schema that defines required and optional settings.
+
+### Creating a Connector Config
+
+```bash
+curl -X POST http://localhost:3000/api/v2/connector-configs \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My File Upload Config",
+    "connectorTypeId": 1,
+    "config": {
+      "maxFileSize": "50MB",
+      "allowedFormats": ["pdf", "csv", "xlsx"]
+    }
+  }'
+```
+
+## Source Connector Details
+
+<AccordionGroup>
+  <Accordion title="File Upload" icon="upload">
+    **Description**: Upload files directly via API
+    
+    **Supported Formats**: PDF, CSV, Excel, Word, Images
+    
+    **Configuration**:
+    ```json
+    {
+      "maxFileSize": "50MB",
+      "allowedFormats": ["pdf", "csv", "xlsx", "docx"]
+    }
+    ```
+    
+    [Learn more →](/connectors/file-upload)
+  </Accordion>
+  
+  <Accordion title="Web Scraping" icon="globe">
+    **Description**: Extract content from web pages using Crawl4AI
+    
+    **Configuration**:
+    ```json
+    {
+      "url": "https://example.com",
+      "depth": 2,
+      "maxPages": 100
+    }
+    ```
+    
+    [Learn more →](/connectors/web-scraping)
+  </Accordion>
+  
+  <Accordion title="Google Drive" icon="google">
+    **Description**: Sync documents from Google Drive folders
+    
+    **Requirements**: OAuth2 authentication
+    
+    **Configuration**:
+    ```json
+    {
+      "folderId": "google-drive-folder-id",
+      "includeSubfolders": true
+    }
+    ```
+    
+    [Learn more →](/connectors/google-drive)
+  </Accordion>
+  
+  <Accordion title="Video/YouTube" icon="video">
+    **Description**: Transcribe video content using OpenAI Whisper
+    
+    **Supported Sources**: YouTube URLs, direct video URLs
+    
+    **Configuration**:
+    ```json
+    {
+      "maxDuration": 10800,
+      "extractAudio": true,
+      "whisperModel": "whisper-1"
+    }
+    ```
+    
+    [Learn more →](/connectors/video)
+  </Accordion>
+</AccordionGroup>
+
+## Destination Connector Details
+
+<Accordion title="pgvector" icon="database">
+  **Description**: PostgreSQL with the pgvector extension for efficient similarity search
+  
+  **Features**:
+  - HNSW indexing for fast approximate nearest neighbor search
+  - Metadata filtering
+  - Hybrid search (vector + keyword)
+  
+  **Configuration**:
+  ```json
+  {
+    "tableName": "document_embeddings",
+    "dimensions": 1536,
+    "indexType": "hnsw"
+  }
+  ```
+</Accordion>
+
+## Connector Type Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | Integer | Unique identifier |
+| `name` | String | Connector name |
+| `category` | Enum | `source` or `destination` |
+| `description` | String | Connector description |
+| `configSchema` | Object | JSON Schema for config validation |
+| `uniqueCode` | String | Unique connector code |
+| `isActive` | Boolean | Whether connector is enabled |
+
+## Listing Connector Types
+
+```bash
+curl http://localhost:3000/api/v2/connector-configs/types \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Reuse configurations">
+    Create connector configs once and reuse across multiple pipelines:
+    - Create a "PDF Upload Config" used by all PDF pipelines
+    - Create a "Marketing Website Scraper" for marketing content
+  </Accordion>
+  
+  <Accordion title="Use meaningful names">
+    Name configs descriptively:
+    - ✅ "Engineering Docs - Google Drive"
+    - ✅ "Customer Support Videos"
+    - ❌ "Config 1"
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="File Upload" icon="upload" href="/connectors/file-upload">
+    Upload PDFs and documents
+  </Card>
+  <Card title="Web Scraping" icon="globe" href="/connectors/web-scraping">
+    Extract content from websites
+  </Card>
+  <Card title="Google Drive" icon="google" href="/connectors/google-drive">
+    Sync from Google Drive
+  </Card>
+  <Card title="Video" icon="video" href="/connectors/video">
+    Transcribe video content
+  </Card>
+</CardGroup>

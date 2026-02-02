@@ -1,0 +1,234 @@
+---
+title: "Architecture"
+description: "System architecture and design overview"
+---
+
+## Overview
+
+IngestIQ is built on **Clean Architecture** principles with an event-driven microservices design.
+
+## High-Level Architecture
+
+```mermaid
+graph TB
+    subgraph Clients
+        A[Web App]
+        B[API Clients]
+        C[MCP Clients]
+    end
+    
+    subgraph API Layer
+        D[Express Server]
+        E[MCP Server Pool]
+    end
+    
+    subgraph Processing
+        F[Document Processor]
+        G[Embedding Generator]
+        H[Scheduler]
+    end
+    
+    subgraph Storage
+        I[(PostgreSQL<br/>Management)]
+        J[(PostgreSQL<br/>pgvector)]
+        K[(S3/MinIO)]
+    end
+    
+    subgraph Messaging
+        L[NATS JetStream]
+        M[Redis + BullMQ]
+    end
+    
+    A --> D
+    B --> D
+    C --> E
+    D --> L
+    L --> F
+    F --> G
+    G --> J
+    D --> I
+    F --> K
+    H --> M
+    M --> D
+```
+
+## Clean Architecture Layers
+
+```
+┌─────────────────────────────────────┐
+│        Presentation Layer           │
+│  (Controllers, Routes, Middleware)  │
+├─────────────────────────────────────┤
+│        Application Layer            │
+│      (Use Cases, Services)          │
+├─────────────────────────────────────┤
+│          Domain Layer               │
+│   (Entities, Interfaces, Errors)    │
+├─────────────────────────────────────┤
+│       Infrastructure Layer          │
+│  (Repositories, External Services)  │
+└─────────────────────────────────────┘
+```
+
+### Layer Responsibilities
+
+| Layer | Responsibility |
+|-------|----------------|
+| **Presentation** | HTTP handling, validation, response formatting |
+| **Application** | Business logic, orchestration, use cases |
+| **Domain** | Core entities, business rules, interfaces |
+| **Infrastructure** | Database, external APIs, storage |
+
+## Project Structure
+
+```
+src/
+├── presentation/     # HTTP Layer
+│   ├── controllers/  # Request handlers
+│   ├── routes/       # Route definitions
+│   ├── middleware/   # Auth, validation
+│   └── schemas/      # Request validation
+│
+├── application/      # Business Logic
+│   └── useCases/     # Feature implementations
+│       ├── auth/
+│       ├── document/
+│       ├── knowledgebase/
+│       └── pipeline/
+│
+├── domain/           # Core Business
+│   ├── entities/     # Domain objects
+│   ├── interfaces/   # Repository contracts
+│   └── errors/       # Domain errors
+│
+├── infrastructure/   # External Integrations
+│   ├── repository/   # Database implementations
+│   └── services/     # External service adapters
+│
+├── common/           # Shared Utilities
+│   ├── ai/           # AI provider factory
+│   ├── db/           # Database setup
+│   ├── embedding/    # Embedding providers
+│   └── storage/      # S3 storage
+│
+├── mcp/              # MCP Server
+├── nats-events/      # Event handlers
+└── scheduler/        # Job scheduling
+```
+
+## Event-Driven Processing
+
+Document processing is fully asynchronous via NATS JetStream:
+
+```mermaid
+sequenceDiagram
+    participant API
+    participant NATS
+    participant Processor
+    participant Embedder
+    participant VectorDB
+    
+    API->>NATS: DocumentProcessingRequest
+    NATS->>Processor: Receive event
+    Processor->>Processor: Extract text, chunk
+    Processor->>NATS: EmbeddingRequest
+    NATS->>Embedder: Receive event
+    Embedder->>Embedder: Generate embeddings
+    Embedder->>VectorDB: Store vectors
+    Embedder->>NATS: ProcessingComplete
+```
+
+### Event Types
+
+| Event | Purpose |
+|-------|---------|
+| `document.processing.request` | Start document processing |
+| `document.embedding.request` | Generate embeddings |
+| `document.processing.complete` | Processing finished |
+| `document.processing.failed` | Processing error |
+
+## Data Flow
+
+### Document Ingestion
+
+```mermaid
+graph LR
+    A[Upload] --> B[S3 Storage]
+    B --> C[Text Extraction]
+    C --> D[AI Chunking]
+    D --> E[Embedding]
+    E --> F[Vector DB]
+```
+
+### Search Query
+
+```mermaid
+graph LR
+    A[Query] --> B[Embed Query]
+    B --> C[Vector Search]
+    C --> D[Fetch Metadata]
+    D --> E[Return Results]
+```
+
+## Component Details
+
+### PostgreSQL + pgvector
+
+- **HNSW indexing** for fast approximate nearest neighbor
+- Supports millions of vectors
+- Metadata filtering alongside vector search
+
+### NATS JetStream
+
+- Durable message streaming
+- At-least-once delivery
+- Consumer groups for scaling
+
+### BullMQ + Redis
+
+- Scheduled job execution
+- Retry with backoff
+- Job status tracking
+
+### MCP Server Pool
+
+- Per-Knowledge Base server isolation
+- Connection pooling
+- Automatic cleanup
+
+## Scaling Considerations
+
+### Horizontal Scaling
+
+| Component | Scaling Strategy |
+|-----------|------------------|
+| API Server | Multiple instances behind load balancer |
+| Document Processor | Consumer groups in NATS |
+| Database | Read replicas, connection pooling |
+| Object Storage | S3/MinIO handles natively |
+
+### Bottlenecks
+
+| Bottleneck | Solution |
+|------------|----------|
+| Embedding generation | Batch processing, caching |
+| Database writes | Connection pooling, async commits |
+| File storage | CDN, distributed storage |
+
+## Security Architecture
+
+- **JWT authentication** with refresh tokens
+- **Organization-level isolation**
+- **Role-based access control**
+- **API key encryption** at rest
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Deployment" icon="rocket" href="/self-hosting/deployment">
+    Deploy IngestIQ
+  </Card>
+  <Card title="Configuration" icon="gear" href="/self-hosting/configuration">
+    Environment setup
+  </Card>
+</CardGroup>

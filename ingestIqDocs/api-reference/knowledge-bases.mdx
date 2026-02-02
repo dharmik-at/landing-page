@@ -1,0 +1,208 @@
+---
+title: "Knowledge Bases"
+description: "Knowledge Base management endpoints"
+---
+
+## List Knowledge Bases
+
+Get all knowledge bases for the current organization.
+
+```bash
+curl http://localhost:3000/api/v2/knowledgebases \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "knowledgebases": [
+    {
+      "id": "kb-uuid",
+      "name": "Product Documentation",
+      "description": "Technical docs for our product",
+      "status": "active",
+      "createdAt": "2024-01-28T12:00:00.000Z",
+      "updatedAt": "2024-01-28T12:00:00.000Z"
+    }
+  ]
+}
+```
+
+---
+
+## Create Knowledge Base
+
+Create a new knowledge base.
+
+<ParamField path="name" type="string" required>
+  Knowledge base name (max 100 characters)
+</ParamField>
+
+<ParamField path="description" type="string">
+  Optional description (max 500 characters)
+</ParamField>
+
+<ParamField path="metadata" type="object">
+  Optional custom metadata
+</ParamField>
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Engineering Runbooks",
+    "description": "Operational runbooks and procedures",
+    "metadata": {
+      "department": "Engineering",
+      "owners": ["team-lead@example.com"]
+    }
+  }'
+```
+
+### Response
+
+```json
+{
+  "id": "kb-uuid",
+  "name": "Engineering Runbooks",
+  "description": "Operational runbooks and procedures",
+  "status": "active",
+  "metadata": {
+    "department": "Engineering",
+    "owners": ["team-lead@example.com"]
+  },
+  "createdAt": "2024-01-28T12:00:00.000Z",
+  "updatedAt": "2024-01-28T12:00:00.000Z"
+}
+```
+
+---
+
+## Get Knowledge Base
+
+Get a specific knowledge base by ID.
+
+```bash
+curl http://localhost:3000/api/v2/knowledgebases/{kbId} \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "id": "kb-uuid",
+  "name": "Engineering Runbooks",
+  "description": "Operational runbooks and procedures",
+  "status": "active",
+  "metadata": {},
+  "documentCount": 45,
+  "pipelineCount": 2,
+  "createdAt": "2024-01-28T12:00:00.000Z",
+  "updatedAt": "2024-01-28T12:00:00.000Z"
+}
+```
+
+---
+
+## Update Knowledge Base
+
+Update knowledge base properties.
+
+<ParamField path="name" type="string">
+  New name
+</ParamField>
+
+<ParamField path="description" type="string">
+  New description
+</ParamField>
+
+<ParamField path="metadata" type="object">
+  New metadata (replaces existing)
+</ParamField>
+
+```bash
+curl -X PUT http://localhost:3000/api/v2/knowledgebases/{kbId} \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Engineering Runbooks v2",
+    "description": "Updated runbooks"
+  }'
+```
+
+### Response
+
+```json
+{
+  "id": "kb-uuid",
+  "name": "Engineering Runbooks v2",
+  "description": "Updated runbooks",
+  "status": "active",
+  "updatedAt": "2024-01-28T14:00:00.000Z"
+}
+```
+
+---
+
+## Update Status
+
+Activate or deactivate a knowledge base.
+
+<ParamField path="status" type="string" required>
+  `active` or `inactive`
+</ParamField>
+
+```bash
+curl -X PUT http://localhost:3000/api/v2/knowledgebases/{kbId}/status \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "status": "inactive"
+  }'
+```
+
+### Response
+
+```json
+{
+  "id": "kb-uuid",
+  "status": "inactive",
+  "message": "Knowledge base deactivated"
+}
+```
+
+---
+
+## Delete Knowledge Base
+
+Delete a knowledge base and all its contents.
+
+<Warning>
+  This permanently deletes all documents, pipelines, and embeddings in the knowledge base.
+</Warning>
+
+```bash
+curl -X DELETE http://localhost:3000/api/v2/knowledgebases/{kbId} \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "message": "Knowledge base deleted successfully"
+}
+```
+
+---
+
+## Error Responses
+
+| Error | Status | Description |
+|-------|--------|-------------|
+| `KB_NOT_FOUND` | 404 | Knowledge base not found |
+| `KB_NAME_EXISTS` | 409 | Name already in use |
+| `INVALID_STATUS` | 400 | Invalid status value |

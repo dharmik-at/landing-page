@@ -1,0 +1,223 @@
+---
+title: "Google Drive"
+description: "Sync documents from Google Drive"
+---
+
+## Overview
+
+The **Google Drive** connector allows you to ingest documents directly from Google Drive folders using OAuth2 authentication.
+
+## Features
+
+<CardGroup cols={2}>
+  <Card title="OAuth2 Authentication" icon="key">
+    Secure Google account authentication
+  </Card>
+  <Card title="Folder Sync" icon="folder">
+    Sync entire folders and subfolders
+  </Card>
+  <Card title="Multiple Formats" icon="file">
+    Support for Docs, Sheets, PDFs, and more
+  </Card>
+  <Card title="Scheduled Sync" icon="clock">
+    Automatic periodic synchronization
+  </Card>
+</CardGroup>
+
+## Prerequisites
+
+Before using Google Drive connector, you need:
+
+1. **Google Cloud Project** with Drive API enabled
+2. **OAuth2 Credentials** (Client ID and Secret)
+3. **Configured Redirect URI**
+
+## Setup
+
+### Step 1: Create Google Cloud Project
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing
+3. Enable the **Google Drive API**
+
+### Step 2: Create OAuth Credentials
+
+1. Go to **APIs & Services → Credentials**
+2. Click **Create Credentials → OAuth client ID**
+3. Select **Web application**
+4. Add authorized redirect URI:
+   ```
+   http://localhost:3000/api/google-services/oauth2callback
+   ```
+5. Save your **Client ID** and **Client Secret**
+
+### Step 3: Configure Environment
+
+Add to your `.env` file:
+
+```env
+GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-client-secret
+GOOGLE_REDIRECT_URI=http://localhost:3000/api/google-services/oauth2callback
+```
+
+## OAuth Flow
+
+### 1. Get Authorization URL
+
+```bash
+curl http://localhost:3000/api/google-services/auth-url \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+Response:
+```json
+{
+  "authUrl": "https://accounts.google.com/o/oauth2/v2/auth?..."
+}
+```
+
+### 2. User Authorization
+
+Redirect the user to the `authUrl`. They will:
+1. Sign in to their Google account
+2. Grant access to Google Drive
+3. Be redirected back with an authorization code
+
+### 3. Handle Callback
+
+The callback is handled automatically at `/api/google-services/oauth2callback`.
+
+## Configuration
+
+### Google Drive Config
+
+```json
+{
+  "folderId": "1A2B3C4D5E6F7G8H9I0J",
+  "includeSubfolders": true,
+  "fileTypes": ["application/pdf", "application/vnd.google-apps.document"],
+  "maxFiles": 500
+}
+```
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `folderId` | String | Required | Google Drive folder ID |
+| `includeSubfolders` | Boolean | true | Include files from subfolders |
+| `fileTypes` | Array | All | MIME types to include |
+| `maxFiles` | Integer | 1000 | Maximum files per sync |
+
+## Supported File Types
+
+| Google Format | Exported As |
+|--------------|-------------|
+| Google Docs | PDF |
+| Google Sheets | XLSX |
+| Google Slides | PDF |
+| Native PDF | PDF (direct) |
+| Word Documents | PDF |
+| Images | PNG/JPEG |
+
+<Note>
+  Google Workspace files (Docs, Sheets, Slides) are automatically exported to compatible formats.
+</Note>
+
+## Finding the Folder ID
+
+The folder ID is in the Google Drive URL:
+
+```
+https://drive.google.com/drive/folders/1A2B3C4D5E6F7G8H9I0J
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+                                        This is the folder ID
+```
+
+## Creating Google Drive Config
+
+```bash
+curl -X POST http://localhost:3000/api/v2/connector-configs \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Engineering Docs Folder",
+    "connectorTypeId": 3,
+    "config": {
+      "folderId": "1A2B3C4D5E6F7G8H9I0J",
+      "includeSubfolders": true
+    }
+  }'
+```
+
+## Executing a Sync
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Scheduling Sync
+
+Keep your Knowledge Base updated with scheduled syncs:
+
+```json
+{
+  "scheduleConfig": {
+    "enable_automation": true,
+    "interval_type": "Daily",
+    "interval_time": "06:00",
+    "timezone": "UTC"
+  }
+}
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Use dedicated folders">
+    Create a specific folder in Google Drive for documents you want to ingest, rather than syncing your entire drive.
+  </Accordion>
+  
+  <Accordion title="Organize by topic">
+    Map different folders to different Knowledge Bases:
+    - `/IngestIQ/Engineering` → Engineering KB
+    - `/IngestIQ/Marketing` → Marketing KB
+  </Accordion>
+  
+  <Accordion title="Handle permissions carefully">
+    Ensure the authenticated Google account has read access to all folders you want to sync.
+  </Accordion>
+</AccordionGroup>
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `AUTH_EXPIRED` | OAuth token expired | Re-authenticate via auth flow |
+| `FOLDER_NOT_FOUND` | Invalid folder ID | Verify folder ID and permissions |
+| `QUOTA_EXCEEDED` | Google API rate limit | Reduce sync frequency |
+| `ACCESS_DENIED` | Insufficient permissions | Check folder sharing settings |
+
+## Token Management
+
+OAuth tokens are stored securely and refreshed automatically. If you need to re-authenticate:
+
+```bash
+curl -X DELETE http://localhost:3000/api/google-services/disconnect \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+Then repeat the OAuth flow.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Pipelines" icon="arrow-right" href="/core-concepts/pipelines">
+    Configure Google Drive pipelines
+  </Card>
+  <Card title="Configuration" icon="gear" href="/self-hosting/configuration">
+    Environment variables reference
+  </Card>
+</CardGroup>

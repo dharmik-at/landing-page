@@ -1,0 +1,252 @@
+---
+title: "Custom Prompts"
+description: "Fine-tune document parsing and metadata extraction"
+---
+
+## Overview
+
+Custom prompts let you control how IngestIQ parses your documents. You can customize:
+
+<CardGroup cols={2}>
+  <Card title="Parsing Prompts" icon="scissors">
+    How documents are chunked
+  </Card>
+  <Card title="Metadata Prompts" icon="tags">
+    What metadata is extracted
+  </Card>
+</CardGroup>
+
+## Parsing Prompts
+
+Parsing prompts guide the AI in how to break down your documents into chunks.
+
+### Setting a Parsing Prompt
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Technical Docs Pipeline",
+    "parsingPrompt": "Parse this technical documentation. Preserve all code blocks exactly. Keep function documentation with the code. Group related concepts together.",
+    ...
+  }'
+```
+
+### Example Prompts by Document Type
+
+<Tabs>
+  <Tab title="Technical Documentation">
+    ```text
+    Parse this technical documentation:
+    
+    1. Keep code blocks complete and unmodified
+    2. Group explanations with their code examples
+    3. Preserve command-line examples exactly
+    4. Keep API endpoints with their descriptions
+    5. Maintain hierarchical structure (h1 > h2 > h3)
+    ```
+  </Tab>
+  <Tab title="Legal Documents">
+    ```text
+    Parse this legal document:
+    
+    1. Keep each clause as a complete unit
+    2. Preserve section and subsection numbering
+    3. Extract all defined terms with definitions
+    4. Identify obligations, rights, and conditions
+    5. Keep references and cross-references intact
+    ```
+  </Tab>
+  <Tab title="Support/FAQ">
+    ```text
+    Parse this support document:
+    
+    1. Keep each Q&A as a single chunk
+    2. Preserve step-by-step instructions complete
+    3. Include troubleshooting context with solutions
+    4. Keep related topics together
+    ```
+  </Tab>
+  <Tab title="Research Papers">
+    ```text
+    Parse this research paper:
+    
+    1. Keep abstract as a single chunk
+    2. Preserve methodology descriptions completely
+    3. Keep findings with supporting data
+    4. Maintain references and citations
+    5. Include figure/table captions with data
+    ```
+  </Tab>
+</Tabs>
+
+## Metadata Extraction
+
+Enable automatic extraction of structured metadata from documents.
+
+### Enabling Metadata Extraction
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Docs with Metadata",
+    "isMetadataPrompt": true,
+    "metadataParsingPrompt": "Extract: title, author, date, keywords, summary (max 200 words)",
+    ...
+  }'
+```
+
+### Metadata Prompt Examples
+
+<Tabs>
+  <Tab title="Basic">
+    ```text
+    Extract the following metadata:
+    - title: Document title
+    - author: Author name
+    - date: Publication or creation date
+    - summary: Brief 2-3 sentence summary
+    ```
+  </Tab>
+  <Tab title="Technical">
+    ```text
+    Extract technical metadata:
+    - title: Document title
+    - version: Version number if present
+    - product: Product or service name
+    - category: Type of documentation
+    - api_version: API version if applicable
+    - keywords: Key terms (comma-separated)
+    ```
+  </Tab>
+  <Tab title="Business">
+    ```text
+    Extract business metadata:
+    - title: Document title
+    - department: Originating department
+    - date: Document date
+    - classification: Public/Internal/Confidential
+    - stakeholders: Key people mentioned
+    - summary: Executive summary (max 100 words)
+    ```
+  </Tab>
+</Tabs>
+
+### Metadata Response Format
+
+Extracted metadata is stored in the document:
+
+```json
+{
+  "id": "doc-uuid",
+  "filename": "api-guide.pdf",
+  "metadata": {
+    "title": "IngestIQ API Reference",
+    "author": "Engineering Team",
+    "version": "2.0",
+    "date": "2024-01-15",
+    "keywords": ["API", "REST", "authentication", "search"],
+    "summary": "Complete API reference for IngestIQ platform..."
+  }
+}
+```
+
+## Prompt Engineering Tips
+
+### Be Specific
+
+<IconCross /> **Too vague**:
+```text
+Parse this document nicely.
+```
+
+<IconCheck /> **Specific**:
+```text
+Parse this document by:
+1. Splitting at heading boundaries
+2. Keeping paragraphs together
+3. Preserving list items as units
+```
+
+### Use Numbered Instructions
+
+The AI follows numbered instructions more reliably:
+
+```text
+1. First, identify section headings
+2. Group content under each heading
+3. Keep code blocks with explanations
+4. Preserve table structure
+```
+
+### Include Examples
+
+For metadata extraction, show expected format:
+
+```text
+Extract metadata in this format:
+{
+  "title": "...",
+  "date": "YYYY-MM-DD",
+  "keywords": ["keyword1", "keyword2"]
+}
+```
+
+### Handle Edge Cases
+
+Specify what to do with edge cases:
+
+```text
+If no author is specified, use "Unknown".
+If date cannot be determined, omit the field.
+For multi-part documents, include part numbers.
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Test with sample documents">
+    Create test pipelines with different prompts:
+    ```bash
+    # Create test pipeline
+    # Upload sample doc
+    # Review chunks and metadata
+    # Iterate on prompts
+    ```
+  </Accordion>
+  
+  <Accordion title="Version your prompts">
+    Keep track of prompt changes in your pipeline descriptions or external docs.
+  </Accordion>
+  
+  <Accordion title="Start simple, add complexity">
+    Begin with basic prompts and add specificity based on results.
+  </Accordion>
+  
+  <Accordion title="Match prompts to content">
+    Use different pipelines for different document types, each with tailored prompts.
+  </Accordion>
+</AccordionGroup>
+
+## Common Issues
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Chunks too small | Overly aggressive splitting | Add "keep related content together" |
+| Missing code | Code not preserved | Add "preserve code blocks exactly" |
+| Wrong metadata | Ambiguous instructions | Use specific field names and formats |
+| Inconsistent results | Vague prompts | Use numbered, specific instructions |
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Semantic Chunking" icon="scissors" href="/ai-processing/semantic-chunking">
+    How chunking works
+  </Card>
+  <Card title="Pipelines" icon="arrow-right" href="/core-concepts/pipelines">
+    Configure pipelines with prompts
+  </Card>
+</CardGroup>

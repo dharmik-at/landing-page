@@ -1,0 +1,175 @@
+---
+title: "Authentication"
+description: "User authentication endpoints"
+---
+
+## Register
+
+Create a new user account.
+
+<ParamField path="email" type="string" required>
+  User's email address
+</ParamField>
+
+<ParamField path="password" type="string" required>
+  Password (minimum 8 characters)
+</ParamField>
+
+<ParamField path="name" type="string" required>
+  User's display name
+</ParamField>
+
+```bash
+curl -X POST http://localhost:3000/api/v2/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "securepassword123",
+    "name": "John Doe"
+  }'
+```
+
+### Response
+
+```json
+{
+  "user": {
+    "id": "user-uuid",
+    "email": "user@example.com",
+    "name": "John Doe"
+  },
+  "accessToken": "eyJhbGciOiJIUzI1NiIs...",
+  "refreshToken": "eyJhbGciOiJIUzI1NiIs..."
+}
+```
+
+---
+
+## Login
+
+Authenticate and receive tokens.
+
+<ParamField path="email" type="string" required>
+  User's email address
+</ParamField>
+
+<ParamField path="password" type="string" required>
+  User's password
+</ParamField>
+
+```bash
+curl -X POST http://localhost:3000/api/v2/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "securepassword123"
+  }'
+```
+
+### Response
+
+```json
+{
+  "user": {
+    "id": "user-uuid",
+    "email": "user@example.com",
+    "name": "John Doe"
+  },
+  "accessToken": "eyJhbGciOiJIUzI1NiIs...",
+  "refreshToken": "eyJhbGciOiJIUzI1NiIs..."
+}
+```
+
+---
+
+## Refresh Token
+
+Get a new access token using a refresh token.
+
+<ParamField path="refreshToken" type="string" required>
+  Valid refresh token
+</ParamField>
+
+```bash
+curl -X POST http://localhost:3000/api/v2/auth/refresh \
+  -H "Content-Type: application/json" \
+  -d '{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIs..."
+  }'
+```
+
+### Response
+
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIs...",
+  "refreshToken": "eyJhbGciOiJIUzI1NiIs..."
+}
+```
+
+---
+
+## Logout
+
+Invalidate the current session.
+
+```bash
+curl -X POST http://localhost:3000/api/v2/auth/logout \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+---
+
+## Get Current User
+
+Get the authenticated user's profile.
+
+```bash
+curl http://localhost:3000/api/v2/auth/me \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "user": {
+    "id": "user-uuid",
+    "email": "user@example.com",
+    "name": "John Doe",
+    "organizationId": "org-uuid",
+    "role": "owner",
+    "createdAt": "2024-01-28T12:00:00.000Z"
+  }
+}
+```
+
+---
+
+## Token Expiry
+
+| Token Type | Expiry |
+|------------|--------|
+| Access Token | 15 minutes |
+| Refresh Token | 7 days |
+
+<Note>
+  Access tokens expire quickly for security. Use refresh tokens to get new access tokens without re-authenticating.
+</Note>
+
+## Error Responses
+
+| Error | Status | Description |
+|-------|--------|-------------|
+| `INVALID_CREDENTIALS` | 401 | Wrong email or password |
+| `EMAIL_EXISTS` | 409 | Email already registered |
+| `TOKEN_EXPIRED` | 401 | Token has expired |
+| `INVALID_TOKEN` | 401 | Token is malformed or invalid |

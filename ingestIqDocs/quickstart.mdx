@@ -1,0 +1,159 @@
+---
+title: "Quick Start"
+description: "Get IngestIQ running in 5 minutes"
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+<CardGroup cols={2}>
+  <Card title="Node.js 18+" icon="node-js">
+    [Download Node.js](https://nodejs.org/)
+  </Card>
+  <Card title="Docker & Docker Compose" icon="docker">
+    [Download Docker](https://www.docker.com/products/docker-desktop/)
+  </Card>
+</CardGroup>
+
+You'll also need API keys for:
+- **OpenAI** - For embeddings ([Get API Key](https://platform.openai.com/api-keys))
+- **Google AI** - For document parsing ([Get API Key](https://aistudio.google.com/apikey))
+
+## Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/avesta-hq/ingestiq-backend.git
+cd ingestiq-backend
+```
+
+## Step 2: Configure Environment
+
+Copy the example environment file and add your API keys:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and set your API keys:
+
+```env
+# Required API Keys
+OPENAI_API_KEY=sk-your-openai-key
+GOOGLE_API_KEY=your-google-api-key
+
+# JWT Secrets (generate secure random strings)
+JWT_SECRET=your-super-secret-jwt-key
+JWT_REFRESH_SECRET=your-super-secret-refresh-key
+```
+
+<Warning>
+  Never commit your `.env` file to version control. It contains sensitive API keys.
+</Warning>
+
+## Step 3: Start Services with Docker
+
+Launch all services (PostgreSQL, Redis, NATS, MinIO):
+
+```bash
+docker compose up -d
+```
+
+This starts:
+- **PostgreSQL 16** with pgvector extension (ports 5432, 5433)
+- **Redis** for job queuing (port 6379)
+- **NATS** with JetStream for messaging (port 4222)
+- **MinIO** for S3-compatible storage (port 9000)
+- **Gotenberg** for document conversion (port 3001)
+
+## Step 4: Install Dependencies & Run Migrations
+
+```bash
+# Install Node.js dependencies
+npm install
+
+# Run database migrations
+npm run db:migrate
+
+# Seed initial data (AI models, connector types)
+npm run db:seed
+```
+
+## Step 5: Start the Server
+
+```bash
+npm run dev
+```
+
+<Check>
+  IngestIQ is now running at **http://localhost:3000**
+</Check>
+
+## Step 6: Verify Installation
+
+Check the health endpoint:
+
+```bash
+curl http://localhost:3000/api/health
+```
+
+Expected response:
+```json
+{
+  "status": "ok",
+  "timestamp": "2024-01-28T12:00:00.000Z"
+}
+```
+
+## Step 7: Explore the API
+
+Open the Swagger documentation in your browser:
+
+<Card title="Swagger API Docs" icon="book-open" href="http://localhost:3000/api/docs">
+  http://localhost:3000/api/docs
+</Card>
+
+## What's Next?
+
+<CardGroup cols={2}>
+  <Card title="Create a Knowledge Base" icon="database" href="/core-concepts/knowledge-bases">
+    Organize your documents into searchable collections
+  </Card>
+  <Card title="Set Up a Pipeline" icon="arrow-right" href="/core-concepts/pipelines">
+    Configure automated data ingestion workflows
+  </Card>
+  <Card title="Upload Documents" icon="upload" href="/connectors/file-upload">
+    Start ingesting PDFs, CSVs, and more
+  </Card>
+  <Card title="Search Your Data" icon="magnifying-glass" href="/api-reference/search">
+    Query your knowledge base with semantic search
+  </Card>
+</CardGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Docker services not starting">
+    Ensure Docker is running and you have enough memory allocated (minimum 4GB recommended).
+    
+    ```bash
+    docker compose logs
+    ```
+  </Accordion>
+  
+  <Accordion title="Database migration errors">
+    Ensure PostgreSQL is fully started before running migrations:
+    
+    ```bash
+    docker compose logs vectordb
+    # Wait for "database system is ready to accept connections"
+    npm run db:migrate
+    ```
+  </Accordion>
+  
+  <Accordion title="API key errors">
+    Verify your API keys are correct and have proper permissions:
+    - OpenAI: Ensure you have credits and API access enabled
+    - Google: Enable the Generative AI API in your Google Cloud project
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,199 @@
+---
+title: "Web Scraping"
+description: "Extract content from web pages using Crawl4AI"
+---
+
+## Overview
+
+The **Web Scraping** connector uses Crawl4AI to extract content from websites and ingest it into your Knowledge Base.
+
+## Features
+
+<CardGroup cols={2}>
+  <Card title="Smart Crawling" icon="spider">
+    Recursively crawl websites with configurable depth
+  </Card>
+  <Card title="Content Extraction" icon="file-lines">
+    Extract clean text from HTML pages
+  </Card>
+  <Card title="JavaScript Support" icon="js">
+    Handle dynamic JavaScript-rendered content
+  </Card>
+  <Card title="Sitemap Support" icon="sitemap">
+    Efficiently crawl using XML sitemaps
+  </Card>
+</CardGroup>
+
+## Configuration
+
+### Web Scraping Config
+
+```json
+{
+  "url": "https://docs.example.com",
+  "depth": 2,
+  "maxPages": 100,
+  "includePatterns": ["/docs/*"],
+  "excludePatterns": ["/blog/*", "/changelog/*"],
+  "waitForJs": true,
+  "timeout": 30000
+}
+```
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `url` | String | Required | Start URL for crawling |
+| `depth` | Integer | 2 | How many levels deep to crawl |
+| `maxPages` | Integer | 100 | Maximum pages to crawl |
+| `includePatterns` | Array | [] | URL patterns to include |
+| `excludePatterns` | Array | [] | URL patterns to exclude |
+| `waitForJs` | Boolean | false | Wait for JavaScript to render |
+| `timeout` | Integer | 30000 | Request timeout in ms |
+
+## Creating Web Scrape Config
+
+```bash
+curl -X POST http://localhost:3000/api/v2/connector-configs \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Product Documentation Scraper",
+    "connectorTypeId": 2,
+    "config": {
+      "url": "https://docs.myproduct.com",
+      "depth": 3,
+      "maxPages": 200,
+      "includePatterns": ["/docs/*", "/guides/*"],
+      "excludePatterns": ["/api/*"]
+    }
+  }'
+```
+
+## Executing a Web Scrape
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+The pipeline will:
+1. Start from the configured URL
+2. Crawl linked pages up to the specified depth
+3. Extract text content from each page
+4. Process and embed the content
+
+## Content Extraction
+
+### What Gets Extracted
+
+- Main content text
+- Headings and structure
+- Lists and tables
+- Code blocks
+- Image alt text
+
+### What Gets Filtered
+
+- Navigation menus
+- Footers and headers
+- Advertisements
+- Cookie banners
+- Duplicate content
+
+## URL Patterns
+
+### Include Patterns
+
+Only crawl URLs matching these patterns:
+
+```json
+{
+  "includePatterns": [
+    "/docs/*",      // All docs pages
+    "/api/*",       // API reference
+    "/guides/v2/*"  // Only v2 guides
+  ]
+}
+```
+
+### Exclude Patterns
+
+Skip URLs matching these patterns:
+
+```json
+{
+  "excludePatterns": [
+    "/blog/*",       // Skip blog posts
+    "/changelog/*",  // Skip changelog
+    "*.pdf",         // Skip PDF files (use file upload instead)
+    "*?*"            // Skip URLs with query params
+  ]
+}
+```
+
+## Scheduling Web Scrapes
+
+Schedule regular crawls to keep content up-to-date:
+
+```json
+{
+  "scheduleConfig": {
+    "enable_automation": true,
+    "interval_type": "Weekly",
+    "interval_time": "02:00",
+    "day_of_week": "Sunday",
+    "timezone": "UTC"
+  }
+}
+```
+
+<Tip>
+  Schedule web scrapes during off-peak hours to minimize impact on the target website.
+</Tip>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Respect robots.txt">
+    Always check the website's robots.txt and terms of service before scraping. Configure excludePatterns accordingly.
+  </Accordion>
+  
+  <Accordion title="Use reasonable limits">
+    Start with conservative settings:
+    - `depth: 2-3` for most sites
+    - `maxPages: 100-500` initially
+    - Increase after verifying results
+  </Accordion>
+  
+  <Accordion title="Target specific sections">
+    Use includePatterns to focus on relevant content areas rather than crawling entire sites.
+  </Accordion>
+  
+  <Accordion title="Handle dynamic content">
+    Set `waitForJs: true` for sites using React, Vue, or other JavaScript frameworks.
+  </Accordion>
+</AccordionGroup>
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `CRAWL_TIMEOUT` | Page took too long | Increase timeout or skip slow pages |
+| `ACCESS_DENIED` | 403/401 response | Check if site requires authentication |
+| `RATE_LIMITED` | Too many requests | Add delays between requests |
+| `CONTENT_EMPTY` | No text extracted | Check if site requires JavaScript |
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Pipelines" icon="arrow-right" href="/core-concepts/pipelines">
+    Configure scheduled scraping
+  </Card>
+  <Card title="Documents" icon="file" href="/core-concepts/documents">
+    View scraped page documents
+  </Card>
+</CardGroup>

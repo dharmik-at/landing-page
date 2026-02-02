@@ -1,0 +1,145 @@
+---
+title: "Documents"
+description: "Document management endpoints"
+---
+
+## List Documents
+
+Get all documents in a knowledge base.
+
+```bash
+curl "http://localhost:3000/api/v2/knowledgebases/{kbId}/documents?page=1&limit=20" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Query Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `page` | integer | 1 | Page number |
+| `limit` | integer | 20 | Items per page |
+| `status` | string | - | Filter by status |
+| `pipelineId` | string | - | Filter by pipeline |
+
+### Response
+
+```json
+{
+  "documents": [
+    {
+      "id": "doc-uuid",
+      "filename": "product-guide.pdf",
+      "status": "processed",
+      "size": 1048576,
+      "pageCount": 25,
+      "pipelineId": "pipeline-uuid",
+      "createdAt": "2024-01-28T12:00:00.000Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total": 150
+  }
+}
+```
+
+---
+
+## Get Document
+
+Get document details.
+
+```bash
+curl http://localhost:3000/api/v2/knowledgebases/{kbId}/documents/{docId} \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "id": "doc-uuid",
+  "fileId": "s3-file-id",
+  "filename": "product-guide.pdf",
+  "author": "Product Team",
+  "size": 1048576,
+  "pageCount": 25,
+  "status": "processed",
+  "metadata": {
+    "title": "Product Guide",
+    "keywords": ["guide", "product", "documentation"],
+    "processingCompleted": "2024-01-28T12:05:00.000Z"
+  },
+  "pipelineId": "pipeline-uuid",
+  "knowledgebaseId": "kb-uuid",
+  "createdAt": "2024-01-28T12:00:00.000Z",
+  "updatedAt": "2024-01-28T12:05:00.000Z"
+}
+```
+
+---
+
+## Reprocess Document
+
+Re-run processing on a document.
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/documents/{docId}/reprocess \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "documentId": "doc-uuid",
+  "status": "reprocessing",
+  "message": "Document queued for reprocessing"
+}
+```
+
+<Note>
+  Reprocessing replaces all existing embeddings for the document.
+</Note>
+
+---
+
+## Delete Document
+
+Delete a document and its embeddings.
+
+```bash
+curl -X DELETE http://localhost:3000/api/v2/knowledgebases/{kbId}/documents/{docId} \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "message": "Document deleted successfully"
+}
+```
+
+---
+
+## Document Status Values
+
+| Status | Description |
+|--------|-------------|
+| `uploaded` | File received, awaiting processing |
+| `processing` | Currently being processed |
+| `processed` | Successfully processed |
+| `failed` | Processing failed |
+| `reprocessing` | Being reprocessed |
+
+---
+
+## Error Responses
+
+| Error | Status | Description |
+|-------|--------|-------------|
+| `DOCUMENT_NOT_FOUND` | 404 | Document not found |
+| `REPROCESS_FAILED` | 500 | Reprocessing failed |
+| `DOCUMENT_PROCESSING` | 409 | Document already processing |

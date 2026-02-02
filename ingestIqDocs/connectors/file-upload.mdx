@@ -1,0 +1,147 @@
+---
+title: "File Upload"
+description: "Upload documents directly via API"
+---
+
+## Overview
+
+The **File Upload** connector allows you to upload documents directly to IngestIQ via the REST API. This is the simplest way to ingest documents.
+
+## Supported File Types
+
+| Type | Extensions | Max Size |
+|------|------------|----------|
+| PDF | `.pdf` | 100MB |
+| CSV | `.csv` | 50MB |
+| Excel | `.xlsx`, `.xls` | 50MB |
+| Word | `.docx` | 50MB |
+| Images | `.png`, `.jpg`, `.jpeg` | 20MB |
+
+## Uploading Files
+
+### Single File Upload
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -F "files=@/path/to/document.pdf"
+```
+
+### Multiple Files
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -F "files=@document1.pdf" \
+  -F "files=@document2.pdf" \
+  -F "files=@data.csv"
+```
+
+## Response
+
+```json
+{
+  "executionId": "exec-uuid",
+  "status": "processing",
+  "documentsQueued": 3,
+  "message": "Pipeline execution started"
+}
+```
+
+## File Processing Details
+
+### PDF Processing
+
+PDFs are processed with full text extraction:
+- Text content is extracted page by page
+- Page numbers are preserved in metadata
+- Charts and tables are processed via Gemini Vision
+- Embedded images are extracted for OCR
+
+<Note>
+  Scanned PDFs (image-only) are automatically detected and processed with OCR.
+</Note>
+
+### CSV/Excel Processing
+
+Structured data is handled specially:
+- Each row can become a separate chunk
+- Headers are preserved as context
+- Column names are included in metadata
+- Large files are streamed for memory efficiency
+
+### Word Documents
+
+Word documents are converted to PDF first (via Gotenberg), then processed:
+- Formatting is preserved where possible
+- Images and charts are included
+- TOC and headers are extracted
+
+## Configuration
+
+### Connector Config Schema
+
+```json
+{
+  "maxFileSize": "100MB",
+  "allowedFormats": ["pdf", "csv", "xlsx", "docx"],
+  "processImages": true,
+  "extractTables": true
+}
+```
+
+### Creating File Upload Config
+
+```bash
+curl -X POST http://localhost:3000/api/v2/connector-configs \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Standard File Upload",
+    "connectorTypeId": 1,
+    "config": {
+      "maxFileSize": "50MB",
+      "allowedFormats": ["pdf", "csv", "xlsx"]
+    }
+  }'
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Optimize PDF size">
+    Compress large PDFs before upload to reduce processing time:
+    - Use PDF compression tools
+    - Remove unnecessary images
+    - Split very large documents
+  </Accordion>
+  
+  <Accordion title="Use consistent naming">
+    Name files descriptively for better organization:
+    - ✅ `q4-2024-financial-report.pdf`
+    - ❌ `doc123.pdf`
+  </Accordion>
+  
+  <Accordion title="Batch similar documents">
+    Upload related documents in a single execution for consistent processing.
+  </Accordion>
+</AccordionGroup>
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `FILE_TOO_LARGE` | Exceeds max size | Compress or split the file |
+| `UNSUPPORTED_FORMAT` | File type not allowed | Check allowed formats |
+| `EXTRACTION_FAILED` | Cannot read content | Verify file isn't corrupted |
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Pipelines" icon="arrow-right" href="/core-concepts/pipelines">
+    Configure file upload pipelines
+  </Card>
+  <Card title="Documents" icon="file" href="/core-concepts/documents">
+    Track document processing status
+  </Card>
+</CardGroup>

@@ -1,0 +1,102 @@
+---
+title: "IngestIQ"
+description: "The complete RAG platform for AI application developers"
+---
+
+<img
+  src="/images/hero-banner.png"
+  alt="IngestIQ Platform"
+  style={{ borderRadius: '0.5rem' }}
+/>
+
+## What is IngestIQ?
+
+IngestIQ is a comprehensive **Retrieval-Augmented Generation (RAG)** platform that enables AI application developers to easily integrate enterprise data sources without building RAG infrastructure from scratch.
+
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
+    Get up and running in 5 minutes with Docker
+  </Card>
+  <Card title="Core Concepts" icon="book" href="/core-concepts/knowledge-bases">
+    Understand Knowledge Bases, Pipelines, and Documents
+  </Card>
+  <Card title="Data Connectors" icon="plug" href="/connectors/file-upload">
+    Connect files, web pages, Google Drive, and video
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference/introduction">
+    Explore the complete REST API documentation
+  </Card>
+</CardGroup>
+
+## Key Features
+
+<AccordionGroup>
+  <Accordion title="Multi-format Document Processing" icon="file-lines">
+    Process PDFs, CSV, Excel, and video content with intelligent parsing powered by Google Gemini AI.
+  </Accordion>
+  
+  <Accordion title="Semantic Chunking" icon="scissors">
+    AI-powered document chunking that understands context and meaning, not just character counts.
+  </Accordion>
+  
+  <Accordion title="Vector Search" icon="magnifying-glass">
+    High-performance semantic search using OpenAI embeddings and PostgreSQL with pgvector.
+  </Accordion>
+  
+  <Accordion title="MCP Integration" icon="puzzle-piece">
+    Native Model Context Protocol (MCP) server for seamless AI tool integration.
+  </Accordion>
+  
+  <Accordion title="Scheduled Pipelines" icon="clock">
+    Automated data ingestion with cron-based scheduling via BullMQ.
+  </Accordion>
+  
+  <Accordion title="Multi-tenant Architecture" icon="building">
+    Organizations with role-based access control for enterprise deployments.
+  </Accordion>
+</AccordionGroup>
+
+## Data Connectors
+
+IngestIQ supports multiple data sources out of the box:
+
+| Connector | Description | Status |
+|-----------|-------------|--------|
+| **File Upload** | PDF, CSV, Excel direct uploads | Available |
+| **Web Scraping** | Crawl4AI integration for web content | Available |
+| **Google Drive** | OAuth2-based document sync | Available |
+| **Video/YouTube** | FFmpeg + Whisper transcription | Available |
+
+## Tech Stack
+
+<CardGroup cols={3}>
+  <Card title="Node.js 18+" icon="node-js">
+    TypeScript with Express.js
+  </Card>
+  <Card title="PostgreSQL 16" icon="database">
+    With pgvector extension
+  </Card>
+  <Card title="NATS JetStream" icon="bolt">
+    Event-driven messaging
+  </Card>
+  <Card title="BullMQ + Redis" icon="clock">
+    Job scheduling
+  </Card>
+  <Card title="MinIO / S3" icon="hard-drive">
+    Object storage
+  </Card>
+  <Card title="OpenAI + Gemini" icon="wand-magic-sparkles">
+    AI processing
+  </Card>
+</CardGroup>
+
+## Getting Help
+
+<CardGroup cols={2}>
+  <Card title="GitHub Issues" icon="github" href="https://github.com/avesta-hq/ingestiq-backend/issues">
+    Report bugs or request features
+  </Card>
+  <Card title="Twitter/X" icon="x-twitter" href="https://x.com/avestalabs">
+    Follow for updates
+  </Card>
+</CardGroup>

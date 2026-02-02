@@ -1,0 +1,149 @@
+---
+title: "Search"
+description: "Semantic search endpoints"
+---
+
+## Semantic Search
+
+Search across documents in a knowledge base using natural language.
+
+<ParamField path="knowledgebaseId" type="string" required>
+  Knowledge base to search
+</ParamField>
+
+<ParamField path="query" type="string" required>
+  Natural language search query
+</ParamField>
+
+<ParamField path="topK" type="integer">
+  Number of results to return (default: 10)
+</ParamField>
+
+<ParamField path="scoreThreshold" type="number">
+  Minimum similarity score (0-1, default: 0.5)
+</ParamField>
+
+<ParamField path="filter" type="object">
+  Metadata filters
+</ParamField>
+
+```bash
+curl -X POST http://localhost:3000/api/v2/documents/search \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "knowledgebaseId": "kb-uuid",
+    "query": "How do I configure authentication?",
+    "topK": 5,
+    "scoreThreshold": 0.6
+  }'
+```
+
+### Response
+
+```json
+{
+  "results": [
+    {
+      "id": "chunk-uuid",
+      "documentId": "doc-uuid",
+      "filename": "auth-guide.pdf",
+      "content": "Authentication is configured by setting the JWT_SECRET environment variable...",
+      "score": 0.89,
+      "metadata": {
+        "page": 5,
+        "section": "Configuration"
+      }
+    },
+    {
+      "id": "chunk-uuid-2",
+      "documentId": "doc-uuid-2",
+      "filename": "security.pdf",
+      "content": "For secure authentication, use strong passwords and enable 2FA...",
+      "score": 0.72,
+      "metadata": {
+        "page": 12,
+        "section": "Security Best Practices"
+      }
+    }
+  ],
+  "query": "How do I configure authentication?",
+  "totalResults": 2
+}
+```
+
+---
+
+## Filtered Search
+
+Filter results by document metadata.
+
+```bash
+curl -X POST http://localhost:3000/api/v2/documents/search \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "knowledgebaseId": "kb-uuid",
+    "query": "deployment procedures",
+    "topK": 10,
+    "filter": {
+      "department": "Engineering",
+      "documentType": "runbook"
+    }
+  }'
+```
+
+<Note>
+  Filters match against document metadata extracted during processing.
+</Note>
+
+---
+
+## Understanding Scores
+
+The `score` field indicates semantic similarity:
+
+| Score | Interpretation |
+|-------|----------------|
+| 0.90+ | Very high relevance |
+| 0.75-0.89 | High relevance |
+| 0.60-0.74 | Moderate relevance |
+| 0.50-0.59 | Low relevance |
+| &lt;0.50 | Minimal relevance |
+
+---
+
+## Search Tips
+
+<AccordionGroup>
+  <Accordion title="Use natural language">
+    ```
+    ✅ "How do I reset a user's password?"
+    ❌ "password reset user"
+    ```
+  </Accordion>
+  
+  <Accordion title="Be specific">
+    ```
+    ✅ "Configure JWT authentication in Node.js"
+    ❌ "authentication"
+    ```
+  </Accordion>
+  
+  <Accordion title="Include context">
+    ```
+    ✅ "Error handling for API rate limits"
+    ❌ "error handling"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Error Responses
+
+| Error | Status | Description |
+|-------|--------|-------------|
+| `KB_NOT_FOUND` | 404 | Knowledge base not found |
+| `EMPTY_QUERY` | 400 | Query cannot be empty |
+| `EMBEDDING_FAILED` | 500 | Failed to generate query embedding |

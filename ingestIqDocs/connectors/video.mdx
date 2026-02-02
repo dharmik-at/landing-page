@@ -1,0 +1,227 @@
+---
+title: "Video & Audio"
+description: "Transcribe video and audio content"
+---
+
+## Overview
+
+The **Video connector** enables ingestion of video and audio content by extracting audio and transcribing it using OpenAI's Whisper model.
+
+## Features
+
+<CardGroup cols={2}>
+  <Card title="YouTube Support" icon="youtube">
+    Direct YouTube URL transcription
+  </Card>
+  <Card title="Video URLs" icon="video">
+    Any publicly accessible video URL
+  </Card>
+  <Card title="Audio Files" icon="headphones">
+    MP3, WAV, and other audio formats
+  </Card>
+  <Card title="Whisper AI" icon="wand-magic-sparkles">
+    High-accuracy transcription
+  </Card>
+</CardGroup>
+
+## Supported Sources
+
+| Source | Example |
+|--------|---------|
+| **YouTube** | `https://youtube.com/watch?v=...` |
+| **Video URL** | `https://example.com/video.mp4` |
+| **Audio URL** | `https://example.com/audio.mp3` |
+| **Uploaded Audio** | MP3, WAV, M4A files |
+| **Uploaded Video** | MP4, MOV, WebM files |
+
+## How It Works
+
+```mermaid
+graph LR
+    A[Video/Audio Source] --> B[Download/Extract]
+    B --> C[Audio Extraction]
+    C --> D[Whisper Transcription]
+    D --> E[Text Processing]
+    E --> F[Embedding & Storage]
+```
+
+1. **Download**: Video/audio is downloaded from URL
+2. **Extract**: FFmpeg extracts audio from video
+3. **Transcribe**: OpenAI Whisper converts speech to text
+4. **Process**: Transcription is chunked and embedded
+
+## Configuration
+
+### Video Connector Config
+
+```json
+{
+  "maxDuration": 10800,
+  "language": "en",
+  "whisperModel": "whisper-1",
+  "generateTimestamps": true
+}
+```
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `maxDuration` | Integer | 10800 | Max duration in seconds (3 hours) |
+| `language` | String | auto | Language hint for transcription |
+| `whisperModel` | String | whisper-1 | OpenAI Whisper model |
+| `generateTimestamps` | Boolean | true | Include timestamps in output |
+
+## Environment Variables
+
+```env
+# Video Processing Configuration
+VIDEO_MAX_SIZE_MB=500
+VIDEO_MAX_DURATION_SECONDS=10800
+AUDIO_EXTRACTION_TIMEOUT_MS=60000
+FFMPEG_PATH=/usr/bin/ffmpeg
+
+# URL Download Configuration
+URL_DOWNLOAD_MAX_SIZE=524288000
+URL_DOWNLOAD_TIMEOUT=120000
+```
+
+## Processing YouTube Videos
+
+### Via Pipeline Execution
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "urls": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
+  }'
+```
+
+### Batch YouTube Processing
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "urls": [
+      "https://www.youtube.com/watch?v=video1",
+      "https://www.youtube.com/watch?v=video2",
+      "https://www.youtube.com/watch?v=video3"
+    ]
+  }'
+```
+
+## Processing Audio Files
+
+### Upload Audio
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -F "files=@podcast-episode.mp3"
+```
+
+## Transcription Output
+
+The transcription includes:
+
+```json
+{
+  "text": "Full transcription text...",
+  "metadata": {
+    "duration": 1800,
+    "language": "en",
+    "source": "youtube",
+    "videoTitle": "Product Demo 2024",
+    "timestamps": [
+      { "start": 0, "end": 30, "text": "Introduction..." },
+      { "start": 30, "end": 60, "text": "Feature overview..." }
+    ]
+  }
+}
+```
+
+## Requirements
+
+<Warning>
+  Video processing requires FFmpeg to be installed. This is included in the Docker image.
+</Warning>
+
+### System Requirements
+
+- **FFmpeg**: For audio extraction
+- **Memory**: ~500MB per hour of video
+- **Storage**: Temporary storage for downloaded files
+
+### Docker Setup
+
+FFmpeg is pre-installed in the IngestIQ Docker image:
+
+```dockerfile
+RUN apt-get update && apt-get install -y ffmpeg
+```
+
+## Limits
+
+| Limit | Default | Environment Variable |
+|-------|---------|---------------------|
+| Max file size | 500MB | `VIDEO_MAX_SIZE_MB` |
+| Max duration | 3 hours | `VIDEO_MAX_DURATION_SECONDS` |
+| Download timeout | 2 minutes | `URL_DOWNLOAD_TIMEOUT` |
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Process shorter videos">
+    Longer videos take more time and resources. Consider:
+    - Splitting long videos into segments
+    - Processing key sections only
+    - Using timestamps to locate relevant content
+  </Accordion>
+  
+  <Accordion title="Use language hints">
+    Specify the language if known for better accuracy:
+    ```json
+    { "language": "en" }
+    ```
+  </Accordion>
+  
+  <Accordion title="Enable timestamps">
+    Timestamps help users locate information in the original video:
+    ```json
+    { "generateTimestamps": true }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `DOWNLOAD_FAILED` | Cannot download video | Check URL accessibility |
+| `DURATION_EXCEEDED` | Video too long | Increase limit or split video |
+| `AUDIO_EXTRACTION_FAILED` | FFmpeg error | Check FFmpeg installation |
+| `TRANSCRIPTION_FAILED` | Whisper API error | Check OpenAI API key and quota |
+| `UNSUPPORTED_FORMAT` | Unknown format | Use supported format |
+
+## Cost Considerations
+
+<Note>
+  OpenAI Whisper charges based on audio duration. Current pricing: ~$0.006/minute.
+  
+  A 1-hour video costs approximately $0.36 to transcribe.
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Pipelines" icon="arrow-right" href="/core-concepts/pipelines">
+    Configure video pipelines
+  </Card>
+  <Card title="Configuration" icon="gear" href="/self-hosting/configuration">
+    Environment variables
+  </Card>
+</CardGroup>

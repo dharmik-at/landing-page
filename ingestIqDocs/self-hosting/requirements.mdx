@@ -1,0 +1,140 @@
+---
+title: "Requirements"
+description: "System requirements for self-hosting IngestIQ"
+---
+
+## System Requirements
+
+### Minimum Requirements
+
+| Resource | Minimum | Recommended |
+|----------|---------|-------------|
+| **CPU** | 2 cores | 4+ cores |
+| **RAM** | 4 GB | 8+ GB |
+| **Storage** | 20 GB | 100+ GB |
+| **OS** | Linux (x86_64) | Ubuntu 22.04+, Debian 12+ |
+
+### For Production
+
+| Resource | Recommended |
+|----------|-------------|
+| **CPU** | 8+ cores |
+| **RAM** | 16+ GB |
+| **Storage** | 500+ GB SSD |
+| **Network** | 1 Gbps |
+
+## Software Requirements
+
+### Required
+
+<CardGroup cols={2}>
+  <Card title="Docker" icon="docker">
+    Docker 20.10+ and Docker Compose v2
+  </Card>
+  <Card title="Node.js" icon="node-js">
+    Node.js 18+ (for local development)
+  </Card>
+</CardGroup>
+
+### Optional
+
+- **PostgreSQL client** - Direct database access
+- **Redis CLI** - Queue monitoring
+- **nats-cli** - Event debugging
+
+## API Keys Required
+
+You'll need API keys from:
+
+| Service | Purpose | Get Key |
+|---------|---------|---------|
+| **OpenAI** | Embeddings | [platform.openai.com](https://platform.openai.com/api-keys) |
+| **Google AI** | Document parsing | [aistudio.google.com](https://aistudio.google.com/apikey) |
+
+### Optional API Keys
+
+| Service | Purpose |
+|---------|---------|
+| **Google OAuth** | Google Drive connector |
+| **Firecrawl** | Web scraping (optional) |
+
+## Network Requirements
+
+### Ports
+
+| Port | Service | Required |
+|------|---------|----------|
+| 3000 | API Server | Yes |
+| 5432 | PostgreSQL | Internal |
+| 5433 | Vector DB | Internal |
+| 6379 | Redis | Internal |
+| 4222 | NATS | Internal |
+| 9000 | MinIO | Internal |
+| 3001 | Gotenberg | Internal |
+
+### External Access
+
+- **Outbound**: Access to OpenAI API, Google AI API
+- **Inbound**: Port 3000 for API access
+
+## Storage Requirements
+
+### Database Storage
+
+| Component | Size Estimate |
+|-----------|---------------|
+| Management DB | 1-5 GB |
+| Vector DB | 10-100+ GB (depends on document count) |
+
+### Object Storage
+
+| Content Type | Size Estimate |
+|--------------|---------------|
+| Uploaded documents | Varies |
+| Processed files | ~2x original size |
+
+<Note>
+  Vector storage grows with document count. Plan for approximately 10KB per document chunk.
+</Note>
+
+## Docker Compose Services
+
+IngestIQ's `docker-compose.yml` runs:
+
+| Service | Image | Purpose |
+|---------|-------|---------|
+| `vectordb` | postgres:16 + pgvector | Vector storage |
+| `redis` | redis:7-alpine | Job queue |
+| `nats` | nats:2.10 | Event messaging |
+| `minio` | minio/minio | S3 storage |
+| `gotenberg` | gotenberg:8 | Document conversion |
+
+## Quick Check
+
+Verify your system is ready:
+
+```bash
+# Check Docker
+docker --version
+docker compose version
+
+# Check Node.js
+node --version  # Should be 18+
+
+# Check available memory
+free -h
+
+# Check disk space
+df -h
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Configuration" icon="gear" href="/self-hosting/configuration">
+    Set up environment variables
+  </Card>
+  <Card title="Deployment" icon="rocket" href="/self-hosting/deployment">
+    Deploy with Docker
+  </Card>
+</CardGroup>

@@ -1,0 +1,155 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "IngestIQ",
+  "colors": {
+    "primary": "#16A34A",
+    "light": "#22C55E",
+    "dark": "#15803D"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "index",
+              "quickstart",
+              "development"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Core Concepts",
+        "groups": [
+          {
+            "group": "Platform",
+            "pages": [
+              "core-concepts/knowledge-bases",
+              "core-concepts/pipelines",
+              "core-concepts/documents",
+              "core-concepts/connectors"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Data Connectors",
+        "groups": [
+          {
+            "group": "Source Connectors",
+            "pages": [
+              "connectors/file-upload",
+              "connectors/web-scraping",
+              "connectors/google-drive",
+              "connectors/video"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "AI & Processing",
+        "groups": [
+          {
+            "group": "AI Configuration",
+            "pages": [
+              "ai-processing/ai-models",
+              "ai-processing/semantic-chunking",
+              "ai-processing/embeddings",
+              "ai-processing/custom-prompts"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "groups": [
+          {
+            "group": "MCP",
+            "pages": [
+              "integrations/mcp-server"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Endpoints",
+            "pages": [
+              "api-reference/authentication",
+              "api-reference/knowledge-bases",
+              "api-reference/pipelines",
+              "api-reference/documents",
+              "api-reference/search"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Self-Hosting",
+        "groups": [
+          {
+            "group": "Deployment",
+            "pages": [
+              "self-hosting/requirements",
+              "self-hosting/configuration",
+              "self-hosting/architecture",
+              "self-hosting/deployment"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "GitHub",
+          "href": "https://github.com/avesta-hq/ingestiq-backend",
+          "icon": "github"
+        },
+        {
+          "anchor": "Community",
+          "href": "https://x.com/avestalabs",
+          "icon": "x-twitter"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:admin@avestalabs.ai"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "/quickstart"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/avestalabs",
+      "github": "https://github.com/avesta-hq/ingestiq-backend",
+      "linkedin": "https://linkedin.com/company/avestalabs",
+      "youtube": "https://www.youtube.com/channel/UCHCxoLxwAy1FCXkdch7Ex0Q"
+    }
+  }
+}

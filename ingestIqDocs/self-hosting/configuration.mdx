@@ -1,0 +1,236 @@
+---
+title: "Configuration"
+description: "Environment variables reference"
+---
+
+## Environment File
+
+Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+## Required Variables
+
+### API Keys
+
+```env
+# OpenAI - Required for embeddings
+OPENAI_API_KEY=sk-your-openai-api-key
+
+# Google AI - Required for document parsing
+GOOGLE_API_KEY=your-google-api-key
+```
+
+### JWT Secrets
+
+```env
+# Generate secure random strings for production
+JWT_SECRET=your-super-secret-jwt-key-change-in-production
+JWT_REFRESH_SECRET=your-super-secret-refresh-key-change-in-production
+```
+
+<Warning>
+  Use strong, unique secrets in production. Generate with: `openssl rand -hex 32`
+</Warning>
+
+## Database Configuration
+
+### Management Database
+
+```env
+MANAGEMENT_DB_URL=postgres://postgres:postgres@vectordb:5432/ingestiq_management
+
+# Or use individual parameters
+MANAGEMENT_DB_HOST=vectordb
+MANAGEMENT_DB_PORT=5432
+MANAGEMENT_DB_NAME=ingestiq_management
+MANAGEMENT_DB_USER=postgres
+MANAGEMENT_DB_PASSWORD=postgres
+```
+
+### Vector Database
+
+```env
+VECTOR_DB_URL=postgres://postgres:postgres@vectordb:5432/ingestiq_vector_db
+
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_NAME=ingestiq_vector_db
+DB_HOST=vectordb
+DB_PORT=5432
+```
+
+## Service Configuration
+
+### Server
+
+```env
+NODE_ENV=development  # or 'production'
+PORT=3000
+```
+
+### NATS (Messaging)
+
+```env
+NATS_URL=nats://nats:4222
+```
+
+### Redis (Job Queue)
+
+```env
+REDIS_URL=redis://redis:6379
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=
+REDIS_DB=0
+```
+
+### S3 Storage (MinIO)
+
+```env
+S3_ENDPOINT=http://minio:9000
+S3_REGION=us-east-1
+S3_BUCKET=ingestiq-documents
+S3_ACCESS_KEY=minioadmin
+S3_SECRET_KEY=minioadmin
+STORAGE_PROVIDER=s3
+```
+
+For AWS S3:
+```env
+S3_ENDPOINT=https://s3.amazonaws.com
+S3_REGION=us-east-1
+S3_BUCKET=your-bucket-name
+S3_ACCESS_KEY=your-aws-access-key
+S3_SECRET_KEY=your-aws-secret-key
+```
+
+## Feature Flags
+
+Enable/disable components:
+
+```env
+ENABLE_SCHEDULER=true
+ENABLE_DOCUMENT_PROCESSING=true
+ENABLE_METADATA=true
+ENABLE_API_GATEWAY=true
+ENABLE_ENTERPRISE_CONNECTORS=false
+```
+
+## Scheduler Configuration
+
+```env
+ENABLE_SCHEDULER=true
+SCHEDULER_CONCURRENCY=5
+SCHEDULER_DEFAULT_TIMEZONE=UTC
+SCHEDULER_JOB_RETENTION_DAYS=30
+SCHEDULER_QUEUE_NAME=pipeline-scheduler
+SCHEDULER_MAX_RETRY_ATTEMPTS=3
+SCHEDULER_RETRY_DELAY_MS=5000
+```
+
+## Model Configuration
+
+```env
+# Default models
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+GOOGLE_MODEL=gemini-1.5-flash
+```
+
+## Video Processing
+
+```env
+VIDEO_MAX_SIZE_MB=500
+VIDEO_MAX_DURATION_SECONDS=10800  # 3 hours
+AUDIO_EXTRACTION_TIMEOUT_MS=60000
+FFMPEG_PATH=/usr/bin/ffmpeg
+
+URL_DOWNLOAD_MAX_SIZE=524288000  # 500MB
+URL_DOWNLOAD_TIMEOUT=120000      # 2 minutes
+```
+
+## Google OAuth (Optional)
+
+Required for Google Drive connector:
+
+```env
+GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-client-secret
+GOOGLE_REDIRECT_URI=http://localhost:3000/api/google-services/oauth2callback
+```
+
+## MCP Server
+
+```env
+MCP_MAX_SERVERS=100
+MCP_MAX_IDLE_TIME=1800000     # 30 minutes
+MCP_CLEANUP_INTERVAL=300000   # 5 minutes
+```
+
+## Production Recommendations
+
+<AccordionGroup>
+  <Accordion title="Security">
+    ```env
+    NODE_ENV=production
+    JWT_SECRET=[32+ character random string]
+    JWT_REFRESH_SECRET=[32+ character random string]
+    ```
+  </Accordion>
+  
+  <Accordion title="Database">
+    ```env
+    # Use strong passwords
+    DB_PASSWORD=[strong-password]
+    
+    # Separate hosts for scalability
+    MANAGEMENT_DB_HOST=management-db.example.com
+    DB_HOST=vector-db.example.com
+    ```
+  </Accordion>
+  
+  <Accordion title="Storage">
+    ```env
+    # Use AWS S3 for production
+    S3_ENDPOINT=https://s3.amazonaws.com
+    S3_BUCKET=your-production-bucket
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Complete Example
+
+```env
+# Server
+NODE_ENV=production
+PORT=3000
+
+# API Keys
+OPENAI_API_KEY=sk-...
+GOOGLE_API_KEY=AIza...
+
+# JWT
+JWT_SECRET=your-production-jwt-secret-min-32-chars
+JWT_REFRESH_SECRET=your-production-refresh-secret-min-32-chars
+
+# Database
+VECTOR_DB_URL=postgres://user:pass@db-host:5432/ingestiq_vector
+MANAGEMENT_DB_URL=postgres://user:pass@db-host:5432/ingestiq_mgmt
+
+# Services
+NATS_URL=nats://nats-host:4222
+REDIS_URL=redis://redis-host:6379
+
+# Storage
+S3_ENDPOINT=https://s3.amazonaws.com
+S3_REGION=us-east-1
+S3_BUCKET=your-bucket
+S3_ACCESS_KEY=AKIA...
+S3_SECRET_KEY=...
+
+# Features
+ENABLE_SCHEDULER=true
+ENABLE_DOCUMENT_PROCESSING=true
+```

@@ -1,0 +1,282 @@
+---
+title: "Deployment"
+description: "Deploy IngestIQ with Docker"
+---
+
+## Quick Start Deployment
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/avesta-hq/ingestiq-backend.git
+cd ingestiq-backend
+```
+
+### 2. Configure Environment
+
+```bash
+cp .env.example .env
+# Edit .env with your API keys and secrets
+```
+
+### 3. Start Services
+
+```bash
+docker compose up -d
+```
+
+### 4. Run Migrations
+
+```bash
+npm install
+npm run db:migrate
+npm run db:seed
+```
+
+### 5. Start Server
+
+```bash
+npm run dev  # Development
+# or
+npm start    # Production
+```
+
+<Check>
+  IngestIQ is running at **http://localhost:3000**
+</Check>
+
+## Docker Compose Overview
+
+The `docker-compose.yml` includes:
+
+```yaml
+services:
+  vectordb:    # PostgreSQL 16 + pgvector
+  redis:       # Redis 7
+  nats:        # NATS with JetStream
+  minio:       # S3-compatible storage
+  gotenberg:   # Document conversion
+```
+
+## Production Deployment
+
+### 1. Use Production Environment
+
+```env
+NODE_ENV=production
+
+# Strong secrets
+JWT_SECRET=[generate-32-char-secret]
+JWT_REFRESH_SECRET=[generate-32-char-secret]
+
+# Production database
+MANAGEMENT_DB_URL=postgres://user:pass@prod-db:5432/ingestiq_mgmt
+VECTOR_DB_URL=postgres://user:pass@prod-db:5432/ingestiq_vector
+```
+
+### 2. Build Production Image
+
+```bash
+docker build -t ingestiq-backend:latest .
+```
+
+### 3. Run with Docker
+
+```bash
+docker run -d \
+  --name ingestiq \
+  -p 3000:3000 \
+  --env-file .env.production \
+  ingestiq-backend:latest
+```
+
+## Kubernetes Deployment
+
+### Sample Deployment
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingestiq-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ingestiq
+  template:
+    metadata:
+      labels:
+        app: ingestiq
+    spec:
+      containers:
+      - name: ingestiq
+        image: ingestiq-backend:latest
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: ingestiq-secrets
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+```
+
+### Sample Service
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingestiq-backend
+spec:
+  selector:
+    app: ingestiq
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: LoadBalancer
+```
+
+## Managed Services
+
+For production, consider managed services:
+
+| Component | Managed Option |
+|-----------|----------------|
+| PostgreSQL | AWS RDS, Google Cloud SQL, Supabase |
+| Redis | AWS ElastiCache, Redis Cloud |
+| S3 | AWS S3, Google Cloud Storage |
+| NATS | NATS.io Cloud |
+
+## Health Checks
+
+### API Health
+
+```bash
+curl http://localhost:3000/api/health
+```
+
+Expected response:
+```json
+{
+  "status": "ok",
+  "timestamp": "2024-01-28T12:00:00.000Z"
+}
+```
+
+### Service Health
+
+```bash
+# Check all containers
+docker compose ps
+
+# Check logs
+docker compose logs -f
+```
+
+## Monitoring
+
+### Recommended Stack
+
+- **Prometheus** - Metrics collection
+- **Grafana** - Visualization
+- **Loki** - Log aggregation
+
+### Key Metrics
+
+| Metric | What to Monitor |
+|--------|----------------|
+| API latency | Response times |
+| Error rates | 4xx, 5xx responses |
+| Queue depth | BullMQ job counts |
+| Vector DB size | Storage growth |
+| Memory usage | Container limits |
+
+## Backup Strategy
+
+### Database Backups
+
+```bash
+# PostgreSQL backup
+pg_dump -h localhost -U postgres ingestiq_vector > backup.sql
+
+# Restore
+psql -h localhost -U postgres ingestiq_vector < backup.sql
+```
+
+### S3 Backup
+
+```bash
+# MinIO/S3 sync to backup location
+aws s3 sync s3://ingestiq-documents s3://backup-bucket/ingestiq/
+```
+
+## Security Checklist
+
+<AccordionGroup>
+  <Accordion title="Secrets Management">
+    - [ ] Strong JWT secrets (32+ chars)
+    - [ ] Rotate API keys periodically
+    - [ ] Use secrets manager (AWS Secrets Manager, HashiCorp Vault)
+  </Accordion>
+  
+  <Accordion title="Network Security">
+    - [ ] Run behind reverse proxy (nginx, Traefik)
+    - [ ] Enable HTTPS/TLS
+    - [ ] Restrict database ports to internal network
+  </Accordion>
+  
+  <Accordion title="Application Security">
+    - [ ] Set `NODE_ENV=production`
+    - [ ] Enable rate limiting
+    - [ ] Regular dependency updates
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+### Common Issues
+
+<AccordionGroup>
+  <Accordion title="Database connection errors">
+    ```bash
+    # Check database is running
+    docker compose logs vectordb
+    
+    # Verify connection string
+    psql $VECTOR_DB_URL -c "SELECT 1"
+    ```
+  </Accordion>
+  
+  <Accordion title="Out of memory">
+    Increase container memory limits:
+    ```yaml
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    ```
+  </Accordion>
+  
+  <Accordion title="Slow processing">
+    - Check NATS consumer lag
+    - Monitor embedding API response times
+    - Consider scaling processors
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Requirements" icon="list-check" href="/self-hosting/requirements">
+    System requirements
+  </Card>
+  <Card title="Configuration" icon="gear" href="/self-hosting/configuration">
+    Environment variables
+  </Card>
+</CardGroup>

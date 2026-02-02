@@ -1,0 +1,222 @@
+---
+title: "AI Models"
+description: "Configure AI models for parsing and embeddings"
+---
+
+## Overview
+
+IngestIQ uses AI models for two key tasks:
+
+<CardGroup cols={2}>
+  <Card title="Parser Models" icon="scissors">
+    Break documents into semantic chunks
+  </Card>
+  <Card title="Embedding Models" icon="cube">
+    Convert text to vector embeddings
+  </Card>
+</CardGroup>
+
+## Supported Provider
+
+### Parser Models (Document Processing)
+
+| Provider | Models | Best For |
+|----------|--------|----------|
+| **Google Gemini** | gemini-1.5-flash, gemini-1.5-pro | General documents, PDFs, images |
+| **OpenAI** | gpt-4o, gpt-4o-mini | Complex documents |
+
+### Embedding Models
+
+| Provider | Model | Dimensions | Best For |
+|----------|-------|------------|----------|
+| **OpenAI** | text-embedding-3-small | 1536 | General use, cost-effective |
+| **OpenAI** | text-embedding-3-large | 3072 | High accuracy, large docs |
+
+## Model Configuration
+
+### List Available Models
+
+```bash
+curl http://localhost:3000/api/v2/ai-models \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "aiModels": [
+    {
+      "id": "uuid",
+      "name": "Gemini 1.5 Flash",
+      "provider": "google",
+      "type": "parser",
+      "configSchema": {
+        "model": "gemini-1.5-flash",
+        "inputCostPer1MTokens": 0.075,
+        "outputCostPer1MTokens": 0.30
+      }
+    },
+    {
+      "id": "uuid",
+      "name": "OpenAI Embedding Small",
+      "provider": "openai",
+      "type": "embedding",
+      "configSchema": {
+        "model": "text-embedding-3-small",
+        "dimensions": 1536,
+        "costPer1MTokens": 0.02
+      }
+    }
+  ]
+}
+```
+
+## Creating Model Configuration
+
+### Parser Model Config
+
+```bash
+curl -X POST http://localhost:3000/api/v2/ai-models/configs \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Fast Parser",
+    "aiModelId": "gemini-flash-model-uuid",
+    "config": {
+      "temperature": 0.2,
+      "maxOutputTokens": 8192
+    }
+  }'
+```
+
+### Embedding Model Config
+
+```bash
+curl -X POST http://localhost:3000/api/v2/ai-models/configs \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Standard Embeddings",
+    "aiModelId": "openai-embedding-small-uuid",
+    "config": {
+      "dimensions": 1536
+    }
+  }'
+```
+
+## Environment Configuration
+
+### API Keys
+
+```env
+# Required API Keys
+OPENAI_API_KEY=sk-your-openai-api-key
+GOOGLE_API_KEY=your-google-ai-api-key
+
+# Model defaults
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+GOOGLE_MODEL=gemini-1.5-flash
+```
+
+## Choosing Models
+
+### Parser Model Selection
+
+<Tabs>
+  <Tab title="Gemini 1.5 Flash">
+    **Best for**: Most use cases
+    
+    - Fast processing
+    - Cost-effective
+    - Good for PDFs, docs, images
+    - 1M token context window
+    
+    **Cost**: ~$0.075/1M input tokens
+  </Tab>
+  <Tab title="Gemini 1.5 Pro">
+    **Best for**: Complex documents
+    
+    - Higher accuracy
+    - Better reasoning
+    - Complex layouts
+    - 2M token context window
+    
+    **Cost**: ~$1.25/1M input tokens
+  </Tab>
+  <Tab title="GPT-4o">
+    **Best for**: Specialized parsing
+    
+    - Excellent instruction following
+    - Strong with structured data
+    - 128K context window
+    
+    **Cost**: ~$2.50/1M input tokens
+  </Tab>
+</Tabs>
+
+### Embedding Model Selection
+
+<Tabs>
+  <Tab title="text-embedding-3-small">
+    **Best for**: Most use cases
+    
+    - 1536 dimensions
+    - Fast processing
+    - Cost-effective
+    - Good accuracy
+    
+    **Cost**: $0.02/1M tokens
+  </Tab>
+  <Tab title="text-embedding-3-large">
+    **Best for**: High accuracy needs
+    
+    - 3072 dimensions
+    - Best accuracy
+    - Larger knowledge bases
+    - More storage required
+    
+    **Cost**: $0.13/1M tokens
+  </Tab>
+</Tabs>
+
+## Usage Tracking
+
+IngestIQ tracks AI usage for cost monitoring:
+
+```bash
+curl http://localhost:3000/api/v2/ai-models/usage \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+Response includes:
+- Token counts per model
+- Estimated costs
+- Usage by pipeline
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Start with cost-effective models">
+    Use Gemini Flash and text-embedding-3-small for initial development. Upgrade only if needed.
+  </Accordion>
+  
+  <Accordion title="Match dimensions across pipelines">
+    Keep embedding dimensions consistent within a Knowledge Base. Mixing dimensions causes search issues.
+  </Accordion>
+  
+  <Accordion title="Monitor costs">
+    Check usage logs regularly, especially during initial ingestion of large document sets.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Semantic Chunking" icon="scissors" href="/ai-processing/semantic-chunking">
+    How documents are chunked
+  </Card>
+  <Card title="Embeddings" icon="cube" href="/ai-processing/embeddings">
+    Vector embedding details
+  </Card>
+</CardGroup>

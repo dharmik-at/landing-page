@@ -1,0 +1,160 @@
+---
+title: "API Introduction"
+description: "IngestIQ REST API overview"
+---
+
+## Overview
+
+The IngestIQ API is a RESTful API that allows you to programmatically manage Knowledge Bases, Pipelines, Documents, and perform semantic search.
+
+## Base URL
+
+```
+http://localhost:3000/api/v2
+```
+
+For production deployments, use your configured domain.
+
+## Authentication
+
+All API endpoints (except health check) require JWT authentication.
+
+### Getting a Token
+
+```bash
+# Register
+curl -X POST http://localhost:3000/api/v2/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "securepassword",
+    "name": "Your Name"
+  }'
+
+# Login
+curl -X POST http://localhost:3000/api/v2/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "securepassword"
+  }'
+```
+
+### Using the Token
+
+Include the JWT token in the Authorization header:
+
+```bash
+curl http://localhost:3000/api/v2/knowledgebases \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## Response Format
+
+### Successful Response
+
+```json
+{
+  "data": { ... },
+  "message": "Operation successful"
+}
+```
+
+### Error Response
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid request parameters",
+    "details": [...]
+  }
+}
+```
+
+## HTTP Status Codes
+
+| Code | Meaning |
+|------|---------|
+| 200 | Success |
+| 201 | Created |
+| 400 | Bad Request |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+| 404 | Not Found |
+| 429 | Rate Limited |
+| 500 | Server Error |
+
+## Common Error Codes
+
+| Code | Description |
+|------|-------------|
+| `VALIDATION_ERROR` | Request validation failed |
+| `UNAUTHORIZED` | Missing or invalid token |
+| `NOT_FOUND` | Resource not found |
+| `DUPLICATE_ENTRY` | Resource already exists |
+| `RATE_LIMITED` | Too many requests |
+
+## Pagination
+
+List endpoints support pagination:
+
+```bash
+curl "http://localhost:3000/api/v2/knowledgebases/{kbId}/documents?page=1&limit=20" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+Response includes pagination metadata:
+
+```json
+{
+  "data": [...],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total": 150,
+    "totalPages": 8
+  }
+}
+```
+
+## Rate Limiting
+
+Default rate limits:
+- **100 requests/minute** per IP for unauthenticated
+- **1000 requests/minute** per user for authenticated
+
+Rate limit headers:
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 998
+X-RateLimit-Reset: 1706450400
+```
+
+## API Reference
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Register, login, refresh tokens
+  </Card>
+  <Card title="Knowledge Bases" icon="database" href="/api-reference/knowledge-bases">
+    CRUD operations
+  </Card>
+  <Card title="Pipelines" icon="arrow-right" href="/api-reference/pipelines">
+    Pipeline management
+  </Card>
+  <Card title="Documents" icon="file" href="/api-reference/documents">
+    Document operations
+  </Card>
+  <Card title="Search" icon="magnifying-glass" href="/api-reference/search">
+    Semantic search
+  </Card>
+</CardGroup>
+
+## OpenAPI Specification
+
+Interactive API documentation is available at:
+
+<Card title="Swagger UI" icon="book-open" href="http://localhost:3000/api/docs">
+  http://localhost:3000/api/docs
+</Card>

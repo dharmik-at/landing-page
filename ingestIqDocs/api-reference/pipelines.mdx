@@ -1,0 +1,253 @@
+---
+title: "Pipelines"
+description: "Pipeline management and execution endpoints"
+---
+
+## List Pipelines
+
+Get all pipelines for a knowledge base.
+
+```bash
+curl http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "pipelines": [
+    {
+      "id": "pipeline-uuid",
+      "name": "PDF Document Pipeline",
+      "description": "Process uploaded PDFs",
+      "status": "active",
+      "scheduleConfig": null,
+      "createdAt": "2024-01-28T12:00:00.000Z"
+    }
+  ]
+}
+```
+
+---
+
+## Create Pipeline
+
+Create a new pipeline.
+
+<ParamField path="name" type="string" required>
+  Pipeline name
+</ParamField>
+
+<ParamField path="description" type="string">
+  Optional description
+</ParamField>
+
+<ParamField path="sourceConnectorConfigId" type="string" required>
+  Source connector configuration ID
+</ParamField>
+
+<ParamField path="parserModelConfigId" type="string" required>
+  Parser model configuration ID
+</ParamField>
+
+<ParamField path="embeddingModelConfigId" type="string" required>
+  Embedding model configuration ID
+</ParamField>
+
+<ParamField path="destinationConnectorConfigId" type="string" required>
+  Destination connector configuration ID
+</ParamField>
+
+<ParamField path="parsingPrompt" type="string">
+  Custom parsing instructions
+</ParamField>
+
+<ParamField path="metadataParsingPrompt" type="string">
+  Metadata extraction prompt
+</ParamField>
+
+<ParamField path="isMetadataPrompt" type="boolean">
+  Enable metadata extraction
+</ParamField>
+
+<ParamField path="scheduleConfig" type="object">
+  Scheduling configuration
+</ParamField>
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Technical Docs Pipeline",
+    "description": "Process technical documentation",
+    "sourceConnectorConfigId": "source-config-uuid",
+    "parserModelConfigId": "parser-config-uuid",
+    "embeddingModelConfigId": "embedding-config-uuid",
+    "destinationConnectorConfigId": "dest-config-uuid",
+    "parsingPrompt": "Preserve code blocks exactly"
+  }'
+```
+
+### Response
+
+```json
+{
+  "id": "pipeline-uuid",
+  "name": "Technical Docs Pipeline",
+  "knowledgebaseId": "kb-uuid",
+  "status": "active",
+  "createdAt": "2024-01-28T12:00:00.000Z"
+}
+```
+
+---
+
+## Get Pipeline
+
+Get pipeline details.
+
+```bash
+curl http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/details \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "id": "pipeline-uuid",
+  "name": "Technical Docs Pipeline",
+  "description": "Process technical documentation",
+  "status": "active",
+  "sourceConnectorConfig": { ... },
+  "parserModelConfig": { ... },
+  "embeddingModelConfig": { ... },
+  "destinationConnectorConfig": { ... },
+  "parsingPrompt": "Preserve code blocks exactly",
+  "scheduleConfig": null
+}
+```
+
+---
+
+## Update Pipeline
+
+Update pipeline configuration.
+
+```bash
+curl -X PUT http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/update \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Updated Pipeline Name",
+    "parsingPrompt": "New parsing instructions"
+  }'
+```
+
+---
+
+## Execute Pipeline
+
+Execute a pipeline to process documents.
+
+### File Upload Execution
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -F "files=@document.pdf"
+```
+
+### URL-based Execution (Video/Web)
+
+```bash
+curl -X POST http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/execute \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "urls": ["https://youtube.com/watch?v=..."]
+  }'
+```
+
+### Response
+
+```json
+{
+  "executionId": "exec-uuid",
+  "status": "processing",
+  "documentsQueued": 3,
+  "message": "Pipeline execution started"
+}
+```
+
+---
+
+## Get Execution History
+
+Get pipeline execution history.
+
+```bash
+curl "http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/executions?page=1&limit=10" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+### Response
+
+```json
+{
+  "executions": [
+    {
+      "id": "exec-uuid",
+      "status": "completed",
+      "documentsProcessed": 5,
+      "documentsFailed": 0,
+      "startedAt": "2024-01-28T12:00:00.000Z",
+      "completedAt": "2024-01-28T12:05:00.000Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "total": 25
+  }
+}
+```
+
+---
+
+## Configure Schedule
+
+Enable scheduled execution.
+
+```bash
+curl -X PUT http://localhost:3000/api/v2/knowledgebases/{kbId}/pipelines/{pipelineId}/update \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "scheduleConfig": {
+      "enable_automation": true,
+      "interval_type": "Daily",
+      "interval_time": "09:00",
+      "timezone": "UTC"
+    }
+  }'
+```
+
+### Schedule Types
+
+| Type | Additional Fields |
+|------|-------------------|
+| `Daily` | `interval_time` |
+| `Weekly` | `interval_time`, `day_of_week` |
+| `Monthly` | `interval_time`, `date_of_month` |
+
+---
+
+## Error Responses
+
+| Error | Status | Description |
+|-------|--------|-------------|
+| `PIPELINE_NOT_FOUND` | 404 | Pipeline not found |
+| `EXECUTION_FAILED` | 500 | Pipeline execution failed |
+| `INVALID_SCHEDULE` | 400 | Invalid schedule configuration |
