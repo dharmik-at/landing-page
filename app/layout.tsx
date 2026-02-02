@@ -44,9 +44,9 @@ export const metadata: Metadata = {
     siteName: "IngestIQ",
     images: [
       {
-        url: "/ingestiqlogo2.png",
+        url: "/images/logo_dark_with_text_transparent.png",
         width: 1200,
-        height: 630,
+        height: 730,
         alt: "IngestIQ Platform",
       },
     ],
@@ -56,13 +56,16 @@ export const metadata: Metadata = {
     title: "IngestIQ | Unified RAG Infrastructure",
     description:
       "Connect, process, and vectorize unstructured data in hours. Build production-ready RAG applications faster.",
-    images: ["/ingestiqlogo2.png"],
+    images: ["/images/logo_dark_with_text_transparent.png"],
     creator: "@ingestiq",
   },
   icons: {
-    icon: "/ingestiqlogo2.png",
-    shortcut: "/ingestiqlogo2.png",
-    apple: "/ingestiqlogo2.png",
+    icon: [
+      { url: "/images/ingestiqLogo.png", media: "(prefers-color-scheme: light)" },
+      { url: "/images/ingestiqLogo.png", media: "(prefers-color-scheme: dark)" },
+    ],
+    shortcut: "/images/logo_dark_icon_transparent.png",
+    apple: "/images/logo_dark_icon_transparent.png",
   },
   alternates: {
     canonical: "https://ingestiq.ai",

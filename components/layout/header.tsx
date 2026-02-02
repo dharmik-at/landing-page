@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 
 import { ProductDropdown } from "@/components/layout/product-dropdown";
 import { SolutionsDropdown } from "@/components/layout/solutions-dropdown";
@@ -24,6 +25,12 @@ export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -53,19 +60,22 @@ export function Header() {
             <div className="container px-4 md:px-6 mx-auto flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 group">
-                    <div className="relative flex h-8 w-8 items-center justify-center">
-                        <Image
-                            src="/ingestiqlogo2.png"
-                            alt="IngestIQ Logo"
-                            fill
-                            className="object-contain"
-                        />
+                    <div className="relative flex h-10 w-44 sm:h-12 sm:w-52 md:h-14 md:w-60 items-center justify-start">
+                        {mounted && (
+                            <Image
+                                src={
+                                    resolvedTheme === "dark"
+                                        ? "/images/ingestiqLogoWithTextDark.png"
+                                        : "/images/ingestIqLogoWithTextLight.png"
+                                }
+                                alt="IngestIQ"
+                                fill
+                                className="object-contain object-left scale-[2.5] origin-left"
+                                priority
+                            />
+                        )}
                     </div>
-                    <span className="text-xl font-bold tracking-tight font-heading text-foreground">
-                        IngestIQ
-                    </span>
                 </Link>
-
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-8">
                     <ProductDropdown />

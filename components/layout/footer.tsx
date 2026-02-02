@@ -6,6 +6,8 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 import { Input } from "@/components/ui/input";
 import { NewsletterForm } from "@/components/layout/newsletter-form";
 import { Github, Twitter, Linkedin, Send, Youtube, Instagram } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const footerLinks = {
     Product: [
@@ -27,6 +29,13 @@ const footerLinks = {
 };
 
 export function Footer() {
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
         <footer className="relative bg-white dark:bg-black border-t border-black/10 dark:border-white/10 pt-20 pb-24 overflow-hidden">
             {/* Background Gradients */}
@@ -37,17 +46,21 @@ export function Footer() {
                     {/* Brand Column */}
                     <div className="lg:col-span-2">
                         <Link href="/" className="flex items-center gap-2 mb-6 group">
-                            <div className="relative flex h-8 w-8 items-center justify-center">
-                                <Image
-                                    src="/ingestiqlogo2.png"
-                                    alt="IngestIQ Logo"
-                                    fill
-                                    className="object-contain"
-                                />
+                            <div className="relative flex h-14 w-56 md:h-16 md:w-64 items-center justify-start">
+                                {mounted && (
+                                    <Image
+                                        src={
+                                            resolvedTheme === "dark"
+                                                ? "/images/ingestiqLogoWithTextDark.png"
+                                                : "/images/ingestIqLogoWithTextLight.png"
+                                        }
+                                        alt="IngestIQ"
+                                        fill
+                                        className="object-contain object-left scale-[2.5] origin-left"
+                                        priority
+                                    />
+                                )}
                             </div>
-                            <span className="text-xl font-bold font-heading text-gray-900 dark:text-white">
-                                IngestIQ
-                            </span>
                         </Link>
                         <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-sm leading-relaxed">
                             Stop building data pipelines from scratch. IngestIQ provides the complete infrastructure to connect, process, and vectorize your enterprise data at scale.
